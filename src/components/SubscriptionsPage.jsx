@@ -1,9 +1,9 @@
 // src/components/SubscriptionsPage.jsx
 import React, { useContext } from "react";
-import { SubscribedCoursesContext } from "../SubscribedCoursesContext";
+import { AppStateContext } from "../AppStateContext";
 
 const SubscriptionsPage = () => {
-  const { subscribedCourses } = useContext(SubscribedCoursesContext);
+  const { subscribedCourses } = useContext(AppStateContext);
 
   return (
     <div>

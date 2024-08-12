@@ -1,67 +1,38 @@
-import React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { Grid } from '@mui/material';
+import React, { useContext } from "react";
+import { useHandleCheckboxChange } from "../hooks/useHandleCheckboxChange";
+import { AppStateContext } from "../AppStateContext";
 
-const SubscribedTable = ({
-  subscribedCourses,
-  setSubscribedCourses,
-  originalData,
-  setOriginalData,
-  setJsonData, // Add this to update jsonData in the CourseTable
-}) => {
-  const handleCheckboxChange = (courseId) => {
-    const isSubscribed = subscribedCourses.some((c) => c.id === courseId);
-
-    if (isSubscribed) {
-      const updatedCourses = subscribedCourses.filter((c) => c.id !== courseId);
-      setSubscribedCourses(updatedCourses);
-      updateOriginalData(courseId, false, updatedCourses);
-    } else {
-      const course = originalData.find((c) => c.id === courseId);
-      const updatedCourses = [...subscribedCourses, course];
-      setSubscribedCourses(updatedCourses);
-      updateOriginalData(courseId, true, updatedCourses);
-    }
-  };
-
-  const updateOriginalData = (courseId, subscribed, updatedCourses) => {
-    const updatedData = originalData.map((course) =>
-      course.id === courseId ? { ...course, subscribed } : course,
-    );
-    setOriginalData(updatedData);
-    setJsonData(updatedData); // Trigger re-render of CourseTable
-  };
+const SubscribedTable = () => {
+  const { subscribedCourses } = useContext(AppStateContext);
+  const handleCheckboxChange = useHandleCheckboxChange();
 
   return (
-    <Grid item>
-      <div style={{ height: 400, width: '100%' }}>
-        <DataGrid
-          checkboxSelection={false}
-          disableRowSelectionOnClick
-          rows={subscribedCourses}
-          columns={[
-            {
-              field: 'select',
-              headerName: '',
-              renderCell: (params) => (
-                <input
-                  type="checkbox"
-                  checked={subscribedCourses.some(
-                    (course) => course.id === params.row.id,
-                  )}
-                  onChange={() => handleCheckboxChange(params.row.id)}
-                />
-              ),
-              width: 50,
-            },
-            { field: 'Course Code', headerName: 'Course Code', width: 150 },
-            { field: 'Section Code', headerName: 'Section Code', width: 150 },
-            { field: 'Course Name', headerName: 'Course Name', width: 300 },
-          ]}
-          pageSize={10}
-        />
-      </div>
-    </Grid>
+    <table id="subscribedTable">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Course Code</th>
+          <th>Section Code</th>
+          <th>Course Name</th>
+        </tr>
+      </thead>
+      <tbody id="subscribedBody">
+        {subscribedCourses.map((course, index) => (
+          <tr key={index}>
+            <td>
+              <input
+                type="checkbox"
+                checked={true}
+                onChange={() => handleCheckboxChange(course.id)}
+              />
+            </td>
+            <td>{course["Course Code"]}</td>
+            <td>{course["Section Code"]}</td>
+            <td>{course["Course Name"]}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 

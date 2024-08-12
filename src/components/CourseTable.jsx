@@ -1,31 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { TextField, Grid } from '@mui/material';
+import React, { useState, useEffect, useContext } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import { TextField, Grid } from "@mui/material";
+import { useHandleCheckboxChange } from "../hooks/useHandleCheckboxChange";
+import { AppStateContext } from "../AppStateContext";
 
-const CourseTable = ({
-  jsonData,
-  originalData,
-  setJsonData,
-  subscribedCourses,
-  setSubscribedCourses,
-}) => {
-  const [searchTerm, setSearchTerm] = useState('');
+const CourseTable = ({}) => {
+  const { jsonData, setJsonData, originalData, subscribedCourses } =
+    useContext(AppStateContext);
+  const handleCheckboxChange = useHandleCheckboxChange();
+
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [columns, setColumns] = useState([]);
 
   useEffect(() => {
-    setFilteredData(jsonData);
-
     if (jsonData.length > 0) {
-      const cols = Object.keys(jsonData[0]).map((key) => ({    
+      const cols = Object.keys(jsonData[0]).map((key) => ({
         field: key,
         headerName: key,
         width: 150,
       }));
       setColumns([
         {
-          field: 'select',
-          headerName: '',
+          field: "select",
+          headerName: "",
           renderCell: (params) => (
             <input
               type="checkbox"
@@ -40,41 +38,28 @@ const CourseTable = ({
         ...cols,
       ]);
     }
-  }, [jsonData]);
+    setFilteredData(jsonData); // Initialize filteredData with jsonData
+  }, [jsonData, subscribedCourses]);
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
-    const filtered = originalData.filter((item) =>
+    filterData(value, originalData);
+  };
+
+  const filterData = (term, data) => {
+    const filtered = data.filter((item) =>
       Object.values(item).some((val) =>
-        String(val).toLowerCase().includes(value),
+        String(val).toLowerCase().includes(term),
       ),
     );
     setFilteredData(filtered);
-    setJsonData(filtered);
+    setJsonData(filtered); // Update jsonData with the filtered data
   };
 
-  const handleCheckboxChange = (courseId) => {
-    const course = originalData.find((c) => c.id === courseId);
-    const isSubscribed = subscribedCourses.some((c) => c.id === courseId);
-
-    if (isSubscribed) {
-      setSubscribedCourses((prevCourses) =>
-        prevCourses.filter((c) => c.id !== courseId),
-      );
-      updateOriginalData(courseId, false);
-    } else {
-      setSubscribedCourses((prevCourses) => [...prevCourses, course]);
-      updateOriginalData(courseId, true);
-    }
-  };
-
-  const updateOriginalData = (courseId, subscribed) => {
-    const updatedData = originalData.map((course) =>
-      course.id === courseId ? { ...course, subscribed } : course,
-    );
-    setJsonData(updatedData);
-  };
+  useEffect(() => {
+    filterData(searchTerm, originalData); // Reapply the search filter whenever originalData changes
+  }, [originalData]);
 
   return (
     <Grid container direction="column" spacing={2}>
@@ -88,20 +73,20 @@ const CourseTable = ({
         />
       </Grid>
       <Grid item>
-        <div style={{ height: 400, width: '100%' }}>
+        <div style={{ height: 400, width: "100%" }}>
           <DataGrid
-          columnVisibilityModel={{
-            id: false,
-            subscribed: false
-          }}
+            columnVisibilityModel={{
+              id: false,
+              subscribed: false,
+            }}
             rows={filteredData}
             columns={columns}
-            pageSizeOptions={[10,50,100]}
+            pageSizeOptions={[10, 50, 100]}
             checkboxSelection={false}
             disableRowSelectionOnClick
             sx={{
-              '& .MuiDataGrid-footerContainer': {
-                justifyContent: 'flex-start', // Aligns the pagination controls to the left
+              "& .MuiDataGrid-footerContainer": {
+                justifyContent: "flex-start", // Aligns the pagination controls to the left
               },
             }}
           />

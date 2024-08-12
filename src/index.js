@@ -1,12 +1,15 @@
-// src/index.js
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
+import { AppStateProvider } from "./AppStateContext";
 
-const container = document.getElementById('root');
-const root = createRoot(container);
-
-root.render(
-    <App />
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <AppStateProvider>
+      <Router>
+        <App />
+      </Router>
+    </AppStateProvider>
+  </React.StrictMode>,
 );
