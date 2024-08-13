@@ -1,11 +1,8 @@
 import React from "react";
-import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import { rrulestr } from "rrule";
-
-import "react-big-calendar/lib/css/react-big-calendar.css";
-
-const localizer = momentLocalizer(moment);
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
 
 const createRecurringEvents = (event) => {
   const { recurrence, start, end, ...rest } = event;
@@ -13,7 +10,6 @@ const createRecurringEvents = (event) => {
   if (recurrence && recurrence.length > 1) {
     // Extract the dtstart value from recurrence[0]
     const dtstartString = recurrence[0].split(":")[1];
-    const dtstart = moment(dtstartString, "YYYYMMDDTHHmmss").toDate();
 
     // Include dtstart in the RRULE string
     const ruleString = `${recurrence[1]};DTSTART=${dtstartString}`;
@@ -44,22 +40,42 @@ const createRecurringEvents = (event) => {
 
 const CourseViewer = ({ eventObjects }) => {
   const [events, setEvents] = React.useState([]);
+  const [highlightedDates, setHighlightedDates ] = React.useState([]);
 
-  React.useEffect(() => {
+  /*React.useEffect(() => {
     const allEvents = eventObjects.flatMap(createRecurringEvents);
     setEvents(allEvents);
-    console.log(allEvents);
-  }, [eventObjects]);
+  }, [eventObjects]); */
+
+  React.useEffect(() => {
+    const dates = eventObjects.flatMap((event) => {
+      if (event.recurrence && event.recurrence.length > 1) {
+        const rule = rrulestr(event.recurrence[1]);
+        return rule.all().map((date) => date.toISOString().split("T")[0]);
+      } else {
+        return new Date(event.start.dateTime).toISOString().split("T")[0];
+      }
+    }
+  )
+  setHighlightedDates(dates);
+}, [eventObjects]);
+
+const tileClassName = ({ date, view }) => {
+  if (view === "month") {
+    const dateStr = date.toISOString().split("T")[0];
+    if (highlightedDates.includes(dateStr)) {
+      console.log("hi")
+      return "highlight";
+ 
+    }
+  }
+  return null;
+}
 
   return (
     <div style={{ height: "500px" }}>
       <h2>Course Calendar</h2>
-      <Calendar
-        localizer={localizer}
-        events={events}
-        startAccessor="start"
-        endAccessor="end"
-        style={{ height: 500 }}
+      <Calendar tileClassName={tileClassName}
       />
     </div>
   );
