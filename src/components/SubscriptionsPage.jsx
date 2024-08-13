@@ -27,6 +27,19 @@ const SubscriptionsPage = () => {
     );
   };
 
+  const handleExcludedDates = (excludedDates) => {
+    setEventObjects((prevEvents) => {
+      const updatedEvents = prevEvents.map((event) => {
+        return {
+          ...event,
+          exdate: [...(event.exdate || []), ...excludedDates],
+        };
+      });
+      console.log(updatedEvents);
+      return updatedEvents;
+    });
+  };
+
   return (
     <div>
       <h1>Subscribed Courses</h1>
@@ -48,7 +61,12 @@ const SubscriptionsPage = () => {
           Next
         </button>
       </div>
-      {eventObjects.length > 0 && <CourseViewer eventObjects={eventObjects} />}
+      {eventObjects.length > 0 && (
+        <CourseViewer
+          eventObjects={eventObjects}
+          onExcludedDates={handleExcludedDates}
+        />
+      )}
     </div>
   );
 };
