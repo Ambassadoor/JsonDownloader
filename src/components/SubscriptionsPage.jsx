@@ -1,9 +1,12 @@
 // src/components/SubscriptionsPage.jsx
 import React, { useContext } from "react";
 import { AppStateContext } from "../AppStateContext";
+import CourseViewer from "./CourseViewer";
+import createEventFromCourse from "./CalendarEntryGenerator";
 
 const SubscriptionsPage = () => {
   const { subscribedCourses } = useContext(AppStateContext);
+  const eventObjects = subscribedCourses.map(createEventFromCourse);
 
   return (
     <div>
@@ -26,6 +29,7 @@ const SubscriptionsPage = () => {
           ))}
         </tbody>
       </table>
+      <CourseViewer eventObjects={eventObjects} />
     </div>
   );
 };

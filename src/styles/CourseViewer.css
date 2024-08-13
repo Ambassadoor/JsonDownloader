@@ -1,0 +1,73 @@
+/* CourseViewer.css */
+.react-calendar {
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+}
+
+.react-calendar__navigation {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px 8px 0 0;
+}
+
+.react-calendar__navigation button {
+  color: #333;
+  background-color: transparent;
+  border: none;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.react-calendar__navigation button:enabled:hover {
+  background-color: #e0e0e0;
+}
+
+.react-calendar__tile {
+  text-align: center;
+  padding: 10px;
+  background-color: #fafafa;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.react-calendar__tile--active {
+  background-color: #4caf50;
+  color: white;
+}
+
+.react-calendar__tile--active:hover {
+  background-color: #45a049;
+}
+
+.react-calendar__tile--now {
+  background-color: #ffeb3b;
+  color: #333;
+}
+
+.react-calendar__tile--now:hover {
+  background-color: #fdd835;
+}
+
+.react-calendar__tile:enabled:hover {
+  background-color: #ddd;
+  border-color: #ccc;
+}
+
+.react-calendar__tile--highlight {
+  background-color: #03a9f4;
+  color: white;
+  border-radius: 50%;
+}
+
+.react-calendar__tile--highlight:hover {
+  background-color: #0288d1;
+}

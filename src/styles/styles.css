@@ -55,3 +55,9 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
+.highlight {
+  background-color: #ffcc00;
+  color: white;
+  border-radius: 50%;
+}

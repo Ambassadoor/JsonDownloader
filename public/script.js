@@ -200,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "Course Code": "CS101",
     "Section Code": "01",
     "Course Name": "Introduction to Computer Science",
-    Instructor: "Dr. Smith",
+    "Instructor": "Dr. Smith",
     "Start Date": "2024-09-01",
     "End Date": "2024-12-15",
     "Start Time": "09:00:00",
