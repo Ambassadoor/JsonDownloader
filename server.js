@@ -98,7 +98,6 @@ app.post("/api/create-events", async (req, res) => {
   try {
     loadCredentials(); // Load OAuth credentials
     const { eventObjects } = req.body;
-    console.log(eventObjects);
 
     const cleanedEvents = eventObjects.map((event) => {
       // Clean recurrence rules by removing the DTSTART field
@@ -135,16 +134,16 @@ app.post("/api/create-events", async (req, res) => {
       })
     );
 
-    // Send back the created events and their instances
+    // Send back all created events and their instances
     res.status(200).json({
-      message: "Events created successfully",
-      eventResponses, // Send both events and their instances
+      events: eventResponses, // Send back the entire array of events and instances
     });
   } catch (error) {
     console.error("Error creating events:", error);
     res.status(500).json({ error: "Failed to create events" });
   }
 });
+
 
 
 

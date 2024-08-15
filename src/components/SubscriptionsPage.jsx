@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppStateContext } from "../AppStateContext";
 import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
@@ -8,6 +9,7 @@ const SubscriptionsPage = () => {
     useContext(AppStateContext);
   const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
   const [currentCourse, setCurrentCourse] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setEventObjects(subscribedCourses.map(createEventFromCourse));
@@ -32,27 +34,33 @@ const SubscriptionsPage = () => {
 
   const handleCreateEvents = async () => {
     try {
-      const response = await fetch('/api/create-events', {
-        method: 'POST',
+      const response = await fetch("/api/create-events", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ eventObjects }),
       });
   
       if (response.ok) {
-        const data = await response.json();
-        console.log(data)
-        console.log('Created events and instances:', data.eventResponses);
-        // Handle the created events and their instances
+        const { events } = await response.json();
+        console.log(events)
+        // Store the instances in the context
+        setEventInstances(events); // Set all event instances
+  
+        alert("Events created successfully");
+  
+        // Redirect to /files page
+        navigate("/files");
       } else {
-        alert('Failed to create events');
+        alert("Failed to create events");
       }
     } catch (error) {
-      console.error('Error creating events:', error);
-      alert('Failed to create events');
+      console.error("Error creating events:", error);
+      alert("Failed to create events");
     }
   };
+  
   
   
 
