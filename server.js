@@ -114,25 +114,38 @@ app.post("/api/create-events", async (req, res) => {
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-    // Create each event and capture the response
-    const createdEvents = await Promise.all(
-      cleanedEvents.map((event) => {
-        return calendar.events.insert({
+    // Create each event and retrieve instances
+    const eventResponses = await Promise.all(
+      cleanedEvents.map(async (event) => {
+        const createdEvent = await calendar.events.insert({
           calendarId: "primary",
           resource: event,
         });
+
+        // Retrieve instances of the created event
+        const instances = await calendar.events.instances({
+          calendarId: "primary",
+          eventId: createdEvent.data.id, // Use the event ID from the created event
+        });
+
+        return {
+          event: createdEvent.data,
+          instances: instances.data.items, // Capture the instances
+        };
       })
     );
 
-    // Extract event details from the responses
-    const eventInstances = createdEvents.map((response) => response.data);
-    console.log(eventInstances)
-    res.status(200).json(eventInstances); // Send back the created event details
+    // Send back the created events and their instances
+    res.status(200).json({
+      message: "Events created successfully",
+      eventResponses, // Send both events and their instances
+    });
   } catch (error) {
     console.error("Error creating events:", error);
     res.status(500).json({ error: "Failed to create events" });
   }
 });
+
 
 
 const PORT = 3000;

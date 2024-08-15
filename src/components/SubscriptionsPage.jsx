@@ -41,14 +41,10 @@ const SubscriptionsPage = () => {
       });
   
       if (response.ok) {
-        const eventInstances = await response.json(); // Assuming your server returns the event details
-        console.log('Events created successfully:', eventInstances);
-        
-        // Assuming eventInstances contains the event details with their IDs
-        // Store the event instances for further processing (e.g., attaching files)
-        setEventInstances(eventInstances); // Save the response to state/context
-  
-        alert('Events created successfully');
+        const data = await response.json();
+        console.log(data)
+        console.log('Created events and instances:', data.eventResponses);
+        // Handle the created events and their instances
       } else {
         alert('Failed to create events');
       }
@@ -57,6 +53,7 @@ const SubscriptionsPage = () => {
       alert('Failed to create events');
     }
   };
+  
   
 
   return (
