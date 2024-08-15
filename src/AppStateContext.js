@@ -8,6 +8,7 @@ const AppStateProvider = ({ children }) => {
   const [originalData, setOriginalData] = useState([]);
   const [eventObjects, setEventObjects] = useState([]);
   const [excludedDates, setExcludedDates] = useState([]);
+  const [eventInstances, setEventInstances] = useState([]);
 
   return (
     <AppStateContext.Provider
@@ -22,6 +23,8 @@ const AppStateProvider = ({ children }) => {
         setEventObjects,
         excludedDates,
         setExcludedDates,
+        eventInstances,
+        setEventInstances
       }}
     >
       {children}

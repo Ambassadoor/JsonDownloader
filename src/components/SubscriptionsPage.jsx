@@ -4,7 +4,7 @@ import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
 
 const SubscriptionsPage = () => {
-  const { subscribedCourses, eventObjects, setEventObjects } =
+  const { subscribedCourses, eventObjects, setEventObjects, eventInstances, setEventInstances } =
     useContext(AppStateContext);
   const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
   const [currentCourse, setCurrentCourse] = useState(null);
@@ -31,26 +31,33 @@ const SubscriptionsPage = () => {
   };
 
   const handleCreateEvents = async () => {
-    console.log(eventObjects);
     try {
-      const response = await fetch("/api/create-events", {
-        method: "POST",
+      const response = await fetch('/api/create-events', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ eventObjects }),
       });
-
+  
       if (response.ok) {
-        alert("Events created successfully");
+        const eventInstances = await response.json(); // Assuming your server returns the event details
+        console.log('Events created successfully:', eventInstances);
+        
+        // Assuming eventInstances contains the event details with their IDs
+        // Store the event instances for further processing (e.g., attaching files)
+        setEventInstances(eventInstances); // Save the response to state/context
+  
+        alert('Events created successfully');
       } else {
-        alert("Failed to create events");
+        alert('Failed to create events');
       }
     } catch (error) {
-      console.error("Error creating events:", error);
-      alert("Failed to create events");
+      console.error('Error creating events:', error);
+      alert('Failed to create events');
     }
   };
+  
 
   return (
     <div>
