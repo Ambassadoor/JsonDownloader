@@ -63,7 +63,7 @@ const createEventFromCourse = (course) => {
       timeZone: "America/Chicago",
     },
     recurrence: [
-      `DTSTART:${startDate.toISOString().split("T")[0].replace(/-/g, "")}T${course["Start Time"].replace(":", "")}00`,
+      `DTSTART:${startDate.toISOString().split("T")[0].replace(/-/g, "")}T${course["Start Time"].replace(":", "")}00Z`,
       `RRULE:FREQ=WEEKLY;BYDAY=${meetingDays.join(",")};UNTIL=${new Date(endDate).toISOString().replace(/[-:]/g, "").split(".")[0]}Z`,
     ], // Adjust for recurrence
     reminders: {

@@ -8,9 +8,20 @@ const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const webpackConfig = require("./webpack.config.js");
+const { google } = require("googleapis");
+const oAuth2Client = require("./src/oauth2client"); // Import the OAuth2 client
+const getAuthUrl = require("./src/auth"); // Import the function to get the auth URL
 
 const app = express();
 const compiler = webpack(webpackConfig);
+const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+const TOKEN_PATH = path.join(__dirname, "server", "config", "tokens.json");
+
+const loadCredentials = () => {
+  const tokenData = fs.readFileSync(TOKEN_PATH, "utf8");
+  const tokens = JSON.parse(tokenData);
+  oAuth2Client.setCredentials(tokens);
+};
 
 app.use(express.json());
 app.use(cors());
@@ -51,6 +62,71 @@ app.get("/api/check-download", async (req, res) => {
   } catch (error) {
     console.error("Error checking file:", error);
     res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.get("/oauth2callback", async (req, res) => {
+  const code = req.query.code;
+
+  if (code) {
+    try {
+      // Get the token using the authorization code
+      const { tokens } = await oAuth2Client.getToken(code);
+      oAuth2Client.setCredentials(tokens);
+
+      // Save the token in the specified tokens.js file
+      fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens));
+
+      // Redirect to your frontend or another page after successful authentication
+      res.redirect("http://localhost:3000"); // Redirect to your app
+    } catch (error) {
+      console.error("Error retrieving access token", error);
+      res.status(500).send("Authentication failed");
+    }
+  } else {
+    res.status(400).send("No authorization code provided");
+  }
+});
+
+// Route to start OAuth flow
+app.get("/auth", (req, res) => {
+  const authUrl = getAuthUrl();
+  res.redirect(authUrl);
+});
+
+app.post("/api/create-events", async (req, res) => {
+  try {
+    loadCredentials(); // Load OAuth credentials
+    const { eventObjects } = req.body;
+    console.log(eventObjects);
+
+    const cleanedEvents = eventObjects.map((event) => {
+      // Clean recurrence rules by removing the DTSTART field
+      const cleanedRecurrence = event.recurrence
+        .map((rule) => (rule.startsWith("DTSTART") ? "" : rule))
+        .filter((rule) => rule); // Filter out empty rules
+
+      return {
+        ...event,
+        recurrence: cleanedRecurrence, // Update event with cleaned recurrence rules
+      };
+    });
+
+    const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+
+    // Create each event
+    const promises = cleanedEvents.map((event) => {
+      return calendar.events.insert({
+        calendarId: "primary",
+        resource: event,
+      });
+    });
+
+    await Promise.all(promises);
+    res.status(200).json({ message: "Events created successfully" });
+  } catch (error) {
+    console.error("Error creating events:", error);
+    res.status(500).json({ error: "Failed to create events" });
   }
 });
 

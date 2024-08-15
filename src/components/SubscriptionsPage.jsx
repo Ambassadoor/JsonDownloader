@@ -4,15 +4,18 @@ import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
 
 const SubscriptionsPage = () => {
-  const { subscribedCourses } = useContext(AppStateContext);
+  const { subscribedCourses, eventObjects, setEventObjects } =
+    useContext(AppStateContext);
   const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
   const [currentCourse, setCurrentCourse] = useState(null);
-  const [eventObjects, setEventObjects] = useState([]);
+
+  useEffect(() => {
+    setEventObjects(subscribedCourses.map(createEventFromCourse));
+  }, [subscribedCourses, setEventObjects]);
 
   useEffect(() => {
     const course = subscribedCourses[currentCourseIndex];
     setCurrentCourse(course);
-    setEventObjects([createEventFromCourse(course)]);
   }, [currentCourseIndex, subscribedCourses]);
 
   const handleNextCourse = () => {
@@ -27,17 +30,26 @@ const SubscriptionsPage = () => {
     );
   };
 
-  const handleExcludedDates = (excludedDates) => {
-    setEventObjects((prevEvents) => {
-      const updatedEvents = prevEvents.map((event) => {
-        return {
-          ...event,
-          exdate: [...(event.exdate || []), ...excludedDates],
-        };
+  const handleCreateEvents = async () => {
+    console.log(eventObjects);
+    try {
+      const response = await fetch("/api/create-events", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ eventObjects }),
       });
-      console.log(updatedEvents);
-      return updatedEvents;
-    });
+
+      if (response.ok) {
+        alert("Events created successfully");
+      } else {
+        alert("Failed to create events");
+      }
+    } catch (error) {
+      console.error("Error creating events:", error);
+      alert("Failed to create events");
+    }
   };
 
   return (
@@ -62,11 +74,11 @@ const SubscriptionsPage = () => {
         </button>
       </div>
       {eventObjects.length > 0 && (
-        <CourseViewer
-          eventObjects={eventObjects}
-          onExcludedDates={handleExcludedDates}
-        />
+        <CourseViewer currentCourseIndex={currentCourseIndex} />
       )}
+      <button onClick={handleCreateEvents}>
+        Create Google Calendar Events
+      </button>
     </div>
   );
 };
