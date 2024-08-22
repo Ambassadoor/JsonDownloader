@@ -42,8 +42,15 @@ const createEventFromCourse = (course) => {
     // Remove duplicates by converting the array to a Set and then back to an array
     return [...new Set(days)];
   }
-  const startDate = new Date(course["Start Date"]);
-  const endDate = new Date(course["End Date"]);
+  const startDate = new Date(
+    `${course["Start Date"]}T${course["Start Time"]}`,
+  ).toISOString();
+  const endTime = new Date(
+    `${course["Start Date"]}T${course["End Time"]}`,
+  ).toISOString();
+  const endDate = new Date(
+    `${course["End Date"]}T${course["End Time"]}`,
+  ).toISOString();
   const meetingDays = parseMeetingDays(course["Meeting Days"]);
 
   return {
@@ -51,20 +58,16 @@ const createEventFromCourse = (course) => {
     location: course["Location"] || "Online", // Default to "Online" if no location is provided
     description: `Course Code: ${course["Course Code"]} ${course["Section Code"]}\nInstructor: ${course["Instructor"]}`,
     start: {
-      dateTime: new Date(
-        startDate.toDateString() + " " + course["Start Time"],
-      ).toISOString(), // Should be a properly formatted date-time string
+      dateTime: startDate, // Should be a properly formatted date-time string
       timeZone: "America/Chicago", // Adjust the timezone as needed
     },
     end: {
-      dateTime: new Date(
-        startDate.toDateString() + " " + course["End Time"],
-      ).toISOString(), // Should be a properly formatted date-time string
+      dateTime: endTime, // Should be a properly formatted date-time string
       timeZone: "America/Chicago",
     },
     recurrence: [
-      `DTSTART:${startDate.toISOString().split("T")[0].replace(/-/g, "")}T${course["Start Time"].replace(":", "")}00Z`,
-      `RRULE:FREQ=WEEKLY;BYDAY=${meetingDays.join(",")};UNTIL=${new Date(endDate).toISOString().replace(/[-:]/g, "").split(".")[0]}Z`,
+      `DTSTART:${startDate.replace(/[-:]/g, "").split(".")[0]}Z`,
+      `RRULE:FREQ=WEEKLY;BYDAY=${meetingDays.join(",")};UNTIL=${endDate.replace(/[-:]/g, "").split(".")[0]}Z`,
     ], // Adjust for recurrence
     reminders: {
       useDefault: false,

@@ -27,7 +27,7 @@ const FilesPage = () => {
           />
           <SelectedFiles
             eventInstances={eventInstances[0].instances.filter(
-              (instance) => instance.id === selectedInstanceId
+              (instance) => instance.id === selectedInstanceId,
             )}
           />
         </>

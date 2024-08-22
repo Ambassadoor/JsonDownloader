@@ -98,6 +98,7 @@ app.post("/api/create-events", async (req, res) => {
   try {
     loadCredentials(); // Load OAuth credentials
     const { eventObjects } = req.body;
+    console.log(eventObjects);
 
     const cleanedEvents = eventObjects.map((event) => {
       // Clean recurrence rules by removing the DTSTART field
@@ -110,6 +111,7 @@ app.post("/api/create-events", async (req, res) => {
         recurrence: cleanedRecurrence, // Update event with cleaned recurrence rules
       };
     });
+    console.log(cleanedEvents);
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
@@ -131,7 +133,7 @@ app.post("/api/create-events", async (req, res) => {
           event: createdEvent.data,
           instances: instances.data.items, // Capture the instances
         };
-      })
+      }),
     );
 
     // Send back all created events and their instances
@@ -143,9 +145,6 @@ app.post("/api/create-events", async (req, res) => {
     res.status(500).json({ error: "Failed to create events" });
   }
 });
-
-
-
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

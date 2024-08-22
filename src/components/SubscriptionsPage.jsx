@@ -5,8 +5,13 @@ import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
 
 const SubscriptionsPage = () => {
-  const { subscribedCourses, eventObjects, setEventObjects, eventInstances, setEventInstances } =
-    useContext(AppStateContext);
+  const {
+    subscribedCourses,
+    eventObjects,
+    setEventObjects,
+    eventInstances,
+    setEventInstances,
+  } = useContext(AppStateContext);
   const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
   const [currentCourse, setCurrentCourse] = useState(null);
   const navigate = useNavigate();
@@ -41,15 +46,15 @@ const SubscriptionsPage = () => {
         },
         body: JSON.stringify({ eventObjects }),
       });
-  
+
       if (response.ok) {
         const { events } = await response.json();
-        console.log(events)
+        console.log(events);
         // Store the instances in the context
         setEventInstances(events); // Set all event instances
-  
+
         alert("Events created successfully");
-  
+
         // Redirect to /files page
         navigate("/files");
       } else {
@@ -60,9 +65,6 @@ const SubscriptionsPage = () => {
       alert("Failed to create events");
     }
   };
-  
-  
-  
 
   return (
     <div>

@@ -50,6 +50,7 @@ const CourseViewer = ({ currentCourseIndex }) => {
       (event) => event.start.toISOString().split("T")[0],
     );
     setHighlightedDates(dates);
+    console.log(dates);
 
     if (!history[currentCourseIndex]) {
       const newHistory = [...history];
@@ -71,6 +72,19 @@ const CourseViewer = ({ currentCourseIndex }) => {
       newExcludedDates[currentCourseIndex] =
         eventObjects[currentCourseIndex].exdate || [];
       setExcludedDates(newExcludedDates);
+    }
+
+    const firstEventDate = allEvents[0].start.toISOString().split("T")[0];
+    if (
+      eventObjects[currentCourseIndex].start.dateTime.split("T")[0] !==
+      firstEventDate
+    ) {
+      const updatedEventObjects = [...eventObjects];
+      updatedEventObjects[currentCourseIndex].start.dateTime =
+        allEvents[0].start.toISOString();
+      updatedEventObjects[currentCourseIndex].end.dateTime =
+        allEvents[0].end.toISOString();
+      setEventObjects(updatedEventObjects);
     }
   }, [eventObjects, currentCourseIndex]);
 
