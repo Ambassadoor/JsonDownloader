@@ -143,5 +143,23 @@ app.post("/api/create-events", async (req, res) => {
   }
 });
 
+app.post("/api/delete-events", async (req, res) => {
+  try {
+    loadCredentials(); // Load OAuth credentials
+    const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+
+    // Clear the primary calendar
+    await calendar.calendars.clear({
+      calendarId: "primary",
+    });
+
+    res.status(200).json({ message: "Calendar cleared successfully" });
+  } catch (error) {
+    console.error("Error clearing calendar:", error);
+    res.status(500).json({ error: "Failed to clear calendar" });
+  }
+});
+
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

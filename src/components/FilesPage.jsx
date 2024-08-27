@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { AppStateContext } from "../AppStateContext";
 import EventInstanceList from "./EventInstanceList";
 import SelectedFiles from "./SelectedFiles";
+import axios from "axios";
 
 const FilesPage = () => {
   const { eventInstances } = useContext(AppStateContext);
@@ -16,6 +17,25 @@ const FilesPage = () => {
     setSelectedInstanceId(instanceId);
   };
 
+  const handleDeleteEvents = async () => {
+    try {
+      const response = await axios.post('/api/delete-events',{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.status = 200) {
+        alert('Events deleted successfully')
+      } else {
+        alert('Failed to create events')
+      }
+    } catch (error) {
+      console.error('Error creating events:', error);
+      alert('Failed to create events');
+    }
+  }
+  
   return (
     <div>
       <h1>Files Page</h1>
@@ -30,6 +50,7 @@ const FilesPage = () => {
               (instance) => instance.id === selectedInstanceId,
             )}
           />
+          <button onClick={handleDeleteEvents}>Delete Events</button>
         </>
       ) : (
         <p>No event instances found.</p>
