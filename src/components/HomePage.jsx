@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CourseTable from "./CourseTable";
@@ -35,9 +35,9 @@ const HomePage = () => {
     checkAndLoadData();
   }, []);
 
-  const handleSubscribeButtonClick = () => {
+  const handleSubscribeButtonClick = useCallback(() => {
     navigate("/subscriptions");
-  };
+  });
 
   return (
     <div className="app-container">

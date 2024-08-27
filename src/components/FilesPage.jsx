@@ -4,7 +4,7 @@ import EventInstanceList from "./EventInstanceList";
 import SelectedFiles from "./SelectedFiles";
 
 const FilesPage = () => {
-  const { eventInstances, setEventInstances } = useContext(AppStateContext);
+  const { eventInstances } = useContext(AppStateContext);
   const [selectedInstanceId, setSelectedInstanceId] = useState(null);
 
   useEffect(() => {
