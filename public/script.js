@@ -170,7 +170,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const startDate = new Date(course["Start Date"]);
     const endDate = new Date(course["End Date"]);
     const meetingDays = parseMeetingDays(course["Meeting Days"]);
-    console.log(startDate, endDate, meetingDays);
 
     const event = {
       summary: `${course["Course Code"]} ${course["Section Code"]} - ${course["Course Name"]}`,
@@ -211,5 +210,4 @@ document.addEventListener("DOMContentLoaded", function () {
   // Example usage
   const timeZone = "America/New_York";
   const events = createCalendarEvent(course, timeZone);
-  console.log(events);
 });

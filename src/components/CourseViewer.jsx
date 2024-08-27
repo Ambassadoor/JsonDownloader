@@ -50,7 +50,6 @@ const CourseViewer = ({ currentCourseIndex }) => {
       (event) => event.start.toISOString().split("T")[0],
     );
     setHighlightedDates(dates);
-    console.log(dates);
 
     if (!history[currentCourseIndex]) {
       const newHistory = [...history];

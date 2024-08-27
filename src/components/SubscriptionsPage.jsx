@@ -47,7 +47,6 @@ const SubscriptionsPage = () => {
   
       if (response.status === 200) {
         const { events } = response.data;
-        console.log(events);
         // Store the instances in the context
         setEventInstances(events); // Set all event instances
   
