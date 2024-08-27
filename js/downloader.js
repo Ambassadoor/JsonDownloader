@@ -4,10 +4,23 @@ const path = require("path");
 const chokidar = require("chokidar");
 
 const downloadPath = path.resolve(__dirname, "..", "downloads");
+const coursesFilePath = path.join(downloadPath, "courses.json");
 
 const runPuppeteer = async () => {
+  // Ensure the downloads directory exists
   if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
+  }
+
+  // Delete the existing file if it exists
+  if (fs.existsSync(coursesFilePath)) {
+    try {
+      fs.unlinkSync(coursesFilePath);
+      console.log(`Deleted old file: ${coursesFilePath}`);
+    } catch (err) {
+      console.error("Error deleting old file:", err);
+      return; // Exit if we can't delete the old file
+    }
   }
 
   const browser = await puppeteer.launch({
@@ -40,17 +53,21 @@ const runPuppeteer = async () => {
         !downloadedFile.includes(".crdownload")
       ) {
         console.log(`File added: ${downloadedFile}`);
-        const newFilePath = path.join(downloadPath, "courses.json");
-        fs.rename(downloadedFile, newFilePath, (err) => {
+        fs.rename(downloadedFile, coursesFilePath, (err) => {
           if (err) {
             console.error("Error renaming file:", err);
             reject(err);
           } else {
-            console.log(`File successfully renamed to ${newFilePath}`);
+            console.log(`File successfully renamed to ${coursesFilePath}`);
             resolve();
           }
         });
       }
+    });
+
+    watcher.on("error", (error) => {
+      console.error("Watcher error:", error);
+      reject(error);
     });
   });
 

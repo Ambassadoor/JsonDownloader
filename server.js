@@ -42,7 +42,6 @@ app.get("/api/check-download", async (req, res) => {
       const stats = fs.statSync(filePath);
       const millisecondsElapsed = new Date() - new Date(stats.mtime);
       const hoursElapsed = millisecondsElapsed / (1000 * 60 * 60);
-
       if (hoursElapsed < Number(req.query.hours)) {
         return res.status(200).json({ status: "current" });
       }
