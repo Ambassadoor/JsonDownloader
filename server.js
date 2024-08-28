@@ -193,6 +193,7 @@ app.post("/api/attach-files", async (req, res) => {
     await calendar.events.patch({
       calendarId: "primary",
       eventId: instanceId, // Use the event instance ID
+      supportsAttachments: true,
       resource: {
         attachments,
       },
