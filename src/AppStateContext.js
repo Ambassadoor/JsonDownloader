@@ -24,7 +24,7 @@ const AppStateProvider = ({ children }) => {
         excludedDates,
         setExcludedDates,
         eventInstances,
-        setEventInstances
+        setEventInstances,
       }}
     >
       {children}

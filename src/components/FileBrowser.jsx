@@ -1,44 +1,48 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-const FileBrowser = ({ onClose, onSelectFiles }) => {
+const FileBrowser = ({ onFileSelect }) => {
   const [files, setFiles] = useState([]);
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch files from Google Drive API
-    async function fetchFiles() {
+    const fetchFiles = async () => {
       try {
-        const response = await fetch("/api/google-drive/files"); // Example endpoint
-        const data = await response.json();
-        setFiles(data.files);
+        const response = await axios.get("/api/drive-files");
+        setFiles(response.data.files);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching files:", error);
+        setLoading(false);
       }
-    }
+    };
+
     fetchFiles();
   }, []);
 
-  const handleFileSelect = (file) => {
-    setSelectedFiles([...selectedFiles, file]);
-  };
-
-  const handleConfirmSelection = () => {
-    onSelectFiles(selectedFiles);
+  const handleFileClick = (file) => {
+    onFileSelect(file); // Pass the selected file to the parent component
   };
 
   return (
     <div>
-      <h2>Select Files from Google Drive</h2>
-      <ul>
-        {files.map((file) => (
-          <li key={file.id}>
-            {file.name}
-            <button onClick={() => handleFileSelect(file)}>Select</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleConfirmSelection}>Attach Selected Files</button>
-      <button onClick={onClose}>Close</button>
+      <h3>Google Drive Files</h3>
+      {loading ? (
+        <p>Loading files...</p>
+      ) : (
+        <ul>
+          {files.map((file) => (
+            <li key={file.id} onClick={() => handleFileClick(file)}>
+              <img
+                src={file.iconLink}
+                alt={file.name}
+                style={{ marginRight: 8 }}
+              />
+              {file.name}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

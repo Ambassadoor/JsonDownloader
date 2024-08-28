@@ -1,25 +1,21 @@
 import React from "react";
 
-const SelectedFiles = ({ eventInstances }) => {
+const SelectedFiles = ({ files }) => {
   return (
     <div>
-      <h2>Selected Files</h2>
-      {eventInstances.map((instance) => (
-        <div key={instance.id}>
-          <h3>
-            {instance.summary} ({instance.start.dateTime})
-          </h3>
-          <ul>
-            {instance.attachments && instance.attachments.length > 0 ? (
-              instance.attachments.map((file, index) => (
-                <li key={index}>{file.name}</li>
-              ))
-            ) : (
-              <li>No files attached</li>
-            )}
-          </ul>
-        </div>
-      ))}
+      <h3>Selected Files</h3>
+      <ul>
+        {files.map((file) => (
+          <li key={file.id}>
+            <img
+              src={file.iconLink}
+              alt={file.name}
+              style={{ marginRight: 8 }}
+            />
+            {file.name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

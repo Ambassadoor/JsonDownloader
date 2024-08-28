@@ -1,41 +1,65 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AppStateContext } from "../AppStateContext";
 import EventInstanceList from "./EventInstanceList";
 import SelectedFiles from "./SelectedFiles";
+import FileBrowser from "./FileBrowser";
 import axios from "axios";
 
 const FilesPage = () => {
   const { eventInstances } = useContext(AppStateContext);
   const [selectedInstanceId, setSelectedInstanceId] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]); // To manage selected files
 
   useEffect(() => {
-    // Assuming `eventInstances` is already set in the context with the correct structure
     console.log("Event Instances:", eventInstances);
   }, [eventInstances]);
 
   const handleSelectInstance = (instanceId) => {
     setSelectedInstanceId(instanceId);
+    setSelectedFiles([]);
+  };
+
+  const handleFileSelect = (file) => {
+    setSelectedFiles((prevFiles) => [...prevFiles, file]); // Add the selected file to the list
+  };
+
+  const handleAttachFiles = async () => {
+    try {
+      const response = await axios.post("/api/attach-files", {
+        instanceId: selectedInstanceId,
+        files: selectedFiles,
+      });
+
+      if (response.status === 200) {
+        alert("Files attached successfully");
+      } else {
+        alert("Failed to attach files");
+      }
+    } catch (error) {
+      console.error("Error attaching files:", error);
+      alert("Failed to attach files");
+    }
   };
 
   const handleDeleteEvents = async () => {
     try {
-      const response = await axios.post('/api/delete-events',{
+      const response = await axios.post("/api/delete-events", {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          "Content-Type": "application/json",
+        },
       });
 
-      if (response.status = 200) {
-        alert('Events deleted successfully')
+      if (response.status === 200) {
+        alert("Events deleted successfully");
       } else {
-        alert('Failed to create events')
+        alert("Failed to delete events");
       }
     } catch (error) {
-      console.error('Error creating events:', error);
-      alert('Failed to create events');
+      console.error("Error deleting events:", error);
+      alert("Failed to delete events");
     }
-  }
-  
+  };
+
   return (
     <div>
       <h1>Files Page</h1>
@@ -45,11 +69,18 @@ const FilesPage = () => {
             eventInstances={eventInstances[0].instances} // Access the instances array
             onSelectInstance={handleSelectInstance}
           />
-          <SelectedFiles
-            eventInstances={eventInstances[0].instances.filter(
-              (instance) => instance.id === selectedInstanceId,
-            )}
-          />
+          {selectedInstanceId && (
+            <>
+              <FileBrowser onFileSelect={handleFileSelect} />
+              <SelectedFiles files={selectedFiles} />
+              <button
+                onClick={handleAttachFiles}
+                disabled={selectedFiles.length === 0}
+              >
+                Attach Files
+              </button>
+            </>
+          )}
           <button onClick={handleDeleteEvents}>Delete Events</button>
         </>
       ) : (

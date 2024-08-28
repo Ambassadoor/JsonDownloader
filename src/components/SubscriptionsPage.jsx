@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppStateContext } from "../AppStateContext";
 import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
-import axios from 'axios';
+import axios from "axios";
 
 const SubscriptionsPage = () => {
   const {
@@ -39,30 +39,33 @@ const SubscriptionsPage = () => {
 
   const handleCreateEvents = async () => {
     try {
-      const response = await axios.post('/api/create-events', { eventObjects }, {
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await axios.post(
+        "/api/create-events",
+        { eventObjects },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
         },
-      });
-  
+      );
+
       if (response.status === 200) {
         const { events } = response.data;
         // Store the instances in the context
         setEventInstances(events); // Set all event instances
-  
-        alert('Events created successfully');
-  
+
+        alert("Events created successfully");
+
         // Redirect to /files page
-        navigate('/files');
+        navigate("/files");
       } else {
-        alert('Failed to create events');
+        alert("Failed to create events");
       }
     } catch (error) {
-      console.error('Error creating events:', error);
-      alert('Failed to create events');
+      console.error("Error creating events:", error);
+      alert("Failed to create events");
     }
   };
-  
 
   return (
     <div>

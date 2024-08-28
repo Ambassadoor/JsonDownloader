@@ -64,20 +64,20 @@ app.get("/api/check-download", async (req, res) => {
   }
 });
 
+// server.js
+
 app.get("/oauth2callback", async (req, res) => {
   const code = req.query.code;
 
   if (code) {
     try {
-      // Get the token using the authorization code
       const { tokens } = await oAuth2Client.getToken(code);
       oAuth2Client.setCredentials(tokens);
 
-      // Save the token in the specified tokens.js file
       fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens));
 
       // Redirect to your frontend or another page after successful authentication
-      res.redirect("http://localhost:3000"); // Redirect to your app
+      res.redirect("http://localhost:3000"); // Adjust this redirect URL as needed
     } catch (error) {
       console.error("Error retrieving access token", error);
       res.status(500).send("Authentication failed");
@@ -160,6 +160,50 @@ app.post("/api/delete-events", async (req, res) => {
   }
 });
 
+app.get("/api/drive-files", async (req, res) => {
+  try {
+    loadCredentials(); // Load OAuth credentials
+    const drive = google.drive({ version: "v3", auth: oAuth2Client });
+
+    const response = await drive.files.list({
+      pageSize: 20, // Adjust the page size as needed
+      fields: "nextPageToken, files(id, name, mimeType, webViewLink, iconLink)",
+    });
+
+    res.status(200).json({ files: response.data.files });
+  } catch (error) {
+    console.error("Error fetching Google Drive files:", error);
+    res.status(500).json({ error: "Failed to fetch files" });
+  }
+});
+
+app.post("/api/attach-files", async (req, res) => {
+  try {
+    loadCredentials(); // Load OAuth credentials
+    const { instanceId, files } = req.body;
+
+    const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
+
+    const attachments = files.map((file) => ({
+      fileUrl: file.webViewLink,
+      title: file.name,
+      mimeType: file.mimeType,
+    }));
+
+    await calendar.events.patch({
+      calendarId: "primary",
+      eventId: instanceId, // Use the event instance ID
+      resource: {
+        attachments,
+      },
+    });
+
+    res.status(200).json({ message: "Files attached successfully" });
+  } catch (error) {
+    console.error("Error attaching files:", error);
+    res.status(500).json({ error: "Failed to attach files" });
+  }
+});
 
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
