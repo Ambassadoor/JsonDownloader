@@ -181,15 +181,19 @@ app.post("/api/attach-files", async (req, res) => {
   try {
     loadCredentials(); // Load OAuth credentials
     const { instanceId, files } = req.body;
+    console.log(files);
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
+    // Transform the selected files into the required attachment format
     const attachments = files.map((file) => ({
-      fileUrl: file.webViewLink,
-      title: file.name,
-      mimeType: file.mimeType,
+      fileUrl: file.url, // Use the 'url' property for the Google Drive file link
+      title: file.name, // Use the 'name' property for the file title
+      mimeType: file.mimeType, // Use the 'mimeType' property for the file MIME type
     }));
+    console.log(attachments);
 
+    // Patch the event instance to include the attachments
     await calendar.events.patch({
       calendarId: "primary",
       eventId: instanceId, // Use the event instance ID
@@ -203,6 +207,17 @@ app.post("/api/attach-files", async (req, res) => {
   } catch (error) {
     console.error("Error attaching files:", error);
     res.status(500).json({ error: "Failed to attach files" });
+  }
+});
+
+app.get("/api/get-token", (req, res) => {
+  try {
+    const tokenData = fs.readFileSync(TOKEN_PATH, "utf8");
+    const tokens = JSON.parse(tokenData);
+    res.status(200).json({ access_token: tokens.access_token });
+  } catch (error) {
+    console.error("Error reading token:", error);
+    res.status(500).json({ error: "Failed to retrieve token" });
   }
 });
 

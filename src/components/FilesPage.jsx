@@ -6,9 +6,9 @@ import FileBrowser from "./FileBrowser";
 import axios from "axios";
 
 const FilesPage = () => {
-  const { eventInstances } = useContext(AppStateContext);
+  const { eventInstances, selectedFiles, setSelectedFiles } =
+    useContext(AppStateContext);
   const [selectedInstanceId, setSelectedInstanceId] = useState(null);
-  const [selectedFiles, setSelectedFiles] = useState([]); // To manage selected files
 
   useEffect(() => {
     console.log("Event Instances:", eventInstances);
@@ -24,6 +24,7 @@ const FilesPage = () => {
   };
 
   const handleAttachFiles = async () => {
+    console.log("Attaching Files");
     try {
       const response = await axios.post("/api/attach-files", {
         instanceId: selectedInstanceId,
@@ -73,12 +74,7 @@ const FilesPage = () => {
             <>
               <FileBrowser onFileSelect={handleFileSelect} />
               <SelectedFiles files={selectedFiles} />
-              <button
-                onClick={handleAttachFiles}
-                disabled={selectedFiles.length === 0}
-              >
-                Attach Files
-              </button>
+              <button onClick={handleAttachFiles}>Attach Files</button>
             </>
           )}
           <button onClick={handleDeleteEvents}>Delete Events</button>
