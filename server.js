@@ -14,7 +14,6 @@ const getAuthUrl = require("./src/auth"); // Import the function to get the auth
 
 const app = express();
 const compiler = webpack(webpackConfig);
-const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 const TOKEN_PATH = path.join(__dirname, "server", "config", "tokens.json");
 
 const loadCredentials = () => {
