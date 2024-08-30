@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from 'react';
 import { AppStateContext } from "../AppStateContext";
 import {
   Autocomplete,
@@ -11,92 +11,42 @@ import {
   TextField,
   Box,
   Grid,
+  Button,
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import moment from "moment-timezone";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
+import useEventForm from '../hooks/useEventForm';
+
+const dayMap = {
+  Sun: "SU",
+  Mon: "MO",
+  Tues: "TU",
+  Wed: "WE",
+  Thur: "TH",
+  Fri: "FR",
+  Sat: "SA",
+};
 
 const EventUI = () => {
   const { eventObjects, currentCourseIndex } = useContext(AppStateContext);
   const defaultEvent = eventObjects?.[currentCourseIndex] || {};
-  
-  dayjs.extend(utc);
-  const timezones = moment.tz.names();
 
-  const formatUntilDate = (untilDate) => {
-    return dayjs(untilDate, "YYYYMMDDTHHmmssZ").format(
-      "YYYY-MM-DDTHH:mm:ss[Z]",
-    );
-  };
-  
-  const [formData, setFormData] = useState({
-    summary: defaultEvent?.summary || "",
-    description: defaultEvent?.description || "",
-    location: defaultEvent?.location || "",
-    startDate: dayjs(defaultEvent?.start?.dateTime) || dayjs(),
-    startTime: dayjs(defaultEvent?.start?.dateTime) || dayjs(),
-    endTime: dayjs(defaultEvent?.end?.dateTime) || dayjs(),
-    endDate:
-      dayjs(
-        formatUntilDate(
-          defaultEvent?.recurrence?.[1]?.match(/UNTIL=([^;]+)/)[1],
-        ),
-      ) || dayjs(),
-    timeZone: defaultEvent?.start.timeZone || 'America/New York',
-    frequency:
-      defaultEvent?.recurrence?.[1]?.match(/FREQ=([^;]+)/)?.[1] || "Weekly",
-    recurrenceDates:
-      defaultEvent?.recurrence?.[1]?.match(/BYDAY=([^;]+)/)[1].split(",") || [],
-  });
-
-  const dayMap = {
-    Sun: "SU",
-    Mon: "MO",
-    Tues: "TU",
-    Wed: "WE",
-    Thur: "TH",
-    Fri: "FR",
-    Sat: "SA",
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleTimeZoneChange = (name, value) => {
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  }
-
-  const handleDayToggle = (e) => {
-    const { value } = e.target;
-    setFormData((prevState) => {
-      const { recurrenceDates } = prevState;
-      const dayString = dayMap[value];
-
-      const updatedDates = recurrenceDates.includes(dayString)
-        ? recurrenceDates.filter((d) => d !== dayString)
-        : [...recurrenceDates, dayString];
-
-      console.log(updatedDates);
-
-      return {
-        ...prevState,
-        recurrenceDates: updatedDates,
-      };
-    });
-  };
+  const {
+    formData,
+    timezones,
+    handleInputChange,
+    handleDayToggle,
+    handleSubmit,
+  } = useEventForm(defaultEvent);
 
   return (
-    <Box component="form">
+    <Box component="form" onSubmit={handleSubmit}>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
             label="Summary"
             name="summary"
             value={formData.summary}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             fullWidth
           />
         </Grid>
@@ -106,7 +56,7 @@ const EventUI = () => {
             name="description"
             multiline
             value={formData.description}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             fullWidth
           />
         </Grid>
@@ -115,26 +65,24 @@ const EventUI = () => {
             label="Location"
             name="location"
             value={formData.location}
-            onChange={handleInputChange}
+            onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             fullWidth
           />
         </Grid>
         <Grid item xs={12}>
-        <Autocomplete
-        name="timeZone"
-        options={timezones}
-        value={formData.timeZone}
-        onChange={(event, newValue) => handleTimeZoneChange("timeZone", newValue)}
-        renderInput={(params) => <TextField {...params} label="Timezone" />}
-      />
+          <Autocomplete
+            name="timeZone"
+            options={timezones}
+            value={formData.timeZone}
+            onChange={(event, newValue) => handleInputChange("timeZone", newValue)}
+            renderInput={(params) => <TextField {...params} label="Timezone" />}
+          />
         </Grid>
         <Grid item xs={6}>
           <DatePicker
             label="Start Date"
             value={formData.startDate}
-            onChange={(date) =>
-              setFormData((prev) => ({ ...prev, startDate: date }))
-            }
+            onChange={(date) => handleInputChange("startDate", date)}
             fullWidth
             maxDate={formData.endDate}
           />
@@ -143,9 +91,7 @@ const EventUI = () => {
           <DatePicker
             label="Until"
             value={formData.endDate}
-            onChange={(date) =>
-              setFormData((prev) => ({ ...prev, endDate: date }))
-            }
+            onChange={(date) => handleInputChange("endDate", date)}
             fullWidth
             minDate={formData.startDate}
           />
@@ -154,9 +100,7 @@ const EventUI = () => {
           <TimePicker
             label="Start Time"
             value={formData.startTime}
-            onChange={(time) =>
-              setFormData((prev) => ({ ...prev, startTime: time }))
-            }
+            onChange={(time) => handleInputChange("startTime", time)}
             fullWidth
             maxTime={formData.endTime}
           />
@@ -165,9 +109,7 @@ const EventUI = () => {
           <TimePicker
             label="End Time"
             value={formData.endTime}
-            onChange={(time) =>
-              setFormData((prev) => ({ ...prev, endTime: time }))
-            }
+            onChange={(time) => handleInputChange("endTime", time)}
             fullWidth
             minTime={formData.startTime}
           />
@@ -179,7 +121,7 @@ const EventUI = () => {
               label="Frequency"
               name="frequency"
               value={formData.frequency}
-              onChange={handleInputChange}
+              onChange={(e) => handleInputChange(e.target.name, e.target.value)}
             >
               <MenuItem value={"DAILY"}>DAILY</MenuItem>
               <MenuItem value={"WEEKLY"}>WEEKLY</MenuItem>
@@ -195,15 +137,17 @@ const EventUI = () => {
                 variant="contained"
                 key={day}
                 value={day}
-                selected={
-                  formData.recurrenceDates.includes(dayString) ? true : false
-                }
-                onChange={handleDayToggle}
+                selected={formData.frequency === "WEEKLY" && formData.recurrenceDates.includes(dayString)}
+                onChange={(e) => handleDayToggle(dayMap, e.target.value)}
+                disabled={formData.frequency !== "WEEKLY"}
               >
                 {day}
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
+        </Grid>
+        <Grid item xs={12}>
+          <Button type="submit" variant="contained" name="submit" value="Submit">Submit</Button>
         </Grid>
       </Grid>
     </Box>
