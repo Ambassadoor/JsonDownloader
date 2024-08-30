@@ -118,6 +118,7 @@ const EventUI = () => {
               setFormData((prev) => ({ ...prev, startDate: date }))
             }
             fullWidth
+            maxDate={formData.endDate}
           />
         </Grid>
         <Grid item xs={6}>
@@ -128,6 +129,7 @@ const EventUI = () => {
               setFormData((prev) => ({ ...prev, endDate: date }))
             }
             fullWidth
+            minDate={formData.startDate}
           />
         </Grid>
         <Grid item xs={6}>
@@ -138,6 +140,7 @@ const EventUI = () => {
               setFormData((prev) => ({ ...prev, startTime: time }))
             }
             fullWidth
+            maxTime={formData.endTime}
           />
         </Grid>
         <Grid item xs={6}>
@@ -148,6 +151,7 @@ const EventUI = () => {
               setFormData((prev) => ({ ...prev, endTime: time }))
             }
             fullWidth
+            minTime={formData.startTime}
           />
         </Grid>
         <Grid item xs={12}>
