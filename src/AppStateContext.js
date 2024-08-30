@@ -10,6 +10,7 @@ const AppStateProvider = ({ children }) => {
   const [excludedDates, setExcludedDates] = useState([]);
   const [eventInstances, setEventInstances] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
+  const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
 
   return (
     <AppStateContext.Provider
@@ -28,6 +29,8 @@ const AppStateProvider = ({ children }) => {
         setEventInstances,
         selectedFiles,
         setSelectedFiles,
+        currentCourseIndex, 
+        setCurrentCourseIndex
       }}
     >
       {children}

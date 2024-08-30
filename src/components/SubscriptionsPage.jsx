@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AppStateContext } from "../AppStateContext";
 import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
+import EventUI from "./EventUI";
 import axios from "axios";
 
 const dayMap = {
@@ -21,8 +22,9 @@ const SubscriptionsPage = () => {
     eventObjects,
     setEventObjects,
     setEventInstances,
+    currentCourseIndex,
+    setCurrentCourseIndex
   } = useContext(AppStateContext);
-  const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
   const [currentCourse, setCurrentCourse] = useState(null);
   const [currentEvent, setCurrentEvent] = useState({});
   const [selectedDays, setSelectedDays] = useState([]);
@@ -191,9 +193,13 @@ const SubscriptionsPage = () => {
       alert("Failed to create events");
     }
   };
+  const handleUiClick = async () => {
+    navigate("/ui")
+  }
 
   return (
     <div>
+      <button onClick={handleUiClick}>UI</button>
       <h1>Subscribed Courses</h1>
       <div>
         <button onClick={handlePrevCourse} disabled={currentCourseIndex === 0}>
@@ -213,6 +219,8 @@ const SubscriptionsPage = () => {
           Next
         </button>
       </div>
+
+        <br></br>
 
       {currentEvent && (
         <form onSubmit={handleSubmit}>
