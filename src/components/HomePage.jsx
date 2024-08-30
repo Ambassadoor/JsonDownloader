@@ -6,6 +6,7 @@ import SubscribedTable from "./SubscribedTable";
 import SubscribeButton from "./SubscribeButton";
 import { AppStateContext } from "../AppStateContext";
 import "../styles/styles.css";
+import CourseTransferList from "./transferListSandbox";
 
 const HomePage = () => {
   const { setJsonData, setOriginalData } = useContext(AppStateContext);
@@ -39,8 +40,15 @@ const HomePage = () => {
     navigate("/subscriptions");
   });
 
+  const handleTransferClick = async () => {
+    navigate("/transfer");
+  };
+
   return (
     <div className="app-container">
+    <div>
+      <button onClick={handleTransferClick}>transfer</button>
+    </div>
       <div className="left-pane">
         <h1>Course Table</h1>
         <CourseTable />

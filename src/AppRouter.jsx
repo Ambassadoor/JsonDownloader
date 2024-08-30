@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage";
 import SubscriptionsPage from "./components/SubscriptionsPage";
 import FilesPage from "./components/FilesPage";
 import EventUI from "./components/EventUI";
+import CourseTransferList from "./components/transferListSandbox";
 
 const AppRouter = () => (
   <Routes>
@@ -12,6 +13,7 @@ const AppRouter = () => (
     <Route path="/subscriptions" element={<SubscriptionsPage />} />
     <Route path="/files" element={<FilesPage />} />
     <Route path="/ui" element={<EventUI />} />
+    <Route path="/transfer" element={<CourseTransferList/>} />
   </Routes>
 );
 
