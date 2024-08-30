@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppStateContext } from "../AppStateContext";
 import {
+  Autocomplete,
   ToggleButton,
   ToggleButtonGroup,
   FormControl,
@@ -12,6 +13,7 @@ import {
   Grid,
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
+import moment from "moment-timezone";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 
@@ -20,6 +22,8 @@ const EventUI = () => {
   const defaultEvent = eventObjects?.[currentCourseIndex] || {};
   
   dayjs.extend(utc);
+  const timezones = moment.tz.names();
+
   const formatUntilDate = (untilDate) => {
     return dayjs(untilDate, "YYYYMMDDTHHmmssZ").format(
       "YYYY-MM-DDTHH:mm:ss[Z]",
@@ -39,6 +43,7 @@ const EventUI = () => {
           defaultEvent?.recurrence?.[1]?.match(/UNTIL=([^;]+)/)[1],
         ),
       ) || dayjs(),
+    timeZone: defaultEvent?.start.timeZone || 'America/New York',
     frequency:
       defaultEvent?.recurrence?.[1]?.match(/FREQ=([^;]+)/)?.[1] || "Weekly",
     recurrenceDates:
@@ -59,6 +64,10 @@ const EventUI = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
+
+  const handleTimeZoneChange = (name, value) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  }
 
   const handleDayToggle = (e) => {
     const { value } = e.target;
@@ -109,6 +118,15 @@ const EventUI = () => {
             onChange={handleInputChange}
             fullWidth
           />
+        </Grid>
+        <Grid item xs={12}>
+        <Autocomplete
+        name="timeZone"
+        options={timezones}
+        value={formData.timeZone}
+        onChange={(event, newValue) => handleTimeZoneChange("timeZone", newValue)}
+        renderInput={(params) => <TextField {...params} label="Timezone" />}
+      />
         </Grid>
         <Grid item xs={6}>
           <DatePicker
