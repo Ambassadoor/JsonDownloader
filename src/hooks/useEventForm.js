@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
-import { formatUntilDate, getTimezones } from '../../server/utils/dateUtils';
-import dayjs from 'dayjs';
+import { useState, useEffect } from "react";
+import { formatUntilDate, getTimezones } from "../../server/utils/dateUtils";
+import dayjs from "dayjs";
+import useEventFormatter from "./useEventFormatter";
 
 const useEventForm = (defaultEvent) => {
   const timezones = getTimezones();
@@ -11,11 +12,18 @@ const useEventForm = (defaultEvent) => {
     location: defaultEvent?.location || "",
     startDate: dayjs(defaultEvent?.start?.dateTime) || dayjs(),
     startTime: dayjs(defaultEvent?.start?.dateTime) || dayjs(),
-    endTime: dayjs(defaultEvent?.end?.dateTime) || dayjs(),
-    endDate: dayjs(formatUntilDate(defaultEvent?.recurrence?.[1]?.match(/UNTIL=([^;]+)/)[1])) || dayjs(),
-    timeZone: defaultEvent?.start.timeZone || 'America/New_York',
-    frequency: defaultEvent?.recurrence?.[1]?.match(/FREQ=([^;]+)/)?.[1] || "WEEKLY",
-    recurrenceDates: defaultEvent?.recurrence?.[1]?.match(/BYDAY=([^;]+)/)[1].split(",") || [],
+    endTime: dayjs(defaultEvent?.end?.dateTime) || startTime.add(1, "hour"),
+    endDate:
+      dayjs(
+        formatUntilDate(
+          defaultEvent?.recurrence?.[1]?.match(/UNTIL=([^;]+)/)[1],
+        ),
+      ) || startDate.add(1, "day"),
+    timeZone: defaultEvent?.start.timeZone || "America/New_York",
+    frequency:
+      defaultEvent?.recurrence?.[1]?.match(/FREQ=([^;]+)/)?.[1] || "WEEKLY",
+    recurrenceDates:
+      defaultEvent?.recurrence?.[1]?.match(/BYDAY=([^;]+)/)[1].split(",") || [],
   });
 
   const [userDataChange, setUserDataChange] = useState(false);
@@ -44,11 +52,13 @@ const useEventForm = (defaultEvent) => {
       setFormData((prev) => ({ ...prev, recurrenceDates: [] }));
     }
     // Further submission logic here
+    if (userDataChange) {
+      const updatedEvent = useEventFormatter(formData);
+      console.log(updatedEvent);
+    } else {
+      console.log(defaultEvent);
+    }
   };
-
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   return {
     formData,

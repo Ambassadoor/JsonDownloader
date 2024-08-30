@@ -29,8 +29,8 @@ const AppStateProvider = ({ children }) => {
         setEventInstances,
         selectedFiles,
         setSelectedFiles,
-        currentCourseIndex, 
-        setCurrentCourseIndex
+        currentCourseIndex,
+        setCurrentCourseIndex,
       }}
     >
       {children}

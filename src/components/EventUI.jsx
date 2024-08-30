@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 import { AppStateContext } from "../AppStateContext";
 import {
   Autocomplete,
@@ -14,7 +14,7 @@ import {
   Button,
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import useEventForm from '../hooks/useEventForm';
+import useEventForm from "../hooks/useEventForm";
 
 const dayMap = {
   Sun: "SU",
@@ -74,7 +74,9 @@ const EventUI = () => {
             name="timeZone"
             options={timezones}
             value={formData.timeZone}
-            onChange={(event, newValue) => handleInputChange("timeZone", newValue)}
+            onChange={(event, newValue) =>
+              handleInputChange("timeZone", newValue)
+            }
             renderInput={(params) => <TextField {...params} label="Timezone" />}
           />
         </Grid>
@@ -137,7 +139,10 @@ const EventUI = () => {
                 variant="contained"
                 key={day}
                 value={day}
-                selected={formData.frequency === "WEEKLY" && formData.recurrenceDates.includes(dayString)}
+                selected={
+                  formData.frequency === "WEEKLY" &&
+                  formData.recurrenceDates.includes(dayString)
+                }
                 onChange={(e) => handleDayToggle(dayMap, e.target.value)}
                 disabled={formData.frequency !== "WEEKLY"}
               >
@@ -147,7 +152,14 @@ const EventUI = () => {
           </ToggleButtonGroup>
         </Grid>
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" name="submit" value="Submit">Submit</Button>
+          <Button
+            type="submit"
+            variant="contained"
+            name="submit"
+            value="Submit"
+          >
+            Submit
+          </Button>
         </Grid>
       </Grid>
     </Box>

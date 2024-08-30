@@ -37,7 +37,8 @@ const createRecurringEvents = (event) => {
 };
 
 const CourseViewer = () => {
-  const { eventObjects, setEventObjects, currentCourseIndex } = useContext(AppStateContext);
+  const { eventObjects, setEventObjects, currentCourseIndex } =
+    useContext(AppStateContext);
   const [highlightedDates, setHighlightedDates] = useState([]);
   const [excludedDates, setExcludedDates] = useState([]); // Array for each course's excludedDates
   const [history, setHistory] = useState([]);

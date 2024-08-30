@@ -23,7 +23,7 @@ const SubscriptionsPage = () => {
     setEventObjects,
     setEventInstances,
     currentCourseIndex,
-    setCurrentCourseIndex
+    setCurrentCourseIndex,
   } = useContext(AppStateContext);
   const [currentCourse, setCurrentCourse] = useState(null);
   const [currentEvent, setCurrentEvent] = useState({});
@@ -194,8 +194,8 @@ const SubscriptionsPage = () => {
     }
   };
   const handleUiClick = async () => {
-    navigate("/ui")
-  }
+    navigate("/ui");
+  };
 
   return (
     <div>
@@ -220,7 +220,7 @@ const SubscriptionsPage = () => {
         </button>
       </div>
 
-        <br></br>
+      <br></br>
 
       {currentEvent && (
         <form onSubmit={handleSubmit}>
