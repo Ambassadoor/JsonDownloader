@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 const AppStateContext = createContext();
 
 const AppStateProvider = ({ children }) => {
-  const [subscribedCourses, setSubscribedCourses] = useState([]);
+  const [subscribedData, setSubscribedData] = useState([]);
   const [jsonData, setJsonData] = useState([]);
   const [originalData, setOriginalData] = useState([]);
   const [eventObjects, setEventObjects] = useState([]);
@@ -15,8 +15,8 @@ const AppStateProvider = ({ children }) => {
   return (
     <AppStateContext.Provider
       value={{
-        subscribedCourses,
-        setSubscribedCourses,
+        subscribedData,
+        setSubscribedData,
         jsonData,
         setJsonData,
         originalData,

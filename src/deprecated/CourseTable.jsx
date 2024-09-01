@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { TextField, Grid } from "@mui/material";
-import { useHandleCheckboxChange } from "../hooks/useHandleCheckboxChange";
+import { useHandleCheckboxChange } from "./useHandleCheckboxChange";
 import { AppStateContext } from "../AppStateContext";
 
 const CourseTable = ({}) => {
-  const { jsonData, setJsonData, originalData, subscribedCourses } =
+  const { jsonData, setJsonData, originalData, subscribedData } =
     useContext(AppStateContext);
   const handleCheckboxChange = useHandleCheckboxChange();
 
@@ -27,7 +27,7 @@ const CourseTable = ({}) => {
           renderCell: (params) => (
             <input
               type="checkbox"
-              checked={subscribedCourses.some(
+              checked={subscribedData.some(
                 (course) => course.id === params.row.id,
               )}
               onChange={() => handleCheckboxChange(params.row.id)}
@@ -39,7 +39,7 @@ const CourseTable = ({}) => {
       ]);
     }
     setFilteredData(jsonData); // Initialize filteredData with jsonData
-  }, [jsonData, subscribedCourses]);
+  }, [jsonData, subscribedData]);
 
   const handleSearch = (e) => {
     const value = e.target.value.toLowerCase();

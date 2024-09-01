@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { useHandleCheckboxChange } from "../hooks/useHandleCheckboxChange";
+import { useHandleCheckboxChange } from "./useHandleCheckboxChange";
 import { AppStateContext } from "../AppStateContext";
 
 const SubscribedTable = () => {
-  const { subscribedCourses } = useContext(AppStateContext);
+  const { subscribedData } = useContext(AppStateContext);
   const handleCheckboxChange = useHandleCheckboxChange();
 
   return (
@@ -17,7 +17,7 @@ const SubscribedTable = () => {
         </tr>
       </thead>
       <tbody id="subscribedBody">
-        {subscribedCourses.map((course, index) => (
+        {subscribedData.map((course, index) => (
           <tr key={index}>
             <td>
               <input

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { AppStateContext } from "../AppStateContext";
 import CourseViewer from "./CourseViewer";
 import createEventFromCourse from "./CalendarEntryGenerator";
-import EventUI from "./EventUI";
 import axios from "axios";
 
 const dayMap = {
@@ -18,7 +17,7 @@ const dayMap = {
 
 const SubscriptionsPage = () => {
   const {
-    subscribedCourses,
+    subscribedData,
     eventObjects,
     setEventObjects,
     setEventInstances,
@@ -35,11 +34,11 @@ const SubscriptionsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setEventObjects(subscribedCourses.map(createEventFromCourse));
-  }, [subscribedCourses, setEventObjects]);
+    setEventObjects(subscribedData.map(createEventFromCourse));
+  }, [subscribedData, setEventObjects]);
 
   useEffect(() => {
-    const course = subscribedCourses[currentCourseIndex];
+    const course = subscribedData[currentCourseIndex];
     setCurrentCourse(course);
     if (eventObjects.length > 0) {
       const event = eventObjects[currentCourseIndex];
@@ -64,7 +63,7 @@ const SubscriptionsPage = () => {
         }
       }
     }
-  }, [currentCourseIndex, subscribedCourses, eventObjects]);
+  }, [currentCourseIndex, subscribedData, eventObjects]);
 
   const formatDateField = (date) => {
     return date.slice(0, 4) + "-" + date.slice(4, 6) + "-" + date.slice(6, 8);
@@ -72,7 +71,7 @@ const SubscriptionsPage = () => {
 
   const handleNextCourse = () => {
     setCurrentCourseIndex((prevIndex) =>
-      prevIndex < subscribedCourses.length - 1 ? prevIndex + 1 : prevIndex,
+      prevIndex < subscribedData.length - 1 ? prevIndex + 1 : prevIndex,
     );
   };
 
@@ -208,13 +207,13 @@ const SubscriptionsPage = () => {
         {currentCourse && (
           <span>
             {`Viewing course ${currentCourseIndex + 1} of ${
-              subscribedCourses.length
+              subscribedData.length
             }: ${currentCourse["Course Name"]}`}
           </span>
         )}
         <button
           onClick={handleNextCourse}
-          disabled={currentCourseIndex === subscribedCourses.length - 1}
+          disabled={currentCourseIndex === subscribedData.length - 1}
         >
           Next
         </button>

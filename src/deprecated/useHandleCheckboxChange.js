@@ -2,12 +2,8 @@ import { useCallback, useContext } from "react";
 import { AppStateContext } from "../AppStateContext";
 
 export const useHandleCheckboxChange = () => {
-  const {
-    originalData,
-    setOriginalData,
-    subscribedCourses,
-    setSubscribedCourses,
-  } = useContext(AppStateContext);
+  const { originalData, setOriginalData, subscribedData, setSubscribedData } =
+    useContext(AppStateContext);
   return useCallback(
     (courseId) => {
       const updatedData = originalData.map((course) =>
@@ -19,16 +15,16 @@ export const useHandleCheckboxChange = () => {
       setOriginalData(updatedData);
 
       const course = updatedData.find((c) => c.id === courseId);
-      const isSubscribed = subscribedCourses.some((c) => c.id === courseId);
+      const isSubscribed = subscribedData.some((c) => c.id === courseId);
 
       if (isSubscribed) {
-        setSubscribedCourses((prevCourses) =>
+        setSubscribedData((prevCourses) =>
           prevCourses.filter((c) => c.id !== courseId),
         );
       } else {
-        setSubscribedCourses((prevCourses) => [...prevCourses, course]);
+        setSubscribedData((prevCourses) => [...prevCourses, course]);
       }
     },
-    [originalData, setOriginalData, subscribedCourses, setSubscribedCourses],
+    [originalData, setOriginalData, subscribedData, setSubscribedData],
   );
 };

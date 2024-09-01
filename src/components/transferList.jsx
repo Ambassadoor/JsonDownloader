@@ -44,13 +44,13 @@ const TransferList = ({
   return (
     <Grid item>
       <Paper
-        style={{ 
-            minHeight: "400px", 
-            maxHeight: "400px", 
-            overflow: "auto",
-            display: list.length > 0 ? 'block' : 'flex',
-            justifyContent: list.length > 0 ? 'flex-start' : 'center',
-            alignItems: list.length > 0 ? 'flex-start' : 'center' }}
+        style={{
+          height: "75vh",
+          overflow: "auto",
+          display: list.length > 0 ? "block" : "flex",
+          justifyContent: list.length > 0 ? "flex-start" : "center",
+          alignItems: list.length > 0 ? "flex-start" : "center",
+        }}
       >
         <List dense>
           {displayedPageData.length > 0 ? (
@@ -70,23 +70,27 @@ const TransferList = ({
                     </Typography>
                   }
                   secondary={
-                  secondaryText && secondaryText.length > 0 ? (
-                    <div style={{ marginLeft: "16px" }}> {/* Indent secondary text */}
-                      {secondaryText.map((field) => (
-                        <Typography
-                          key={field}
-                          variant="body2"
-                          color="textSecondary"
-                          style={{ fontSize: "0.75rem" }} // Smaller font size
-                        >
-                          {field ? `${field}: ${listItem[field]}` : ""}
-                        </Typography>
-                      ))}
-                    </div>
-                  ) : (
-                    ""
-                  )
-                }
+                    secondaryText && secondaryText.length > 0 ? (
+                      <div style={{ marginLeft: "16px" }}>
+                        {" "}
+                        {/* Indent secondary text */}
+                        {secondaryText.map((field) => (
+                          <Typography
+                            key={field}
+                            variant="body2"
+                            color="textSecondary"
+                            style={{ fontSize: "0.75rem" }} // Smaller font size
+                          >
+                            {listItem[field]
+                              ? `${field.slice(0, 1).toUpperCase() + field.slice(1)}: ${listItem[field]}`
+                              : ""}
+                          </Typography>
+                        ))}
+                      </div>
+                    ) : (
+                      ""
+                    )
+                  }
                 />
               </ListItemButton>
             ))
@@ -95,14 +99,19 @@ const TransferList = ({
           )}
         </List>
       </Paper>
-      <TablePagination
-        component="div"
-        count={list.length} // Total number of items
-        page={currentPage} // 0-based page index
-        onPageChange={handlePageChange}
-        rowsPerPage={rowsPerPage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      <Grid container>
+        <TablePagination
+          component="div"
+          count={list.length} // Total number of items
+          page={currentPage} // 0-based page index
+          onPageChange={handlePageChange}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          style={{
+            justifyContent: "flex-start",
+          }}
+        />
+      </Grid>
     </Grid>
   );
 };

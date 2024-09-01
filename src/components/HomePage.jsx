@@ -1,16 +1,11 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import CourseTable from "./CourseTable";
-import SubscribedTable from "./SubscribedTable";
-import SubscribeButton from "./SubscribeButton";
+import CourseTransferList from "./CourseTransferList";
 import { AppStateContext } from "../AppStateContext";
 import "../styles/styles.css";
-import CourseTransferList from "./transferListSandbox";
 
 const HomePage = () => {
-  const { setJsonData, setOriginalData } = useContext(AppStateContext);
-  const navigate = useNavigate();
+  const { setOriginalData } = useContext(AppStateContext);
 
   useEffect(() => {
     const checkAndLoadData = async () => {
@@ -24,9 +19,7 @@ const HomePage = () => {
         const dataWithIds = dataResponse.data.map((course) => ({
           ...course,
           id: `${course["Course Code"]}-${course["Section Code"]}`,
-          subscribed: false, // Add subscribed field with default value
         }));
-        setJsonData(dataWithIds);
         setOriginalData(dataWithIds);
       } catch (error) {
         console.error("Error checking or loading JSON file:", error);
@@ -36,28 +29,9 @@ const HomePage = () => {
     checkAndLoadData();
   }, []);
 
-  const handleSubscribeButtonClick = useCallback(() => {
-    navigate("/subscriptions");
-  });
-
-  const handleTransferClick = async () => {
-    navigate("/transfer");
-  };
-
   return (
     <div className="app-container">
-    <div>
-      <button onClick={handleTransferClick}>transfer</button>
-    </div>
-      <div className="left-pane">
-        <h1>Course Table</h1>
-        <CourseTable />
-      </div>
-      <div className="right-pane">
-        <h2>Subscribed Courses</h2>
-        <SubscribeButton onClick={handleSubscribeButtonClick} />
-        <SubscribedTable />
-      </div>
+      <CourseTransferList />
     </div>
   );
 };
