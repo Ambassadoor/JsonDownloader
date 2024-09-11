@@ -14,21 +14,13 @@ import {
   Button,
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
-import useEventForm from "../hooks/useEventForm";
+import useFormFormatter from "../hooks/useFormFormatter";
 
-const dayMap = {
-  Sun: "SU",
-  Mon: "MO",
-  Tues: "TU",
-  Wed: "WE",
-  Thur: "TH",
-  Fri: "FR",
-  Sat: "SA",
-};
+const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 
 const EventUI = () => {
-  const { eventObjects, currentCourseIndex } = useContext(AppStateContext);
-  const defaultEvent = eventObjects?.[currentCourseIndex] || {};
+  const { currentCourseIndex, subscribedData } = useContext(AppStateContext);
+  const currentCourse = subscribedData[currentCourseIndex];
 
   const {
     formData,
@@ -36,7 +28,7 @@ const EventUI = () => {
     handleInputChange,
     handleDayToggle,
     handleSubmit,
-  } = useEventForm(defaultEvent);
+  } = useFormFormatter(currentCourse);
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
@@ -133,31 +125,20 @@ const EventUI = () => {
         </Grid>
         <Grid item xs={12}>
           <p>Select Days</p>
-          <ToggleButtonGroup>
-            {Object.entries(dayMap).map(([day, dayString]) => (
-              <ToggleButton
-                variant="contained"
-                key={day}
-                value={day}
-                selected={
-                  formData.frequency === "WEEKLY" &&
-                  formData.recurrenceDates.includes(dayString)
-                }
-                onChange={(e) => handleDayToggle(dayMap, e.target.value)}
-                disabled={formData.frequency !== "WEEKLY"}
-              >
+          <ToggleButtonGroup
+            value={formData.meetingDays}
+            onChange={(e, newDays) => handleDayToggle(newDays)}
+            disabled={formData.frequency !== "WEEKLY"}
+          >
+            {dayButtonLabels.map((day) => (
+              <ToggleButton key={day} value={day}>
                 {day}
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            type="submit"
-            variant="contained"
-            name="submit"
-            value="Submit"
-          >
+          <Button type="submit" variant="contained" name="submit">
             Submit
           </Button>
         </Grid>
