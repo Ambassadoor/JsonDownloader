@@ -37,7 +37,7 @@ const CourseTransferList = () => {
   };
 
   const handleConfirmCoursesClick = () => {
-    navigate("/my_courses");
+    navigate("/ui");
   };
 
   return (

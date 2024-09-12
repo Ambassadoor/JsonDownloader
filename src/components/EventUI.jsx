@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import useFormFormatter from "../hooks/useFormFormatter";
+import RecurrenceCalendar from "./ExceptionCalendar";
 
 const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 
@@ -143,6 +144,11 @@ const EventUI = () => {
           </Button>
         </Grid>
       </Grid>
+      {formData && (
+        <Grid>
+          <RecurrenceCalendar formData={formData} />
+        </Grid>
+      )}
     </Box>
   );
 };

@@ -11,9 +11,11 @@ const useFormFormatter = (currentCourse) => {
     description:
       `Instructor: ${currentCourse["Instructor"]}\nStudents: ${currentCourse["Seats Filled"]}${currentCourse["Course Notes"] ? `\nNotes: ${currentCourse["Course Notes"]}` : ""}` ||
       "",
-    startDate: dayjs(currentCourse["Start Date"]) || dayjs(),
+    startDate:
+      dayjs(`${currentCourse["Start Date"]}T${currentCourse["Start Time"]}`) ||
+      dayjs(),
     endDate:
-      dayjs(currentCourse["End Date"]) ||
+      dayjs(`${currentCourse["End Date"]}T${currentCourse["End Time"]}`) ||
       dayjs(currentCourse["Start Date"]).add(1, "day"),
     startTime:
       dayjs(`${currentCourse["Start Date"]}T${currentCourse["Start Time"]}`) ||
