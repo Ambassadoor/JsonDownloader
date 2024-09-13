@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { extractMeetingDays, getTimezones } from "../../server/utils/dateUtils";
 import dayjs from "dayjs";
 
 const useFormFormatter = (currentCourse) => {
   const timezones = getTimezones();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     summary: currentCourse["Course Name"] || "",
@@ -33,7 +35,7 @@ const useFormFormatter = (currentCourse) => {
 
   const handleInputChange = (name, value) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setUserDataChange(true); // Fix typo here
+    setUserDataChange(true);
   };
 
   const handleDayToggle = (newDays) => {
@@ -50,13 +52,15 @@ const useFormFormatter = (currentCourse) => {
     if (formData.frequency !== "WEEKLY") {
       setFormData((prev) => ({ ...prev, meetingDays: [] }));
     }
+
     // Further submission logic here
-    if (userDataChange) {
+    /*if (userDataChange) {
       const updatedEvent = useEventFormatter(formData);
       console.log(updatedEvent);
     } else {
       console.log("No changes made");
-    }
+    }*/
+    navigate("/calendar", { state: { formData } });
   };
 
   return {

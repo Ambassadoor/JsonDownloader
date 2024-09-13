@@ -11,6 +11,7 @@ const AppStateProvider = ({ children }) => {
   const [eventInstances, setEventInstances] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [currentCourseIndex, setCurrentCourseIndex] = useState(0);
+  const [formData, setFormData] = useState();
 
   return (
     <AppStateContext.Provider
@@ -31,6 +32,8 @@ const AppStateProvider = ({ children }) => {
         setSelectedFiles,
         currentCourseIndex,
         setCurrentCourseIndex,
+        formData,
+        setFormData,
       }}
     >
       {children}

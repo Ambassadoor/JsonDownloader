@@ -1,5 +1,6 @@
 import { rrulestr } from "rrule";
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Badge, Box } from "@mui/material";
@@ -33,19 +34,25 @@ function RecurrenceDay(props) {
   );
 }
 
-export default function RecurrenceCalendar({ formData }) {
+export default function RecurrenceCalendar() {
   const [isLoading, setIsLoading] = useState(false);
   const [recurringDates, setRecurringDates] = useState([]);
+
+  const location = useLocation();
+  const formData = location.state?.formData;
 
   const fetchRecurringDates = () => {
     setIsLoading(true);
     setTimeout(() => {
+      console.log(dayjs(formData.endDate));
+      let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss")};DTSTART=${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss")};`;
       // Simulate calculating recurring dates using rrule (this would be your actual logic)
-      const rruleString = `FREQ=${formData.frequency};BYDAY=${formData.meetingDays
-        .map((day) => day.slice(0, 2))
-        .join(
-          ",",
-        )};UNTIL=${formData.endDate.format("YYYYMMDDTHHmmss")};DTSTART=${formData.startDate.format("YYYYMMDDTHHmmss")}`;
+      if (formData.frequency === "WEEKLY") {
+        rruleString += `BYDAY=${formData.meetingDays
+          .map((day) => day.slice(0, 2))
+          .join(",")}`;
+      }
+
       const rule = rrulestr(rruleString);
       const occurrences = rule.all();
 
@@ -53,7 +60,7 @@ export default function RecurrenceCalendar({ formData }) {
       const dates = occurrences.map((date) => dayjs(date).format("YYYYMMDD"));
       setRecurringDates(dates);
       setIsLoading(false);
-    }, 1000); // Simulate server delay, adjust for actual use case
+    }); // Simulate server delay, adjust for actual use case
   };
 
   useEffect(() => {
@@ -81,7 +88,7 @@ export default function RecurrenceCalendar({ formData }) {
   return (
     <Box>
       <DateCalendar
-        value={formData.startDate}
+        value={dayjs(formData.startDate.$d)}
         onChange={handleDateChange} // Controlled input, add your own handler if needed
         loading={isLoading}
         renderLoading={() => <DayCalendarSkeleton />}

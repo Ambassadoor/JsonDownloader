@@ -15,7 +15,6 @@ import {
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import useFormFormatter from "../hooks/useFormFormatter";
-import RecurrenceCalendar from "./ExceptionCalendar";
 
 const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 
@@ -127,7 +126,13 @@ const EventUI = () => {
         <Grid item xs={12}>
           <p>Select Days</p>
           <ToggleButtonGroup
-            value={formData.meetingDays}
+            value={
+              formData.frequency !== "WEEKLY"
+                ? formData.frequency === "DAILY"
+                  ? dayButtonLabels
+                  : []
+                : formData.meetingDays
+            }
             onChange={(e, newDays) => handleDayToggle(newDays)}
             disabled={formData.frequency !== "WEEKLY"}
           >
@@ -144,11 +149,6 @@ const EventUI = () => {
           </Button>
         </Grid>
       </Grid>
-      {formData && (
-        <Grid>
-          <RecurrenceCalendar formData={formData} />
-        </Grid>
-      )}
     </Box>
   );
 };
