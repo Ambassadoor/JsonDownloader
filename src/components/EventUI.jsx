@@ -20,7 +20,6 @@ const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 
 const EventUI = () => {
   const { currentCourseIndex, subscribedData } = useContext(AppStateContext);
-  const currentCourse = subscribedData[currentCourseIndex];
 
   const {
     formData,
@@ -28,7 +27,7 @@ const EventUI = () => {
     handleInputChange,
     handleDayToggle,
     handleSubmit,
-  } = useFormFormatter(currentCourse);
+  } = useFormFormatter(currentCourseIndex, subscribedData);
 
   return (
     <Box component="form" onSubmit={handleSubmit}>

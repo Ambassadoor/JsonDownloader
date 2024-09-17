@@ -44,7 +44,6 @@ export default function RecurrenceCalendar() {
   const fetchRecurringDates = () => {
     setIsLoading(true);
     setTimeout(() => {
-      console.log(dayjs(formData.endDate));
       let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss")};DTSTART=${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss")};`;
       // Simulate calculating recurring dates using rrule (this would be your actual logic)
       if (formData.frequency === "WEEKLY") {
