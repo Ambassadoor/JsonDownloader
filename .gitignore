@@ -4,3 +4,4 @@ server/config/credentials.json
 js/deleteEvents.js
 js/exchange.js
 js/generateAuth.js
+deprecated/
