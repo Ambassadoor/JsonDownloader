@@ -36,7 +36,7 @@ const runPuppeteer = async () => {
     downloadPath: downloadPath,
   });
 
-  await page.goto("https://courseschedule.lipscomb.edu/ScheduleP2024FALL.html");
+  await page.goto("https://courseschedule.lipscomb.edu/ScheduleP2025SPRING.html");
   await page.waitForSelector("a.dt-button.buttons-json.buttons-jsonhtml5");
   await page.click("a.dt-button.buttons-json.buttons-jsonhtml5");
 

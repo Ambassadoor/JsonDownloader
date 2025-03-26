@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { Badge, Box } from "@mui/material";
+import { Badge, Box, Button } from "@mui/material";
 import {
   DateCalendar,
   DayCalendarSkeleton,
   PickersDay,
 } from "@mui/x-date-pickers";
-
+// Add copy of recurring dates for reset functionality 
+// Add a undo/redo function by tracking dates as they're submitted
 dayjs.extend(utc);
 
 function RecurrenceDay(props) {
