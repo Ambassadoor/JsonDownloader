@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
+import { Box, Grid } from "@mui/material";
 import CourseTransferList from "./CourseTransferList";
 import SemesterSelectorUI from "./SemesterSelectorUI";
 import { AppStateContext } from "../AppStateContext";
@@ -33,8 +34,10 @@ const HomePage = () => {
 
   return (
     <div className="app-container">
-      <CourseTransferList />
-      <SemesterSelectorUI onSelectSemester={handleSemesterSelection} />
+      <Box>
+        <SemesterSelectorUI onSelectSemester={handleSemesterSelection} />
+        <CourseTransferList />
+      </Box>
     </div>
   );
 };
