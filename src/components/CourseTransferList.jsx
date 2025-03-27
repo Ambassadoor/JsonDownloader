@@ -6,6 +6,7 @@ import TransferList from "./transferList";
 import SearchBar from "./SearchBar";
 import ConfirmCoursesButton from "./ConfirmCoursesButton";
 
+
 const CourseTransferList = () => {
   const { originalData, subscribedData, setSubscribedData } =
     useContext(AppStateContext);

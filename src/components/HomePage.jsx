@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import CourseTransferList from "./CourseTransferList";
+import SemesterSelectorUI  from "./SemesterSelectorUI";
 import { AppStateContext } from "../AppStateContext";
 import "../styles/styles.css";
 
@@ -32,6 +33,7 @@ const HomePage = () => {
   return (
     <div className="app-container">
       <CourseTransferList />
+      <SemesterSelectorUI/>
     </div>
   );
 };

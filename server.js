@@ -11,6 +11,7 @@ const webpackConfig = require("./webpack.config.js");
 const { google } = require("googleapis");
 const oAuth2Client = require("./src/oauth2client"); // Import the OAuth2 client
 const getAuthUrl = require("./src/auth"); // Import the function to get the auth URL
+const { getSemesters } = require("./js/SemesterSelector.js");
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -217,6 +218,18 @@ app.get("/api/get-token", (req, res) => {
   } catch (error) {
     console.error("Error reading token:", error);
     res.status(500).json({ error: "Failed to retrieve token" });
+  }
+});
+
+app.get("/api/semesters", async (req, res) => {
+  try {
+    console.log("trying")
+    const termMenu = await getSemesters();
+    console.log(termMenu)
+    res.json(termMenu);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch term menu"})
   }
 });
 

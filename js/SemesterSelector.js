@@ -6,6 +6,8 @@ const getSemesters = async () => {
     args: ["--no-sandbox", "--disable-setuid-sandbox"]
   });
 
+  const termMenu = [];
+  
   try {
     const page = await browser.newPage();
     await page.goto("https://lipscomb.edu/academics/office-registrar/class-schedule");
@@ -20,7 +22,7 @@ const getSemesters = async () => {
       }))
     );
 
-    const termMenu = [];
+
     let currentCategory = null;
     let termNames = [];
 
@@ -47,6 +49,7 @@ const getSemesters = async () => {
   } finally {
     await browser.close();
   }
+  return termMenu
 };
 
-getSemesters();
+module.exports = { getSemesters };
