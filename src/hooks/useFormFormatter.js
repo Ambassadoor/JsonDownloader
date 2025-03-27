@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { extractMeetingDays, getTimezones } from "../../server/utils/dateUtils";
 import dayjs from "dayjs";
+import { AppStateContext } from "../AppStateContext";
+
+
 
 const useFormFormatter = (currentCourseIndex, subscribedData) => {
   const timezones = getTimezones();
   const navigate = useNavigate();
 
+
+  const {setCurrentCourseIndex } = useContext(AppStateContext)
   const [formData, setFormData] = useState({
     summary: "",
     location: "",
@@ -75,12 +80,26 @@ const useFormFormatter = (currentCourseIndex, subscribedData) => {
     navigate("/calendar", { state: { formData } });
   };
 
+  const handleNextCourse = () => {
+    setCurrentCourseIndex((prevIndex) =>
+      prevIndex < subscribedData.length - 1 ? prevIndex + 1 : prevIndex,
+    );
+  };
+
+  const handlePrevCourse = () => {
+    setCurrentCourseIndex((prevIndex) =>
+      prevIndex > 0 ? prevIndex - 1 : prevIndex,
+    );
+  };
+
   return {
     formData,
     timezones,
     handleInputChange,
     handleDayToggle,
     handleSubmit,
+    handleNextCourse,
+    handlePrevCourse
   };
 };
 

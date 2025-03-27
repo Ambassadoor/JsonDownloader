@@ -15,11 +15,12 @@ import {
 } from "@mui/material";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import useFormFormatter from "../hooks/useFormFormatter";
+import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 
 const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 
 const EventUI = () => {
-  const { currentCourseIndex, subscribedData } = useContext(AppStateContext);
+  const { currentCourseIndex, setCurrentCourseIndex, subscribedData } = useContext(AppStateContext);
 
   const {
     formData,
@@ -27,7 +28,10 @@ const EventUI = () => {
     handleInputChange,
     handleDayToggle,
     handleSubmit,
+    handleNextCourse,
+    handlePrevCourse,
   } = useFormFormatter(currentCourseIndex, subscribedData);
+
 
   return (
     <Box component="form" onSubmit={handleSubmit}>
@@ -141,6 +145,22 @@ const EventUI = () => {
               </ToggleButton>
             ))}
           </ToggleButtonGroup>
+        </Grid>
+        <Grid item xs={12}>
+          <Button 
+            variant="contained" 
+            name="Previous" 
+            startIcon={<ArrowLeft/>} 
+            onClick={handlePrevCourse}
+            disabled={currentCourseIndex === 0}
+            >Previous</Button>
+          <Button 
+            variant="contained" 
+            name="Next" 
+            endIcon={<ArrowRight/>} 
+            onClick={handleNextCourse}
+            disabled={currentCourseIndex === subscribedData.length - 1}
+            >Next</Button>
         </Grid>
         <Grid item xs={12}>
           <Button type="submit" variant="contained" name="submit">
