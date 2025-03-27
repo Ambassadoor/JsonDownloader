@@ -40,7 +40,7 @@
     "webpack-hot-middleware": "^2.26.1"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon --verbose server.js",
     "dev": "webpack serve --config webpack.config.js"
   }
 }

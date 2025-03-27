@@ -6,8 +6,9 @@ const chokidar = require("chokidar");
 const downloadPath = path.resolve(__dirname, "..", "downloads");
 const coursesFilePath = path.join(downloadPath, "courses.json");
 
-const runPuppeteer = async () => {
+const runPuppeteer = async (targetUrl) => {
   // Ensure the downloads directory exists
+  console.log("Starting runPuppetter with URL:", targetUrl)
   if (!fs.existsSync(downloadPath)) {
     fs.mkdirSync(downloadPath);
   }
@@ -36,7 +37,7 @@ const runPuppeteer = async () => {
     downloadPath: downloadPath,
   });
 
-  await page.goto("https://courseschedule.lipscomb.edu/ScheduleP2025SPRING.html");
+  await page.goto(targetUrl);
   await page.waitForSelector("a.dt-button.buttons-json.buttons-jsonhtml5");
   await page.click("a.dt-button.buttons-json.buttons-jsonhtml5");
 
@@ -83,4 +84,4 @@ const runPuppeteer = async () => {
   console.log("Cleanup completed successfully.");
 };
 
-runPuppeteer();
+module.exports = { runPuppeteer }

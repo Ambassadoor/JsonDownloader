@@ -30,6 +30,7 @@ const getSemesters = async () => {
       if (tag === "H3") {
         // If there's an existing category, push it before starting a new one.
         if (currentCategory !== null) {
+          termNames.reverse()
           termMenu.push({ termCategory: currentCategory, termNames });
         }
         currentCategory = text;
@@ -41,6 +42,7 @@ const getSemesters = async () => {
 
     // Push the last category if present.
     if (currentCategory !== null) {
+      termNames.reverse()
       termMenu.push({ termCategory: currentCategory, termNames });
     }
 

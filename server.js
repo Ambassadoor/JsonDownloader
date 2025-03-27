@@ -12,6 +12,7 @@ const { google } = require("googleapis");
 const oAuth2Client = require("./src/oauth2client"); // Import the OAuth2 client
 const getAuthUrl = require("./src/auth"); // Import the function to get the auth URL
 const { getSemesters } = require("./js/SemesterSelector.js");
+const { runPuppeteer } = require("./js/downloader.js")
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -35,34 +36,24 @@ app.use(express.static("public"));
 app.use("/downloads", express.static(path.join(__dirname, "downloads")));
 
 app.get("/api/check-download", async (req, res) => {
-  const filePath = path.join(__dirname, "downloads", "courses.json");
 
   try {
-    if (fs.existsSync(filePath)) {
-      const stats = fs.statSync(filePath);
-      const millisecondsElapsed = new Date() - new Date(stats.mtime);
-      const hoursElapsed = millisecondsElapsed / (1000 * 60 * 60);
-      if (hoursElapsed < Number(req.query.hours)) {
-        return res.status(200).json({ status: "current" });
-      }
+    // Get the selected URL from the query parameters
+    const selectedUrl = req.query.url;
+    if (!selectedUrl) {
+      return res.status(400).json({ error: "Missing selected semester URL" });
     }
 
-    exec(
-      `node ${path.join(__dirname, "js", "downloader.js")}`,
-      (error, stdout, stderr) => {
-        if (error) {
-          console.error(`exec error: ${error}`);
-          return res.status(500).json({ status: "failed", message: stderr });
-        }
-        console.log(`stdout: ${stdout}`);
-        res.status(200).json({ status: "updated" });
-      },
-    );
+    // Run the downloader function directly
+    await runPuppeteer(selectedUrl);
+    
+    res.status(200).json({ status: "updated" });
   } catch (error) {
-    console.error("Error checking file:", error);
+    console.error("Error in /api/check-download:", error);
     res.status(500).json({ error: "Server error" });
   }
 });
+
 
 // server.js
 
@@ -223,9 +214,7 @@ app.get("/api/get-token", (req, res) => {
 
 app.get("/api/semesters", async (req, res) => {
   try {
-    console.log("trying")
     const termMenu = await getSemesters();
-    console.log(termMenu)
     res.json(termMenu);
   } catch (err) {
     console.error(err);

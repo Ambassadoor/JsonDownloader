@@ -1,39 +1,40 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import CourseTransferList from "./CourseTransferList";
-import SemesterSelectorUI  from "./SemesterSelectorUI";
+import SemesterSelectorUI from "./SemesterSelectorUI";
 import { AppStateContext } from "../AppStateContext";
 import "../styles/styles.css";
 
 const HomePage = () => {
   const { setOriginalData } = useContext(AppStateContext);
+  const [selectedSemesterUrl, setSelectedSemesterUrl] = useState("");
 
-  useEffect(() => {
-    const checkAndLoadData = async () => {
-      try {
-        const response = await axios.get("/api/check-download", {
-          params: { hours: 24 },
-        });
-        console.log("Check Download Response:", response.data);
+  const handleSemesterSelection = async (url) => {
+    setSelectedSemesterUrl(url);
 
-        const dataResponse = await axios.get("/downloads/courses.json");
-        const dataWithIds = dataResponse.data.map((course) => ({
-          ...course,
-          id: `${course["Course Code"]}-${course["Section Code"]}`,
-        }));
-        setOriginalData(dataWithIds);
-      } catch (error) {
-        console.error("Error checking or loading JSON file:", error);
-      }
-    };
+    try {
+      // Trigger the download check API
+      const response = await axios.get("/api/check-download", {
+        params: { url },
+      });
+      console.log("Download check response:", response.data);
 
-    checkAndLoadData();
-  }, []);
+      // Fetch the updated courses JSON file
+      const { data: courses } = await axios.get("/downloads/courses.json");
+      const dataWithIds = courses.map((course) => ({
+        ...course,
+        id: `${course["Course Code"]}-${course["Section Code"]}`,
+      }));
+      setOriginalData(dataWithIds);
+    } catch (error) {
+      console.error("Error triggering download:", error);
+    }
+  };
 
   return (
     <div className="app-container">
       <CourseTransferList />
-      <SemesterSelectorUI/>
+      <SemesterSelectorUI onSelectSemester={handleSemesterSelection} />
     </div>
   );
 };
