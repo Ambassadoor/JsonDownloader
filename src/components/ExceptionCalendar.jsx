@@ -41,8 +41,11 @@ export default function RecurrenceCalendar() {
   const [originalRecurringDates, setOriginalRecurringDates] = useState([]);
   const [updatedRecurringDates, setUpdatedRecurringDates] = useState([]);
 
+
   const location = useLocation();
   const formData = location.state?.formData;
+
+  const [selectedDate, setSelectedDate] = useState(dayjs(formData.startDate.$d));
 
   const fetchRecurringDates = () => {
     setIsLoading(true);
@@ -73,6 +76,7 @@ export default function RecurrenceCalendar() {
   }, [formData]);
 
   const handleDateChange = (newDate) => {
+    setSelectedDate(newDate)
     const formattedNewDate = newDate.format("YYYYMMDD");
 
     // Properly update recurringDates with a new filtered array
@@ -103,7 +107,7 @@ export default function RecurrenceCalendar() {
   return (
     <Box>
       <DateCalendar
-        value={dayjs(formData.startDate.$d)}
+        value={selectedDate}
         onChange={handleDateChange} // Controlled input, add your own handler if needed
         loading={isLoading}
         renderLoading={() => <DayCalendarSkeleton />}
