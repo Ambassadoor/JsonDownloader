@@ -9,6 +9,7 @@ import {
   DayCalendarSkeleton,
   PickersDay,
 } from "@mui/x-date-pickers";
+import { format } from "date-fns";
 // Add copy of recurring dates for reset functionality 
 // Add a undo/redo function by tracking dates as they're submitted
 dayjs.extend(utc);
@@ -69,21 +70,21 @@ export default function RecurrenceCalendar() {
     }
   }, [formData]);
 
-  const handleDateSelect = (newDate) => {
+  const handleDateChange = (newDate) => {
     const formattedNewDate = newDate.format("YYYYMMDD");
 
     // Properly update recurringDates with a new filtered array
     setRecurringDates((prevDates) => {
-      const updatedDates = prevDates.filter(
-        (date) => date !== formattedNewDate,
-      );
-      return updatedDates; // Return new state
+      if (prevDates.includes(formattedNewDate)) {
+        return prevDates.filter((date) => date !== formattedNewDate);
+    } else {
+        return [...prevDates, formattedNewDate];
+      }
     });
+    
   };
 
-  const handleDateChange = (newDate) => {
-    handleDateSelect(newDate);
-  };
+
 
   return (
     <Box>

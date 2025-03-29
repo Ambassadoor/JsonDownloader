@@ -37,7 +37,7 @@ const runPuppeteer = async (targetUrl) => {
     downloadPath: downloadPath,
   });
 
-  await page.goto(targetUrl);
+  await page.goto(targetUrl); 
   await page.waitForSelector("a.dt-button.buttons-json.buttons-jsonhtml5");
   await page.click("a.dt-button.buttons-json.buttons-jsonhtml5");
 
