@@ -15,11 +15,11 @@ import { format } from "date-fns";
 dayjs.extend(utc);
 
 function RecurrenceDay(props) {
-  const { recurringDates = [], day, outsideCurrentMonth, ...other } = props;
+  const { updatedRecurringDates = [], day, outsideCurrentMonth, ...other } = props;
 
   const isSelected =
     !outsideCurrentMonth &&
-    recurringDates.some((recDay) => dayjs(recDay).isSame(day, "day"));
+    updatedRecurringDates.some((recDay) => dayjs(recDay).isSame(day, "day"));
 
   return (
     <Badge
@@ -38,7 +38,8 @@ function RecurrenceDay(props) {
 
 export default function RecurrenceCalendar() {
   const [isLoading, setIsLoading] = useState(false);
-  const [recurringDates, setRecurringDates] = useState([]);
+  const [originalRecurringDates, setOriginalRecurringDates] = useState([]);
+  const [updatedRecurringDates, setUpdatedRecurringDates] = useState([]);
 
   const location = useLocation();
   const formData = location.state?.formData;
@@ -59,7 +60,8 @@ export default function RecurrenceCalendar() {
 
       // Convert dates to dayjs objects
       const dates = occurrences.map((date) => dayjs(date).format("YYYYMMDD"));
-      setRecurringDates(dates);
+      setOriginalRecurringDates(dates);
+      setUpdatedRecurringDates(dates);
       setIsLoading(false);
     }); // Simulate server delay, adjust for actual use case
   };
@@ -74,7 +76,7 @@ export default function RecurrenceCalendar() {
     const formattedNewDate = newDate.format("YYYYMMDD");
 
     // Properly update recurringDates with a new filtered array
-    setRecurringDates((prevDates) => {
+    setUpdatedRecurringDates((prevDates) => {
       if (prevDates.includes(formattedNewDate)) {
         return prevDates.filter((date) => date !== formattedNewDate);
     } else {
@@ -84,6 +86,18 @@ export default function RecurrenceCalendar() {
     
   };
 
+  //place holder for the data filtering. Will update once GUI layout is finalized. 
+  const handleConfirm = () => {
+    // Dates that were originally there but are no longer in the updated array
+    const exdate = originalRecurringDates.filter(
+      (date) => !updatedRecurringDates.includes(date)
+    );
+    // Dates that were added to the updated array that weren't originally there
+    const rdate = updatedRecurringDates.filter(
+      (date) => !originalRecurringDates.includes(date)
+    );
+
+  };
 
 
   return (
@@ -98,7 +112,7 @@ export default function RecurrenceCalendar() {
         }}
         slotProps={{
           day: {
-            recurringDates, // Pass recurring dates as a prop to RecurrenceDay
+            updatedRecurringDates, // Pass recurring dates as a prop to RecurrenceDay
           },
         }}
       />
