@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import axios from "axios";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import CourseTransferList from "./CourseTransferList";
 import SemesterSelectorUI from "./SemesterSelectorUI";
 import { AppStateContext } from "../AppStateContext";

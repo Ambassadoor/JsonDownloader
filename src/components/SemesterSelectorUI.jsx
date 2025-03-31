@@ -7,13 +7,15 @@ const SemesterSelectorUI = ({ onSelectSemester }) => {
   // Initialize semester as an empty string
   const [selectedSemester, setSelectedSemester] = useState("");
   const [termMenu, setTermMenu] = useState([]);
-
+  
   useEffect(() => {
+    if (termMenu.length === 0) {
     fetch("/api/semesters")
       .then((res) => res.json())
       .then((data) => setTermMenu(data))
       .catch((err) => console.error("Error fetching term menu:", err));
-  }, []);
+    }
+  }, [termMenu]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;

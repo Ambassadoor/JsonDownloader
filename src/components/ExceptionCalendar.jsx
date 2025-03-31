@@ -36,14 +36,14 @@ function RecurrenceDay(props) {
   );
 }
 
-export default function RecurrenceCalendar() {
+export default function RecurrenceCalendar({formData}) {
   const [isLoading, setIsLoading] = useState(false);
   const [originalRecurringDates, setOriginalRecurringDates] = useState([]);
   const [updatedRecurringDates, setUpdatedRecurringDates] = useState([]);
 
 
-  const location = useLocation();
-  const formData = location.state?.formData;
+  //const location = useLocation();
+  //const formData = location.state?.formData;
 
   const [selectedDate, setSelectedDate] = useState(dayjs(formData.startDate.$d));
 
