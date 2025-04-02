@@ -15,11 +15,17 @@ import { format } from "date-fns";
 dayjs.extend(utc);
 
 function RecurrenceDay(props) {
-  const { updatedRecurringDates = [], day, outsideCurrentMonth, ...other } = props;
+  const { rruleDates = [], exDates = [], rDates = [], day, outsideCurrentMonth, ...other } = props;
+
+  const checkDateArray = (arr) => {
+    return arr.some((recDay) => dayjs(recDay).isSame(day, "day"))
+  }
 
   const isSelected =
     !outsideCurrentMonth &&
-    updatedRecurringDates.some((recDay) => dayjs(recDay).isSame(day, "day"));
+    (checkDateArray(rruleDates) || checkDateArray(rDates)) &&
+    !checkDateArray(exDates)
+
 
   return (
     <Badge
@@ -38,9 +44,9 @@ function RecurrenceDay(props) {
 
 export default function RecurrenceCalendar({formData}) {
   const [isLoading, setIsLoading] = useState(false);
-  const [originalRecurringDates, setOriginalRecurringDates] = useState([]);
-  const [updatedRecurringDates, setUpdatedRecurringDates] = useState([]);
-
+  const [rruleDates, setRruleDates] = useState([]);
+  const [exDates, setExDates ] = useState([]);
+  const [rDates, setRDates] = useState([]);
 
   //const location = useLocation();
   //const formData = location.state?.formData;
@@ -63,8 +69,7 @@ export default function RecurrenceCalendar({formData}) {
 
       // Convert dates to dayjs objects
       const dates = occurrences.map((date) => dayjs(date).format("YYYYMMDD"));
-      setOriginalRecurringDates(dates);
-      setUpdatedRecurringDates(dates);
+      setRruleDates(dates);
       setIsLoading(false);
     }); // Simulate server delay, adjust for actual use case
   };
@@ -78,30 +83,21 @@ export default function RecurrenceCalendar({formData}) {
   const handleDateChange = (newDate) => {
     setSelectedDate(newDate)
     const formattedNewDate = newDate.format("YYYYMMDD");
+    const toggleDate = (arr, date) =>
+      arr.includes(date) ? arr.filter((d) => d !== date) : [...arr, date];
 
-    // Properly update recurringDates with a new filtered array
-    setUpdatedRecurringDates((prevDates) => {
-      if (prevDates.includes(formattedNewDate)) {
-        return prevDates.filter((date) => date !== formattedNewDate);
+    // Compare user selected Date against rruleDates and update exDate or rDate states. 
+    if (rruleDates.includes(formattedNewDate)) {
+      setExDates((prevExDates) => toggleDate(prevExDates, formattedNewDate)
+      )
     } else {
-        return [...prevDates, formattedNewDate];
-      }
-    });
+      setRDates((prevRDates) => toggleDate(prevRDates, formattedNewDate)
+      )
+    }
     
   };
 
-  //place holder for the data filtering. Will update once GUI layout is finalized. 
-  const handleConfirm = () => {
-    // Dates that were originally there but are no longer in the updated array
-    const exdate = originalRecurringDates.filter(
-      (date) => !updatedRecurringDates.includes(date)
-    );
-    // Dates that were added to the updated array that weren't originally there
-    const rdate = updatedRecurringDates.filter(
-      (date) => !originalRecurringDates.includes(date)
-    );
 
-  };
 
 
   return (
@@ -116,7 +112,9 @@ export default function RecurrenceCalendar({formData}) {
         }}
         slotProps={{
           day: {
-            updatedRecurringDates, // Pass recurring dates as a prop to RecurrenceDay
+            rruleDates,
+            rDates,
+            exDates // Pass recurring dates as a prop to RecurrenceDay
           },
         }}
       />
