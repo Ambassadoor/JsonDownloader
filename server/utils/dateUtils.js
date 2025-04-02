@@ -13,6 +13,11 @@ export const getTimezones = () => {
 };
 
 export const extractMeetingDays = (meetingDays) => {
+  if (!meetingDays || typeof meetingDays !== "string") {
+    console.warn("Invalid meetingDays value:", meetingDays);
+    return [];
+  }
+
   const replacePattern = /[\s\/]+/g;
   const splitPattern = /(?=[A-Z])/;
 

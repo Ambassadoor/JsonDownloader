@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { AppStateContext } from "../AppStateContext";
 import {
   Autocomplete,
@@ -23,16 +23,54 @@ const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 const EventUI = () => {
   const { currentCourseIndex, setCurrentCourseIndex, subscribedData } = useContext(AppStateContext);
 
-  const {
-    formData,
-    timezones,
-    handleInputChange,
-    handleDayToggle,
-    handleSubmit,
-    handleNextCourse,
-    handlePrevCourse,
-  } = useFormFormatter(currentCourseIndex, subscribedData);
+  // State to store form data for all courses
+  const [courseFormData, setCourseFormData] = useState([]);
 
+  // Initialize courseFormData when subscribedData changes
+  useEffect(() => {
+    console.log("Subscribed data:", subscribedData);
+    console.log("Current course index:", currentCourseIndex);
+    setCourseFormData(subscribedData.map((course) => useFormFormatter(course).formData));
+  }, [subscribedData]);
+
+  // Update the form data for the current course
+  const handleInputChange = (name, value) => {
+    setCourseFormData((prevData) =>
+      prevData.map((data, index) =>
+        index === currentCourseIndex ? { ...data, [name]: value } : data
+      )
+    );
+  };
+
+  // Handle day toggle
+  const handleDayToggle = (newDays) => {
+    setCourseFormData((prevData) =>
+      prevData.map((data, index) =>
+        index === currentCourseIndex ? { ...data, meetingDays: newDays } : data
+      )
+    );
+  };
+
+  // Submit handler
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("Submitted data:", courseFormData[currentCourseIndex]);
+  };
+
+  // Navigation handlers
+  const handleNextCourse = () => {
+    if (currentCourseIndex < subscribedData.length - 1) {
+      setCurrentCourseIndex(currentCourseIndex + 1);
+    }
+  };
+
+  const handlePrevCourse = () => {
+    if (currentCourseIndex > 0) {
+      setCurrentCourseIndex(currentCourseIndex - 1);
+    }
+  };
+
+  const formData = courseFormData[currentCourseIndex] || {};
 
   return (
     <Grid>
@@ -42,7 +80,7 @@ const EventUI = () => {
             <TextField
               label="Summary"
               name="summary"
-              value={formData.summary}
+              value={formData.summary || ""}
               onChange={(e) => handleInputChange(e.target.name, e.target.value)}
               fullWidth
             />
@@ -52,7 +90,7 @@ const EventUI = () => {
               label="Description"
               name="description"
               multiline
-              value={formData.description}
+              value={formData.description || ""}
               onChange={(e) => handleInputChange(e.target.name, e.target.value)}
               fullWidth
             />
@@ -61,7 +99,7 @@ const EventUI = () => {
             <TextField
               label="Location"
               name="location"
-              value={formData.location}
+              value={formData.location || ""}
               onChange={(e) => handleInputChange(e.target.name, e.target.value)}
               fullWidth
             />
@@ -69,8 +107,8 @@ const EventUI = () => {
           <Grid item xs={12}>
             <Autocomplete
               name="timeZone"
-              options={timezones}
-              value={formData.timeZone}
+              options={formData.timezones || []}
+              value={formData.timeZone || ""}
               onChange={(event, newValue) =>
                 handleInputChange("timeZone", newValue)
               }
@@ -80,7 +118,7 @@ const EventUI = () => {
           <Grid item xs={6}>
             <DatePicker
               label="Start Date"
-              value={formData.startDate}
+              value={formData.startDate || null}
               onChange={(date) => handleInputChange("startDate", date)}
               fullWidth
               maxDate={formData.endDate}
@@ -89,7 +127,7 @@ const EventUI = () => {
           <Grid item xs={6}>
             <DatePicker
               label="Until"
-              value={formData.endDate}
+              value={formData.endDate || null}
               onChange={(date) => handleInputChange("endDate", date)}
               fullWidth
               minDate={formData.startDate}
@@ -98,7 +136,7 @@ const EventUI = () => {
           <Grid item xs={6}>
             <TimePicker
               label="Start Time"
-              value={formData.startTime}
+              value={formData.startTime || null}
               onChange={(time) => handleInputChange("startTime", time)}
               fullWidth
               maxTime={formData.endTime}
@@ -107,7 +145,7 @@ const EventUI = () => {
           <Grid item xs={6}>
             <TimePicker
               label="End Time"
-              value={formData.endTime}
+              value={formData.endTime || null}
               onChange={(time) => handleInputChange("endTime", time)}
               fullWidth
               minTime={formData.startTime}
@@ -119,7 +157,7 @@ const EventUI = () => {
               <Select
                 label="Frequency"
                 name="frequency"
-                value={formData.frequency}
+                value={formData.frequency || ""}
                 onChange={(e) => handleInputChange(e.target.name, e.target.value)}
               >
                 <MenuItem value={"DAILY"}>DAILY</MenuItem>
@@ -136,7 +174,7 @@ const EventUI = () => {
                   ? formData.frequency === "DAILY"
                     ? dayButtonLabels
                     : []
-                  : formData.meetingDays
+                  : formData.meetingDays || []
               }
               onChange={(e, newDays) => handleDayToggle(newDays)}
               disabled={formData.frequency !== "WEEKLY"}
@@ -172,7 +210,7 @@ const EventUI = () => {
         </Grid>
       </Box>
       <Box>
-        { formData.description.length > 0 ? (<RecurrenceCalendar formData={formData}/>) : (<p>Loading</p>)}
+        { formData.description?.length > 0 ? (<RecurrenceCalendar formData={formData}/>) : (<p>Loading</p>)}
       </Box>
     </Grid>
   );
