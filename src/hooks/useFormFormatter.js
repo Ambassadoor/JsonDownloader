@@ -18,6 +18,8 @@ const useFormFormatter = (course) => {
     timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone || "America/Chicago",
     meetingDays: extractMeetingDays(course["Meeting Days"]), // Safely handle meetingDays
     frequency: "WEEKLY",
+    exDates: [],
+    rDates: [],
   };
 
   return { formData, timezones };

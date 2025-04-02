@@ -42,14 +42,10 @@ function RecurrenceDay(props) {
   );
 }
 
-export default function RecurrenceCalendar({formData}) {
+export default function RecurrenceCalendar({formData, setCourseFormData, currentCourseIndex}) {
   const [isLoading, setIsLoading] = useState(false);
   const [rruleDates, setRruleDates] = useState([]);
-  const [exDates, setExDates ] = useState([]);
-  const [rDates, setRDates] = useState([]);
 
-  //const location = useLocation();
-  //const formData = location.state?.formData;
 
   const [selectedDate, setSelectedDate] = useState(dayjs(formData.startDate.$d));
 
@@ -86,14 +82,23 @@ export default function RecurrenceCalendar({formData}) {
     const toggleDate = (arr, date) =>
       arr.includes(date) ? arr.filter((d) => d !== date) : [...arr, date];
 
+    let updatedExDates = formData.exDates || [];
+    let updatedRDates = formData.rDates || [];
+
     // Compare user selected Date against rruleDates and update exDate or rDate states. 
     if (rruleDates.includes(formattedNewDate)) {
-      setExDates((prevExDates) => toggleDate(prevExDates, formattedNewDate)
-      )
+      updatedExDates = toggleDate(updatedExDates, formattedNewDate);
     } else {
-      setRDates((prevRDates) => toggleDate(prevRDates, formattedNewDate)
-      )
+      updatedRDates = toggleDate(updatedRDates, formattedNewDate);
     }
+
+    setCourseFormData((prevData) =>
+      prevData.map((data, index) =>
+        index === currentCourseIndex
+          ? { ...data, exDates: updatedExDates, rDates: updatedRDates }
+          : data
+  ))
+
     
   };
 
@@ -113,8 +118,8 @@ export default function RecurrenceCalendar({formData}) {
         slotProps={{
           day: {
             rruleDates,
-            rDates,
-            exDates // Pass recurring dates as a prop to RecurrenceDay
+            rDates: formData.rDates || [],
+            exDates: formData.exDates || [] // Pass recurring dates as a prop to RecurrenceDay
           },
         }}
       />

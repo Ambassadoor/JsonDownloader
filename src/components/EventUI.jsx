@@ -210,7 +210,11 @@ const EventUI = () => {
         </Grid>
       </Box>
       <Box>
-        { formData.description?.length > 0 ? (<RecurrenceCalendar formData={formData}/>) : (<p>Loading</p>)}
+        { formData.description?.length > 0 ? (<RecurrenceCalendar 
+                                                formData={formData}
+                                                setCourseFormData={setCourseFormData}
+                                                currentCourseIndex={currentCourseIndex}
+                                                />) : (<p>Loading</p>)}
       </Box>
     </Grid>
   );
