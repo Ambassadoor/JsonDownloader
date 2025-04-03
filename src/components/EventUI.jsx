@@ -21,24 +21,26 @@ import RecurrenceCalendar from "./ExceptionCalendar";
 const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 
 const EventUI = () => {
-  const { currentCourseIndex, setCurrentCourseIndex, subscribedData } = useContext(AppStateContext);
+  const { currentCourseIndex, setCurrentCourseIndex, subscribedData } =
+    useContext(AppStateContext);
 
   // State to store form data for all courses
   const [courseFormData, setCourseFormData] = useState([]);
 
   // Initialize courseFormData when subscribedData changes
   useEffect(() => {
-    console.log("Subscribed data:", subscribedData);
-    console.log("Current course index:", currentCourseIndex);
-    setCourseFormData(subscribedData.map((course) => useFormFormatter(course).formData));
+    setCourseFormData(
+      subscribedData.map((course) => useFormFormatter(course).formData),
+    );
   }, [subscribedData]);
 
   // Update the form data for the current course
   const handleInputChange = (name, value) => {
+    console.log(name, value);
     setCourseFormData((prevData) =>
       prevData.map((data, index) =>
-        index === currentCourseIndex ? { ...data, [name]: value } : data
-      )
+        index === currentCourseIndex ? { ...data, [name]: value } : data,
+      ),
     );
   };
 
@@ -46,8 +48,8 @@ const EventUI = () => {
   const handleDayToggle = (newDays) => {
     setCourseFormData((prevData) =>
       prevData.map((data, index) =>
-        index === currentCourseIndex ? { ...data, meetingDays: newDays } : data
-      )
+        index === currentCourseIndex ? { ...data, meetingDays: newDays } : data,
+      ),
     );
   };
 
@@ -69,6 +71,7 @@ const EventUI = () => {
       setCurrentCourseIndex(currentCourseIndex - 1);
     }
   };
+
 
   const formData = courseFormData[currentCourseIndex] || {};
 
@@ -112,7 +115,9 @@ const EventUI = () => {
               onChange={(event, newValue) =>
                 handleInputChange("timeZone", newValue)
               }
-              renderInput={(params) => <TextField {...params} label="Timezone" />}
+              renderInput={(params) => (
+                <TextField {...params} label="Timezone" />
+              )}
             />
           </Grid>
           <Grid item xs={6}>
@@ -158,7 +163,9 @@ const EventUI = () => {
                 label="Frequency"
                 name="frequency"
                 value={formData.frequency || ""}
-                onChange={(e) => handleInputChange(e.target.name, e.target.value)}
+                onChange={(e) =>
+                  handleInputChange(e.target.name, e.target.value)
+                }
               >
                 <MenuItem value={"DAILY"}>DAILY</MenuItem>
                 <MenuItem value={"WEEKLY"}>WEEKLY</MenuItem>
@@ -187,20 +194,24 @@ const EventUI = () => {
             </ToggleButtonGroup>
           </Grid>
           <Grid item xs={12}>
-            <Button 
-              variant="contained" 
-              name="Previous" 
-              startIcon={<ArrowLeft/>} 
+            <Button
+              variant="contained"
+              name="Previous"
+              startIcon={<ArrowLeft />}
               onClick={handlePrevCourse}
               disabled={currentCourseIndex === 0}
-              >Previous</Button>
-            <Button 
-              variant="contained" 
-              name="Next" 
-              endIcon={<ArrowRight/>} 
+            >
+              Previous
+            </Button>
+            <Button
+              variant="contained"
+              name="Next"
+              endIcon={<ArrowRight />}
               onClick={handleNextCourse}
               disabled={currentCourseIndex === subscribedData.length - 1}
-              >Next</Button>
+            >
+              Next
+            </Button>
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained" name="submit">
@@ -210,11 +221,15 @@ const EventUI = () => {
         </Grid>
       </Box>
       <Box>
-        { formData.description?.length > 0 ? (<RecurrenceCalendar 
-                                                formData={formData}
-                                                setCourseFormData={setCourseFormData}
-                                                currentCourseIndex={currentCourseIndex}
-                                                />) : (<p>Loading</p>)}
+        {formData.description?.length > 0 ? (
+          <RecurrenceCalendar
+            formData={formData}
+            setCourseFormData={setCourseFormData}
+            currentCourseIndex={currentCourseIndex}
+          />
+        ) : (
+          <p>Loading</p>
+        )}
       </Box>
     </Grid>
   );

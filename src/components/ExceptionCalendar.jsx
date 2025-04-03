@@ -52,15 +52,18 @@ export default function RecurrenceCalendar({formData, setCourseFormData, current
   const fetchRecurringDates = () => {
     setIsLoading(true);
     setTimeout(() => {
-      let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss")};DTSTART=${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss")};`;
+
+      let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss[Z]")};DTSTART=${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss[Z]")}`;
+      //let rruleString = `DTSTART:${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss")};FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss")};`;
       // Simulate calculating recurring dates using rrule (this would be your actual logic)
       if (formData.frequency === "WEEKLY") {
-        rruleString += `BYDAY=${formData.meetingDays
+        rruleString += `;BYDAY=${formData.meetingDays
           .map((day) => day.slice(0, 2))
           .join(",")}`;
       }
-
+   
       const rule = rrulestr(rruleString);
+
       const occurrences = rule.all();
 
       // Convert dates to dayjs objects
