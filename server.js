@@ -87,19 +87,20 @@ app.get("/auth", (req, res) => {
 app.post("/api/create-events", async (req, res) => {
   try {
     loadCredentials(); // Load OAuth credentials
-    const { eventObjects } = req.body;
+    const eventObjects = req.body.events;
 
     const cleanedEvents = eventObjects.map((event) => {
       // Clean recurrence rules by removing the DTSTART field
       const cleanedRecurrence = event.recurrence
-        .map((rule) => (rule.startsWith("DTSTART") ? "" : rule))
-        .filter((rule) => rule); // Filter out empty rules
+        .filter((rule) => rule !== ""); // Filter out empty rules
 
       return {
         ...event,
         recurrence: cleanedRecurrence, // Update event with cleaned recurrence rules
       };
     });
+
+    console.log(cleanedEvents);
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 

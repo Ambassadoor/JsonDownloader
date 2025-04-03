@@ -17,15 +17,22 @@ import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 import useFormFormatter from "../hooks/useFormFormatter";
 import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import RecurrenceCalendar from "./ExceptionCalendar";
+import { getTimezones } from "../../server/utils/dateUtils";
+import useEventFormatter from "../hooks/useEventFormatter";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
+const timeZones = getTimezones();
 
 const EventUI = () => {
+  const navigate = useNavigate();
   const { currentCourseIndex, setCurrentCourseIndex, subscribedData } =
-    useContext(AppStateContext);
+    useContext(AppStateContext)
 
   // State to store form data for all courses
   const [courseFormData, setCourseFormData] = useState([]);
+  const [eventData, setEventData] = useState([]);
 
   // Initialize courseFormData when subscribedData changes
   useEffect(() => {
@@ -33,6 +40,10 @@ const EventUI = () => {
       subscribedData.map((course) => useFormFormatter(course).formData),
     );
   }, [subscribedData]);
+
+  useEffect(() => {
+    console.log("Event Data:", eventData);
+  }, [eventData]);
 
   // Update the form data for the current course
   const handleInputChange = (name, value) => {
@@ -54,9 +65,32 @@ const EventUI = () => {
   };
 
   // Submit handler
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Submitted data:", courseFormData[currentCourseIndex]);
+  
+    // Collect formatted events in a local variable
+    const formattedEvents = courseFormData.map((data) => {
+      const event = useEventFormatter(data).formattedData;
+      console.log(event);
+      return event;
+    });
+  
+    try {
+      // Send the formatted events directly in the POST request
+      const response = await axios.post("/api/create-events", {
+        events: formattedEvents,
+      });
+      console.log("Response:", response.data);
+  
+      // Optionally update the state with the response data
+      setEventData(response.data.events || []);
+    } catch (error) {
+      console.error("Error creating events:", error);
+    }
+  
+    // Navigate to the confirmation page with the formatted events
+    navigate("/calendar_confirmation", { state: { eventData: formattedEvents } });
   };
 
   // Navigation handlers
@@ -71,6 +105,7 @@ const EventUI = () => {
       setCurrentCourseIndex(currentCourseIndex - 1);
     }
   };
+
 
 
   const formData = courseFormData[currentCourseIndex] || {};
@@ -110,8 +145,8 @@ const EventUI = () => {
           <Grid item xs={12}>
             <Autocomplete
               name="timeZone"
-              options={formData.timezones || []}
-              value={formData.timeZone || ""}
+              options={timeZones || []}
+              value={formData.timeZone || null}
               onChange={(event, newValue) =>
                 handleInputChange("timeZone", newValue)
               }

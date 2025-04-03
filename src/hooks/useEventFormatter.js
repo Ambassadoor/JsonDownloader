@@ -14,10 +14,11 @@ const useEventFormatter = (formData) => {
       timeZone: formData.timeZone,
     },
     recurrence: [
-      `DTSTART:${formData.startDate.format("YYYYMMDD")}T${formData.startTime.format("HHmmss")}`,
-      `RRULE:FREQ=${formData.frequency};${formData.recurrenceDates && formData.recurrenceDates.length > 0 ? `BYDAY=${formData.recurrenceDates.join(",")};` : ""}UNTIL=${formData.endDate.format("YYYYMMDD")}T${formData.endTime.format("HHmmss")}`,
+      formData.exDates.length > 0 ? `EXDATE:${formData.exDates.join(",")}` : "",
+      formData.rDates.length > 0 ? `RDATE:${formData.rDates.join(",")}` : "",
+      `RRULE:FREQ=${formData.frequency};${formData.meetingDays && formData.meetingDays.length > 0 ? `BYDAY=${formData.meetingDays.join(",")};` : ""}UNTIL=${formData.endDate.format("YYYYMMDD")}T${formData.endTime.format("HHmmss[Z]")}`,
     ],
-    reminders: formData.reminders,
+    reminders: formData.reminders || null,
   };
 
   return {

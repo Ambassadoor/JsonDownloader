@@ -26,6 +26,7 @@ export const extractMeetingDays = (meetingDays) => {
   const split = cleaned.split(splitPattern);
   const allCaps = split.map((day) => day.toUpperCase());
   const days = [...new Set(allCaps)];
+  const abbreviated = days.map((day) => day.slice(0, 2).toUpperCase());
 
-  return days;
+  return abbreviated;
 };
