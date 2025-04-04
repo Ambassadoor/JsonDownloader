@@ -90,7 +90,7 @@ app.post("/api/create-events", async (req, res) => {
     const eventObjects = req.body.events;
 
     const cleanedEvents = eventObjects.map((event) => {
-      // Clean recurrence rules by removing the DTSTART field
+      // Clean recurrence rules by removing empty fields
       const cleanedRecurrence = event.recurrence
         .filter((rule) => rule !== ""); // Filter out empty rules
 
@@ -99,8 +99,6 @@ app.post("/api/create-events", async (req, res) => {
         recurrence: cleanedRecurrence, // Update event with cleaned recurrence rules
       };
     });
-
-    console.log(cleanedEvents);
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
