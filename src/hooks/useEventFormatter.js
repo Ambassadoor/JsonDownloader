@@ -37,7 +37,7 @@ const useEventFormatter = (formData) => {
       // RRULE with UNTIL in UTC
       `RRULE:FREQ=${formData.frequency};${
         formData.meetingDays && formData.meetingDays.length > 0
-          ? `BYDAY=${formData.meetingDays.join(",")};`
+          ? `BYDAY=${formData.meetingDays.map(day => day.slice(0, 2).toUpperCase()).join(",")};`
           : ""
       }UNTIL=${untilUTC}`,
       // EXDATE using proper recurrence date format
