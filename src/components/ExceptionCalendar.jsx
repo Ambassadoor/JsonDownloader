@@ -10,22 +10,28 @@ import {
   PickersDay,
 } from "@mui/x-date-pickers";
 import { format } from "date-fns";
-// Add copy of recurring dates for reset functionality 
+// Add copy of recurring dates for reset functionality
 // Add a undo/redo function by tracking dates as they're submitted
 dayjs.extend(utc);
 
 function RecurrenceDay(props) {
-  const { rruleDates = [], exDates = [], rDates = [], day, outsideCurrentMonth, ...other } = props;
+  const {
+    rruleDates = [],
+    exDates = [],
+    rDates = [],
+    day,
+    outsideCurrentMonth,
+    ...other
+  } = props;
 
   const checkDateArray = (arr) => {
-    return arr.some((recDay) => dayjs(recDay).isSame(day, "day"))
-  }
+    return arr.some((recDay) => dayjs(recDay).isSame(day, "day"));
+  };
 
   const isSelected =
     !outsideCurrentMonth &&
     (checkDateArray(rruleDates) || checkDateArray(rDates)) &&
-    !checkDateArray(exDates)
-
+    !checkDateArray(exDates);
 
   return (
     <Badge
@@ -42,17 +48,21 @@ function RecurrenceDay(props) {
   );
 }
 
-export default function RecurrenceCalendar({formData, setCourseFormData, currentCourseIndex}) {
+export default function RecurrenceCalendar({
+  formData,
+  setCourseFormData,
+  currentCourseIndex,
+}) {
   const [isLoading, setIsLoading] = useState(false);
   const [rruleDates, setRruleDates] = useState([]);
 
-
-  const [selectedDate, setSelectedDate] = useState(dayjs(formData.startDate.$d));
+  const [selectedDate, setSelectedDate] = useState(
+    dayjs(formData.startDate.$d),
+  );
 
   const fetchRecurringDates = () => {
     setIsLoading(true);
     setTimeout(() => {
-
       let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss[Z]")};DTSTART=${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss[Z]")}`;
       //let rruleString = `DTSTART:${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss")};FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss")};`;
       // Simulate calculating recurring dates using rrule (this would be your actual logic)
@@ -61,7 +71,7 @@ export default function RecurrenceCalendar({formData, setCourseFormData, current
           .map((day) => day.slice(0, 2))
           .join(",")}`;
       }
-   
+
       const rule = rrulestr(rruleString);
 
       const occurrences = rule.all();
@@ -80,7 +90,7 @@ export default function RecurrenceCalendar({formData, setCourseFormData, current
   }, [formData]);
 
   const handleDateChange = (newDate) => {
-    setSelectedDate(newDate)
+    setSelectedDate(newDate);
     const formattedNewDate = newDate.format("YYYYMMDD");
     const toggleDate = (arr, date) =>
       arr.includes(date) ? arr.filter((d) => d !== date) : [...arr, date];
@@ -88,7 +98,7 @@ export default function RecurrenceCalendar({formData, setCourseFormData, current
     let updatedExDates = formData.exDates || [];
     let updatedRDates = formData.rDates || [];
 
-    // Compare user selected Date against rruleDates and update exDate or rDate states. 
+    // Compare user selected Date against rruleDates and update exDate or rDate states.
     if (rruleDates.includes(formattedNewDate)) {
       updatedExDates = toggleDate(updatedExDates, formattedNewDate);
     } else {
@@ -99,14 +109,10 @@ export default function RecurrenceCalendar({formData, setCourseFormData, current
       prevData.map((data, index) =>
         index === currentCourseIndex
           ? { ...data, exDates: updatedExDates, rDates: updatedRDates }
-          : data
-  ))
-
-    
+          : data,
+      ),
+    );
   };
-
-
-
 
   return (
     <Box>
@@ -122,7 +128,7 @@ export default function RecurrenceCalendar({formData, setCourseFormData, current
           day: {
             rruleDates,
             rDates: formData.rDates || [],
-            exDates: formData.exDates || [] // Pass recurring dates as a prop to RecurrenceDay
+            exDates: formData.exDates || [], // Pass recurring dates as a prop to RecurrenceDay
           },
         }}
       />

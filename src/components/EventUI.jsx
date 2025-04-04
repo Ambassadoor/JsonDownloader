@@ -28,11 +28,11 @@ const timeZones = getTimezones();
 const EventUI = () => {
   const navigate = useNavigate();
   const { currentCourseIndex, setCurrentCourseIndex, subscribedData } =
-    useContext(AppStateContext)
+    useContext(AppStateContext);
 
   // State to store form data for all courses
   const [courseFormData, setCourseFormData] = useState([]);
-  const [eventData, setEventData] = useState([]);
+  const [eventData, setEventData] = useState({});
 
   // Initialize courseFormData when subscribedData changes
   useEffect(() => {
@@ -42,7 +42,9 @@ const EventUI = () => {
   }, [subscribedData]);
 
   useEffect(() => {
-    console.log("Event Data:", eventData);
+    if (eventData.length > 0) {
+      navigate("/calendar_confirmation", { state: { eventData } });
+    }
   }, [eventData]);
 
   // Update the form data for the current course
@@ -67,30 +69,23 @@ const EventUI = () => {
   // Submit handler
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Submitted data:", courseFormData[currentCourseIndex]);
-  
+
     // Collect formatted events in a local variable
     const formattedEvents = courseFormData.map((data) => {
       const event = useEventFormatter(data).formattedData;
-      console.log(event);
       return event;
     });
-  
+
     try {
       // Send the formatted events directly in the POST request
       const response = await axios.post("/api/create-events", {
         events: formattedEvents,
       });
-      console.log("Response:", response.data);
-  
-      // Optionally update the state with the response data
-      setEventData(response.data.events || []);
+      console.log("Events created successfully:", response.data.events);
+      setEventData(response.data.events);
     } catch (error) {
       console.error("Error creating events:", error);
     }
-  
-    // Navigate to the confirmation page with the formatted events
-    navigate("/calendar_confirmation", { state: { eventData: formattedEvents } });
   };
 
   // Navigation handlers
@@ -105,8 +100,6 @@ const EventUI = () => {
       setCurrentCourseIndex(currentCourseIndex - 1);
     }
   };
-
-
 
   const formData = courseFormData[currentCourseIndex] || {};
 

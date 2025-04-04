@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import {
+  Grid,
+  Box,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+} from "@mui/material";
 
 const SemesterSelectorUI = ({ onSelectSemester }) => {
   // Initialize category as an empty object or null if nothing is selected
@@ -7,13 +14,13 @@ const SemesterSelectorUI = ({ onSelectSemester }) => {
   // Initialize semester as an empty string
   const [selectedSemester, setSelectedSemester] = useState("");
   const [termMenu, setTermMenu] = useState([]);
-  
+
   useEffect(() => {
     if (termMenu.length === 0) {
-    fetch("/api/semesters")
-      .then((res) => res.json())
-      .then((data) => setTermMenu(data))
-      .catch((err) => console.error("Error fetching term menu:", err));
+      fetch("/api/semesters")
+        .then((res) => res.json())
+        .then((data) => setTermMenu(data))
+        .catch((err) => console.error("Error fetching term menu:", err));
     }
   }, [termMenu]);
 
@@ -28,17 +35,19 @@ const SemesterSelectorUI = ({ onSelectSemester }) => {
     setSelectedSemester(semesterUrl);
 
     if (onSelectSemester) {
-        onSelectSemester(semesterUrl)
+      onSelectSemester(semesterUrl);
     }
   };
-  
+
   return (
     <Box>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           {termMenu.length > 0 ? (
             <FormControl fullWidth>
-              <InputLabel id="semester-category-label">Semester Category</InputLabel>
+              <InputLabel id="semester-category-label">
+                Semester Category
+              </InputLabel>
               <Select
                 labelId="semester-category-label"
                 value={selectedCategory || ""}
@@ -75,7 +84,11 @@ const SemesterSelectorUI = ({ onSelectSemester }) => {
               </Select>
             </FormControl>
           ) : (
-            <p>{selectedCategory ? "Loading semesters..." : "Please select a category"}</p>
+            <p>
+              {selectedCategory
+                ? "Loading semesters..."
+                : "Please select a category"}
+            </p>
           )}
         </Grid>
       </Grid>
