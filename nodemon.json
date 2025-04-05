@@ -1,3 +1,6 @@
 {
-    "ignore": ["./downloads/**"]
+    "ignore": [
+        "downloads/**",
+        "server/config/tokens.json"
+]
 }

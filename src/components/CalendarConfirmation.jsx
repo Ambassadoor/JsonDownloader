@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import { useLocation } from "react-router-dom";
+import FileBrowser from "./FileBrowser";
 
 const CalendarConfirmation = () => {
   const location = useLocation();
@@ -33,6 +34,9 @@ const CalendarConfirmation = () => {
       <Button variant="contained" onClick={handleReset}>
         Reset Calendar
       </Button>
+      <div>
+        <FileBrowser />
+      </div>
     </div>
   );
 };

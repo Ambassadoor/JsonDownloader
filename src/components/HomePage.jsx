@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { Box } from "@mui/material";
 import CourseTransferList from "./CourseTransferList";
@@ -9,6 +9,20 @@ import "../styles/styles.css";
 const HomePage = () => {
   const { setOriginalData } = useContext(AppStateContext);
   const [selectedSemesterUrl, setSelectedSemesterUrl] = useState("");
+
+  useEffect(() => {
+    const checkToken = async () => {
+      try {
+        const response = await axios.get("/api/check-token");
+        if (response.data.authUrl) {
+          window.location.href = response.data.authUrl;
+        }
+      } catch (error) {
+        console.error("Error checking token:", error);
+      }
+    }
+    checkToken();
+  },[])
 
   const handleSemesterSelection = async (url) => {
     setSelectedSemesterUrl(url);

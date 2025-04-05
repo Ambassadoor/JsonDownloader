@@ -54,6 +54,29 @@ app.get("/api/check-download", async (req, res) => {
   }
 });
 
+// Endpoint to check for token and redirect to OAuth2 flow if missing
+app.get("/api/check-token", async (req, res) => {
+  try {
+    // Check if the token file exists
+    if (!fs.existsSync(TOKEN_PATH)) {
+      // If the token file is missing, generate the auth URL
+      const authUrl = getAuthUrl();
+      return res.status(200).json({ authUrl });
+    }
+
+    // If the token file exists, validate the token
+    const token = JSON.parse(fs.readFileSync(TOKEN_PATH, "utf-8"));
+    oAuth2Client.setCredentials(token);
+
+    // Check if the token is still valid
+    await oAuth2Client.getAccessToken(); // Throws an error if invalid
+    res.status(200).json({ valid: true });
+  } catch (error) {
+    console.error("Error checking token:", error);
+    res.status(200).json({ authUrl: getAuthUrl() }); // Redirect to OAuth2 flow if invalid
+  }
+});
+
 
 // server.js
 
