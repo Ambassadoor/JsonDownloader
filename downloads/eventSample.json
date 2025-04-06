@@ -1,0 +1,2506 @@
+[
+    {
+        "event": {
+            "kind": "calendar#event",
+            "etag": "\"3487943449674750\"",
+            "id": "u8hu9jnohu98h2cuhalcd5rm50",
+            "status": "confirmed",
+            "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA1MjdUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+            "created": "2025-04-06T20:35:24.000Z",
+            "updated": "2025-04-06T20:35:24.837Z",
+            "summary": "General Chemistry I Lab",
+            "description": "Instructor: Morris, Morghan\nStudents: 7",
+            "location": "McFarland 419 (24)",
+            "creator": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "organizer": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "start": {
+                "dateTime": "2025-05-27T12:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "end": {
+                "dateTime": "2025-05-27T15:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "recurrence": [
+                "RRULE:FREQ=WEEKLY;UNTIL=20250627T200000Z;BYDAY=MO,TU,TH"
+            ],
+            "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+            "sequence": 0,
+            "reminders": {
+                "useDefault": true
+            },
+            "eventType": "default"
+        },
+        "instances": [
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250527T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA1MjdUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-05-27T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-05-27T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-05-27T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250529T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA1MjlUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-05-29T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-05-29T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-05-29T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250602T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MDJUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-02T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-02T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-02T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250603T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MDNUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-03T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-03T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-03T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250605T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MDVUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-05T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-05T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-05T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250609T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MDlUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-09T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-09T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-09T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250610T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MTBUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-10T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-10T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-10T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250612T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MTJUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-12T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-12T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-12T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250616T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MTZUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-16T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-16T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-16T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250617T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MTdUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-17T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-17T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-17T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250619T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MTlUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-19T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-19T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-19T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250623T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MjNUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-23T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-23T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-23T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250624T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MjRUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-24T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-24T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-24T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449674750\"",
+                "id": "u8hu9jnohu98h2cuhalcd5rm50_20250626T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=dThodTlqbm9odTk4aDJjdWhhbGNkNXJtNTBfMjAyNTA2MjZUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.837Z",
+                "summary": "General Chemistry I Lab",
+                "description": "Instructor: Morris, Morghan\nStudents: 7",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-26T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-26T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "u8hu9jnohu98h2cuhalcd5rm50",
+                "originalStartTime": {
+                    "dateTime": "2025-06-26T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "u8hu9jnohu98h2cuhalcd5rm50@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            }
+        ]
+    },
+    {
+        "event": {
+            "kind": "calendar#event",
+            "etag": "\"3487943449361566\"",
+            "id": "afu3jvbc3tgde9qqpgv0ni12fk",
+            "status": "confirmed",
+            "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA2MzBUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+            "created": "2025-04-06T20:35:24.000Z",
+            "updated": "2025-04-06T20:35:24.680Z",
+            "summary": "General Chemistry II Lab",
+            "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+            "location": "McFarland 419 (24)",
+            "creator": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "organizer": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "start": {
+                "dateTime": "2025-06-30T12:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "end": {
+                "dateTime": "2025-06-30T15:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "recurrence": [
+                "RRULE:FREQ=WEEKLY;UNTIL=20250731T200000Z;BYDAY=MO,TU,TH"
+            ],
+            "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+            "sequence": 0,
+            "reminders": {
+                "useDefault": true
+            },
+            "eventType": "default"
+        },
+        "instances": [
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250630T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA2MzBUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-30T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-30T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-06-30T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250701T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MDFUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-01T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-01T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-01T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250703T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MDNUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-03T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-03T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-03T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250707T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MDdUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-07T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-07T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-07T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250708T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MDhUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-08T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-08T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-08T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250710T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MTBUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-10T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-10T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-10T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250714T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MTRUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-14T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-14T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-14T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250715T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MTVUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-15T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-15T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-15T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250717T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MTdUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-17T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-17T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-17T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250721T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MjFUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-21T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-21T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-21T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250722T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MjJUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-22T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-22T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-22T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250724T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MjRUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-24T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-24T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-24T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250728T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MjhUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-28T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-28T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-28T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250729T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MjlUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-29T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-29T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-29T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449361566\"",
+                "id": "afu3jvbc3tgde9qqpgv0ni12fk_20250731T170000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=YWZ1M2p2YmMzdGdkZTlxcXBndjBuaTEyZmtfMjAyNTA3MzFUMTcwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.680Z",
+                "summary": "General Chemistry II Lab",
+                "description": "Instructor: Opoku-Duah, Steve\nStudents: 6",
+                "location": "McFarland 419 (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-31T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-31T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "afu3jvbc3tgde9qqpgv0ni12fk",
+                "originalStartTime": {
+                    "dateTime": "2025-07-31T12:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "afu3jvbc3tgde9qqpgv0ni12fk@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            }
+        ]
+    },
+    {
+        "event": {
+            "kind": "calendar#event",
+            "etag": "\"3487943449995966\"",
+            "id": "7odv600g97tkpd7ob83jkrtqgc",
+            "status": "confirmed",
+            "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA1MjdUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+            "created": "2025-04-06T20:35:24.000Z",
+            "updated": "2025-04-06T20:35:24.997Z",
+            "summary": "Organic Chemistry I Lab",
+            "description": "Instructor: Cavitt, Brian\nStudents: 5",
+            "location": "McFarland 457-Organic Chem Lab (24)",
+            "creator": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "organizer": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "start": {
+                "dateTime": "2025-05-27T11:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "end": {
+                "dateTime": "2025-05-27T15:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "recurrence": [
+                "RRULE:FREQ=WEEKLY;UNTIL=20250627T200000Z;BYDAY=TU,WE,TH"
+            ],
+            "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+            "sequence": 0,
+            "reminders": {
+                "useDefault": true
+            },
+            "eventType": "default"
+        },
+        "instances": [
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250527T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA1MjdUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-05-27T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-05-27T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-05-27T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250528T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA1MjhUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-05-28T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-05-28T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-05-28T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250529T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA1MjlUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-05-29T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-05-29T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-05-29T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250603T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MDNUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-03T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-03T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-03T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250604T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MDRUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-04T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-04T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-04T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250605T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MDVUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-05T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-05T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-05T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250610T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MTBUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-10T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-10T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-10T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250611T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MTFUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-11T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-11T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-11T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250612T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MTJUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-12T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-12T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-12T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250617T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MTdUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-17T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-17T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-17T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250618T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MThUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-18T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-18T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-18T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250619T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MTlUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-19T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-19T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-19T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250624T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MjRUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-24T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-24T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-24T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250625T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MjVUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-25T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-25T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-25T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943449995966\"",
+                "id": "7odv600g97tkpd7ob83jkrtqgc_20250626T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=N29kdjYwMGc5N3RrcGQ3b2I4M2prcnRxZ2NfMjAyNTA2MjZUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:24.000Z",
+                "updated": "2025-04-06T20:35:24.997Z",
+                "summary": "Organic Chemistry I Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 5",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-26T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-26T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "7odv600g97tkpd7ob83jkrtqgc",
+                "originalStartTime": {
+                    "dateTime": "2025-06-26T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "7odv600g97tkpd7ob83jkrtqgc@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            }
+        ]
+    },
+    {
+        "event": {
+            "kind": "calendar#event",
+            "etag": "\"3487943450499070\"",
+            "id": "sb704s32oq9kem99f4fe4aklms",
+            "status": "confirmed",
+            "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA2MzBUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+            "created": "2025-04-06T20:35:25.000Z",
+            "updated": "2025-04-06T20:35:25.249Z",
+            "summary": "Organic Chemistry II Lab",
+            "description": "Instructor: Cavitt, Brian\nStudents: 8",
+            "location": "McFarland 457-Organic Chem Lab (24)",
+            "creator": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "organizer": {
+                "email": "ambassadoor.dev@gmail.com",
+                "self": true
+            },
+            "start": {
+                "dateTime": "2025-06-30T11:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "end": {
+                "dateTime": "2025-06-30T15:00:00-05:00",
+                "timeZone": "America/Chicago"
+            },
+            "recurrence": [
+                "RRULE:FREQ=WEEKLY;UNTIL=20250731T200000Z;BYDAY=TU,WE,TH"
+            ],
+            "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+            "sequence": 0,
+            "reminders": {
+                "useDefault": true
+            },
+            "eventType": "default"
+        },
+        "instances": [
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250630T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA2MzBUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-06-30T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-06-30T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-06-30T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250701T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MDFUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-01T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-01T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-01T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250702T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MDJUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-02T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-02T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-02T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250703T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MDNUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-03T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-03T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-03T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250708T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MDhUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-08T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-08T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-08T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250709T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MDlUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-09T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-09T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-09T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250710T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MTBUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-10T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-10T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-10T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250715T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MTVUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-15T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-15T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-15T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250716T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MTZUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-16T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-16T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-16T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250717T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MTdUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-17T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-17T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-17T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250722T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MjJUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-22T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-22T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-22T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250723T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MjNUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-23T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-23T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-23T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250724T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MjRUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-24T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-24T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-24T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250729T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MjlUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-29T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-29T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-29T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250730T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MzBUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-30T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-30T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-30T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            },
+            {
+                "kind": "calendar#event",
+                "etag": "\"3487943450499070\"",
+                "id": "sb704s32oq9kem99f4fe4aklms_20250731T160000Z",
+                "status": "confirmed",
+                "htmlLink": "https://www.google.com/calendar/event?eid=c2I3MDRzMzJvcTlrZW05OWY0ZmU0YWtsbXNfMjAyNTA3MzFUMTYwMDAwWiBhbWJhc3NhZG9vci5kZXZAbQ",
+                "created": "2025-04-06T20:35:25.000Z",
+                "updated": "2025-04-06T20:35:25.249Z",
+                "summary": "Organic Chemistry II Lab",
+                "description": "Instructor: Cavitt, Brian\nStudents: 8",
+                "location": "McFarland 457-Organic Chem Lab (24)",
+                "creator": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "organizer": {
+                    "email": "ambassadoor.dev@gmail.com",
+                    "self": true
+                },
+                "start": {
+                    "dateTime": "2025-07-31T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "end": {
+                    "dateTime": "2025-07-31T15:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "recurringEventId": "sb704s32oq9kem99f4fe4aklms",
+                "originalStartTime": {
+                    "dateTime": "2025-07-31T11:00:00-05:00",
+                    "timeZone": "America/Chicago"
+                },
+                "iCalUID": "sb704s32oq9kem99f4fe4aklms@google.com",
+                "sequence": 0,
+                "reminders": {
+                    "useDefault": true
+                },
+                "eventType": "default"
+            }
+        ]
+    }
+]

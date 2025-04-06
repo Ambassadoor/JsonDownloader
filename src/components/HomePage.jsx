@@ -1,14 +1,17 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import CourseTransferList from "./CourseTransferList";
 import SemesterSelectorUI from "./SemesterSelectorUI";
 import { AppStateContext } from "../AppStateContext";
 import "../styles/styles.css";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const { setOriginalData } = useContext(AppStateContext);
   const [selectedSemesterUrl, setSelectedSemesterUrl] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkToken = async () => {
@@ -46,9 +49,14 @@ const HomePage = () => {
     }
   };
 
+  const handleButtonClick = () => {
+    navigate("/calendar_confirmation");
+  }
+
   return (
     <div className="app-container">
       <Box>
+        <Button variant="contained" onClick={handleButtonClick}>Test Drive</Button>
         <SemesterSelectorUI onSelectSemester={handleSemesterSelection} />
         <CourseTransferList />
       </Box>
