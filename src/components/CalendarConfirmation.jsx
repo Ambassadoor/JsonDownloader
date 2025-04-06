@@ -3,6 +3,7 @@ import axios from "axios";
 import { Button } from "@mui/material";
 import eventSample from "../../downloads/eventSample.json"; // Import the sample JSON file
 import FileBrowser from "./FileBrowser";
+import BasicTabs from "./Tabs";
 
 const CalendarConfirmation = () => {
   const handleReset = async () => {
@@ -16,18 +17,7 @@ const CalendarConfirmation = () => {
 
   return (
     <div>
-      <h1>Calendar Confirmation</h1>
-      <p>This is the CalendarConfirmation component.</p>
-      <div>
-        {eventSample.map((event, index) => (
-          <div key={index}>
-            <h2>{event.event.summary}</h2>
-            {event.instances.map((instance, i) => (
-              <p key={i}>{instance.start?.dateTime || "No start time available"}</p>
-            ))}
-          </div>
-        ))}
-      </div>
+      <BasicTabs tabs={eventSample}/>
       <Button variant="contained" onClick={handleReset}>
         Reset Calendar
       </Button>
