@@ -1,8 +1,8 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -29,11 +29,11 @@ CustomTabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
-export default function BasicTabs({tabs}) {
+export default function BasicTabs({ tabs }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -41,21 +41,40 @@ export default function BasicTabs({tabs}) {
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            {tabs.length > 0 ? tabs.map((tab, index) => (
-              <Tab label={tab.event.summary} {...a11yProps(index)} key={index} />
-            )): <p>Loading</p>}
+      <Box sx={{ flexGrow: 1, bgcolor: "background.paper", display: "flex" }}>
+        <Tabs
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+          orientation="vertical"
+          sx={{ borderRight: 1, borderColor: "divider" }}
+        >
+          {tabs.length > 0 ? (
+            tabs.map((tab, index) => (
+              <Tab
+                label={tab.event.summary}
+                {...a11yProps(index)}
+                key={index}
+              />
+            ))
+          ) : (
+            <p>Loading</p>
+          )}
         </Tabs>
-      </Box>
-      {tabs.length > 0 ? tabs.map((tab, index) => (
-        <CustomTabPanel value={value} index={index} key={index}>
-          {tab.instances.map((instance, i) => (
-            <p key={i}>{instance.start?.dateTime || "No start time available"}</p>
-          ))}
-        </CustomTabPanel>
-      )): <p>Loading</p>}
+      {tabs.length > 0 ? (
+        tabs.map((tab, index) => (
+          <CustomTabPanel value={value} index={index} key={index}>
+            {tab.instances.map((instance, i) => (
+              <p key={i}>
+                {instance.start?.dateTime || "No start time available"}
+              </p>
+            ))}
+          </CustomTabPanel>
+        ))
+      ) : (
+        <p>Loading</p>
+      )}
     </Box>
   );
 }
