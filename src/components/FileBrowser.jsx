@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const FileBrowser = () => {
-  const [selectedFiles, setSelectedFiles] = useState([]);
+const FileBrowser = ({ events, selectedTab, onFileSelect }) => {
   const [oauthToken, setOauthToken] = useState("");
 
   useEffect(() => {
@@ -23,7 +22,6 @@ const FileBrowser = () => {
   }, []);
 
   const onPickerApiLoad = () => {
-    // Create the picker after the API loads and token is retrieved
     if (oauthToken) {
       createPicker();
     }
@@ -36,35 +34,24 @@ const FileBrowser = () => {
         .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
         .setOAuthToken(oauthToken)
         .setDeveloperKey("AIzaSyCZ_NpeJ9n8UtCwBfu009QoZLbcbyXSKAY") // Replace with your Developer Key
-        .setCallback(pickerCallback)
+        .setCallback((data) => pickerCallback(data, events[selectedTab]?.event?.id))
         .build();
       picker.setVisible(true);
     }
   };
 
-  const pickerCallback = (data) => {
+  const pickerCallback = (data, eventId) => {
     if (data.action === window.google.picker.Action.PICKED) {
       const files = data.docs;
-      for (const file of files) {
-        setSelectedFiles((prevFiles) => [...prevFiles, file]);
-      }
-      // Handle the picked file (e.g., attach it to the event)
+      onFileSelect(eventId, files); // Pass the selected files and event ID to the parent
     }
   };
 
   return (
     <div>
-      <h1>File Browser</h1>
       <button onClick={createPicker} disabled={!oauthToken}>
-        Select File from Google Drive
+        Select Files for this Course
       </button>
-      <div>
-        {selectedFiles.map((file, index) => (
-          <div key={index}>
-            <p>{file.name}</p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };

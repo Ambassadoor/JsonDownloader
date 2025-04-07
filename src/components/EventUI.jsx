@@ -49,7 +49,6 @@ const EventUI = () => {
 
   // Update the form data for the current course
   const handleInputChange = (name, value) => {
-    console.log(name, value);
     setCourseFormData((prevData) =>
       prevData.map((data, index) =>
         index === currentCourseIndex ? { ...data, [name]: value } : data,

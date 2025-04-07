@@ -7,6 +7,8 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { TextField } from "@mui/material";
 import BasicTimePicker from "./TimePicker";
+import FileSelector from "./FileSelector";
+import FileBrowser from "./FileBrowser";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -18,13 +20,12 @@ function a11yProps(index) {
   };
 }
 
-const formattedTime = (dateTime) =>
-  dayjs(dateTime).tz("America/Chicago").format("h:mm A z");
-
 export default function BasicTabs({ tabs, setEventSample }) {
   const [selectedTab, setSelectedTab] = React.useState(0); // Main tab
   const [selectedSubTab, setSelectedSubTab] = React.useState(0); // Subtab for instances
-
+  const [instanceFiles, setInstanceFiles] = React.useState({}); // State to store selected files
+  const [selectedFiles, setSelectedFiles ] = React.useState({}); // State to store selected files
+  
   const handleTabClick = (event, newValue) => {
     setSelectedTab(newValue);
     setSelectedSubTab(0); // Reset subtab when switching main tabs
@@ -59,10 +60,9 @@ export default function BasicTabs({ tabs, setEventSample }) {
     );
   };
 
-
   const handleTimeChange = (name, newValue) => {
     const isoValue = newValue?.toISOString(); // Convert dayjs object to ISO string
-  
+
     setEventSample((prevData) =>
       prevData.map((event, eventIndex) => {
         if (eventIndex === selectedTab) {
@@ -87,6 +87,16 @@ export default function BasicTabs({ tabs, setEventSample }) {
     );
   };
 
+  const handleFileSelect = (eventId, files) => {
+    setSelectedFiles((prevFiles) => ({
+      ...prevFiles,
+      [eventId]: [...(prevFiles[eventId] || []), ...files], // Append files to the event's file list
+    }));
+  };
+
+  const handleFileChange = (updatedInstanceFiles) => {
+    setInstanceFiles(updatedInstanceFiles) }
+
   return (
     <Box sx={{ display: "flex", height: "100%" }}>
       {/* Primary Tabs */}
@@ -98,6 +108,7 @@ export default function BasicTabs({ tabs, setEventSample }) {
           overflowY: "auto", // Add scrolling if the tabs are too long
         }}
       >
+        <h2>Courses</h2>
         <Tabs
           variant="scrollable"
           value={selectedTab}
@@ -106,13 +117,31 @@ export default function BasicTabs({ tabs, setEventSample }) {
           orientation="vertical"
         >
           {tabs.map((tab, index) => (
-            <Tab label={tab.event.summary} {...a11yProps(index)} key={index} />
+            <Tab label={tab.event.summary} key={index} {...a11yProps(index)} />
           ))}
         </Tabs>
+        <Box sx={{ flexGrow: 1, p: 2 }}>
+          <FileBrowser
+            events={tabs}
+            selectedTab={selectedTab}
+            onFileSelect={handleFileSelect} // Pass the callback to FileBrowser
+          />
+        </Box>
+        {selectedFiles[tabs[selectedTab]?.event?.id]?.length > 0 && (
+          <Box sx={{ p: 2 }}>
+            <h3>Selected Files:</h3>
+            <ul>
+              {selectedFiles[tabs[selectedTab]?.event?.id].map((file, index) => (
+                <li key={index}>{file.name}</li>
+              ))}
+            </ul>
+          </Box>
+        )}
       </Box>
 
       {/* Subtabs and Content */}
       <Box sx={{ flexGrow: 1, p: 2 }}>
+        <h2>Dates</h2>
         {tabs[selectedTab]?.instances?.length > 0 ? (
           <>
             {/* Subtabs */}
@@ -145,27 +174,27 @@ export default function BasicTabs({ tabs, setEventSample }) {
                 <h3>Instance Details</h3>
                 <TextField
                   label="Description"
-                  name="description" // Add the name attribute
+                  name="description"
                   value={
                     tabs[selectedTab].instances[selectedSubTab]?.description ||
                     ""
                   }
-                  onChange={handleInputChange} // Bind to handleInputChange
+                  onChange={handleInputChange}
                   multiline
                   sx={{ width: { xs: "100%", sm: "400px" } }}
                 />
                 <TextField
                   label="Location"
-                  name="location" // Add the name attribute
+                  name="location"
                   value={
                     tabs[selectedTab].instances[selectedSubTab]?.location || ""
                   }
-                  onChange={handleInputChange} // Bind to handleInputChange
+                  onChange={handleInputChange}
                   sx={{ width: { xs: "100%", sm: "400px" } }}
                 />
                 <BasicTimePicker
                   label="Start Time"
-                  name="dateTime" // Add the name attribute
+                  name="dateTime"
                   value={
                     tabs[selectedTab].instances[selectedSubTab]?.start
                       ?.dateTime || dayjs()
@@ -174,10 +203,12 @@ export default function BasicTabs({ tabs, setEventSample }) {
                     tabs[selectedTab].instances[selectedSubTab]?.start
                       ?.timeZone || "America/Chicago"
                   }
-                  handleInputChange={(newValue) => handleTimeChange("start", newValue)}
+                  handleInputChange={(newValue) =>
+                    handleTimeChange("start", newValue)
+                  }
                 />
                 <BasicTimePicker
-                  label="end"
+                  label="End Time"
                   name="dateTime"
                   value={
                     tabs[selectedTab].instances[selectedSubTab]?.end
@@ -187,7 +218,16 @@ export default function BasicTabs({ tabs, setEventSample }) {
                     tabs[selectedTab].instances[selectedSubTab]?.end
                       ?.timeZone || "America/Chicago"
                   }
-                  handleInputChange={(newValue) => handleTimeChange("end", newValue)}
+                  handleInputChange={(newValue) =>
+                    handleTimeChange("end", newValue)
+                  }
+                />
+                <FileSelector
+                  selectedFiles={selectedFiles[tabs[selectedTab]?.event?.id] || []}
+                  onFileChange={handleFileChange}
+                  eventId={tabs[selectedTab]?.event?.id}
+                  instanceId={tabs[selectedTab].instances[selectedSubTab]?.id}
+                  instanceFiles={instanceFiles}
                 />
               </Box>
             )}
@@ -199,3 +239,5 @@ export default function BasicTabs({ tabs, setEventSample }) {
     </Box>
   );
 }
+
+
