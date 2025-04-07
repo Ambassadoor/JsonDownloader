@@ -1,11 +1,12 @@
 import * as React from "react";
-import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { TextField } from "@mui/material";
+import BasicTimePicker from "./TimePicker";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -17,9 +18,10 @@ function a11yProps(index) {
   };
 }
 
-const formattedTime = (dateTime) => dayjs(dateTime).tz("America/Chicago").format("h:mm A z");
+const formattedTime = (dateTime) =>
+  dayjs(dateTime).tz("America/Chicago").format("h:mm A z");
 
-export default function BasicTabs({ tabs }) {
+export default function BasicTabs({ tabs, setEventSample }) {
   const [selectedTab, setSelectedTab] = React.useState(0); // Main tab
   const [selectedSubTab, setSelectedSubTab] = React.useState(0); // Subtab for instances
 
@@ -30,6 +32,59 @@ export default function BasicTabs({ tabs }) {
 
   const handleSubTabClick = (event, newValue) => {
     setSelectedSubTab(newValue);
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    // Update the state for the selected tab and subtab
+    setEventSample((prevData) =>
+      prevData.map((event, eventIndex) => {
+        if (eventIndex === selectedTab) {
+          return {
+            ...event,
+            instances: event.instances.map((instance, instanceIndex) => {
+              if (instanceIndex === selectedSubTab) {
+                return {
+                  ...instance,
+                  [name]: value, // Update the specific property (e.g., description, location)
+                };
+              }
+              return instance;
+            }),
+          };
+        }
+        return event;
+      }),
+    );
+  };
+
+
+  const handleTimeChange = (name, newValue) => {
+    const isoValue = newValue?.toISOString(); // Convert dayjs object to ISO string
+  
+    setEventSample((prevData) =>
+      prevData.map((event, eventIndex) => {
+        if (eventIndex === selectedTab) {
+          return {
+            ...event,
+            instances: event.instances.map((instance, instanceIndex) => {
+              if (instanceIndex === selectedSubTab) {
+                return {
+                  ...instance,
+                  [name]: {
+                    ...instance[name], // Preserve other properties (e.g., timeZone)
+                    dateTime: isoValue, // Update the dateTime property
+                  },
+                };
+              }
+              return instance;
+            }),
+          };
+        }
+        return event;
+      })
+    );
   };
 
   return (
@@ -51,11 +106,7 @@ export default function BasicTabs({ tabs }) {
           orientation="vertical"
         >
           {tabs.map((tab, index) => (
-            <Tab
-              label={tab.event.summary}
-              {...a11yProps(index)}
-              key={index}
-            />
+            <Tab label={tab.event.summary} {...a11yProps(index)} key={index} />
           ))}
         </Tabs>
       </Box>
@@ -67,14 +118,19 @@ export default function BasicTabs({ tabs }) {
             {/* Subtabs */}
             <Tabs
               variant="scrollable"
+              scrollButtons="auto"
+              allowScrollButtonsMobile
               value={selectedSubTab}
               onChange={handleSubTabClick}
               aria-label="subtabs"
-              sx={{ borderBottom: 1, borderColor: "divider" }}
+              sx={{ borderBottom: 1, borderColor: "divider", maxWidth: "600px" }}
             >
               {tabs[selectedTab].instances.map((instance, i) => (
                 <Tab
-                  label={dayjs(instance.start?.dateTime).format("MMMM D, YYYY") || "No start time available"}
+                  label={
+                    dayjs(instance.start?.dateTime).format("ddd MMMM D, YYYY") ||
+                    "No start time available"
+                  }
                   {...a11yProps(i)}
                   key={i}
                 />
@@ -83,12 +139,56 @@ export default function BasicTabs({ tabs }) {
 
             {/* Render Instance Details */}
             {selectedSubTab !== null && (
-              <Box sx={{ mt: 2 }}>
+              <Box
+                sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2 }}
+              >
                 <h3>Instance Details</h3>
-                <p><strong>Description:</strong> {tabs[selectedTab].instances[selectedSubTab]?.description || "No description available"}</p>
-                <p><strong>Location:</strong> {tabs[selectedTab].instances[selectedSubTab]?.location || "No location available"}</p>
-                <p><strong>Start Time:</strong> {formattedTime(tabs[selectedTab].instances[selectedSubTab]?.start?.dateTime) || "No start time available"}</p>
-                <p><strong>End Time:</strong> {formattedTime(tabs[selectedTab].instances[selectedSubTab]?.end?.dateTime) || "No end time available"}</p>
+                <TextField
+                  label="Description"
+                  name="description" // Add the name attribute
+                  value={
+                    tabs[selectedTab].instances[selectedSubTab]?.description ||
+                    ""
+                  }
+                  onChange={handleInputChange} // Bind to handleInputChange
+                  multiline
+                  sx={{ width: { xs: "100%", sm: "400px" } }}
+                />
+                <TextField
+                  label="Location"
+                  name="location" // Add the name attribute
+                  value={
+                    tabs[selectedTab].instances[selectedSubTab]?.location || ""
+                  }
+                  onChange={handleInputChange} // Bind to handleInputChange
+                  sx={{ width: { xs: "100%", sm: "400px" } }}
+                />
+                <BasicTimePicker
+                  label="Start Time"
+                  name="dateTime" // Add the name attribute
+                  value={
+                    tabs[selectedTab].instances[selectedSubTab]?.start
+                      ?.dateTime || dayjs()
+                  }
+                  timezone={
+                    tabs[selectedTab].instances[selectedSubTab]?.start
+                      ?.timeZone || "America/Chicago"
+                  }
+                  handleInputChange={(newValue) => handleTimeChange("start", newValue)}
+                />
+                <BasicTimePicker
+                  label="end"
+                  name="dateTime"
+                  value={
+                    tabs[selectedTab].instances[selectedSubTab]?.end
+                      ?.dateTime || dayjs()
+                  }
+                  timezone={
+                    tabs[selectedTab].instances[selectedSubTab]?.end
+                      ?.timeZone || "America/Chicago"
+                  }
+                  handleInputChange={(newValue) => handleTimeChange("end", newValue)}
+                />
               </Box>
             )}
           </>
