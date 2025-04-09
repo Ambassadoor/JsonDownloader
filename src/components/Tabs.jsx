@@ -25,6 +25,7 @@ export default function BasicTabs({ tabs, setEventSample }) {
   const [selectedSubTab, setSelectedSubTab] = React.useState(0); // Subtab for instances
   const [instanceFiles, setInstanceFiles] = React.useState({}); // State to store selected files
   const [selectedFiles, setSelectedFiles ] = React.useState({}); // State to store selected files
+  const [editedInstances, setEditedInstances] = React.useState({}); // State to track edited instances
   
   const handleTabClick = (event, newValue) => {
     setSelectedTab(newValue);
@@ -58,7 +59,20 @@ export default function BasicTabs({ tabs, setEventSample }) {
         return event;
       }),
     );
-  };
+
+    const eventId = tabs[selectedTab]?.event?.id;
+    const instanceId = tabs[selectedTab]?.instances[selectedSubTab]?.id;
+
+    setEditedInstances((prevEdits) => ({
+      ...prevEdits,
+      [eventId]: {
+        ...(prevEdits[eventId] || {}),
+        [instanceId]: {
+          ...(prevEdits[eventId]?.[instanceId] || {}),
+          [name]: value,
+        },
+      },
+  }));
 
   const handleTimeChange = (name, newValue) => {
     const isoValue = newValue?.toISOString(); // Convert dayjs object to ISO string
@@ -85,6 +99,20 @@ export default function BasicTabs({ tabs, setEventSample }) {
         return event;
       })
     );
+
+    const eventId = tabs[selectedTab]?.event?.id;
+    const instanceId = tabs[selectedTab]?.instances[selectedSubTab]?.id;
+
+    setEditedInstances((prevEdits) => ({
+      ...prevEdits,
+      [eventId]: {
+        ...(prevEdits[eventId] || {}),
+        [instanceId]: {
+          ...(prevEdits[eventId]?.[instanceId] || {}),
+          [name]: isoValue,
+        },
+      },
+    }));
   };
 
   const handleFileSelect = (eventId, files) => {
