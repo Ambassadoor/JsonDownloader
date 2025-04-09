@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import axios from "axios";
 
-const FileBrowser = ({ events, selectedTab, onFileSelect }) => {
+const FileBrowser = React.memo(({ events, selectedTab, onFileSelect }) => {
   const [oauthToken, setOauthToken] = useState("");
 
   useEffect(() => {
@@ -54,6 +54,6 @@ const FileBrowser = ({ events, selectedTab, onFileSelect }) => {
       </button>
     </div>
   );
-};
+});
 
 export default FileBrowser;
