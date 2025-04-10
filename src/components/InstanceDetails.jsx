@@ -12,6 +12,8 @@ const InstanceDetails = React.memo(
     selectedInstanceData,
     focusedTabIndex,
     browserFiles,
+    handleChange,
+    updatedInstances,
   }) => (
     <Box sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2 }}>
       <h3>Instance Details</h3>
@@ -19,9 +21,10 @@ const InstanceDetails = React.memo(
         label="Description"
         name="description"
         value={
-          selectedInstanceData?.description ??
-          ""
+          updatedInstances[selectedInstanceData?.id]?.description ??
+          selectedInstanceData?.description
         }
+        onChange={(e) => handleChange(e.target.value, selectedInstanceData?.id, "description")}
         multiline
         sx={{ width: { xs: "100%", sm: "400px" } }}
       />
@@ -29,28 +32,29 @@ const InstanceDetails = React.memo(
         label="Location"
         name="location"
         value={
-          selectedInstanceData?.location ??
-          ""
+          updatedInstances[selectedInstanceData?.id]?.location ??
+          selectedInstanceData?.location
         }
+        onChange={(e) => handleChange(e.target.value, selectedInstanceData?.id, "location")}
         sx={{ width: { xs: "100%", sm: "400px" } }}
       />
       <BasicTimePicker
         label="Start Time"
-        name="dateTime"
-        value={selectedInstanceData?.start?.dateTime || dayjs()}
-        timezone={selectedInstanceData?.start?.timeZone || "America/Chicago"}
-        handleInputChange={(newValue) =>
-          handleInstanceChange("start", newValue?.toISOString())
+        name="start"
+        id={selectedInstanceData?.id}
+        value={updatedInstances[selectedInstanceData?.id]?.start ??
+        selectedInstanceData?.start?.dateTime
         }
+        timezone={selectedInstanceData?.start?.timeZone || "America/Chicago"}
+        handleChange={handleChange}
       />
       <BasicTimePicker
         label="End Time"
-        name="dateTime"
+        name="end"
         value={selectedInstanceData?.end?.dateTime || dayjs()}
         timezone={selectedInstanceData?.end?.timeZone || "America/Chicago"}
-        handleInputChange={(newValue) =>
-          handleInstanceChange("end", newValue?.toISOString())
-        }
+        handleChange={handleChange}
+        id={selectedInstanceData?.id}
       />
 
     </Box>

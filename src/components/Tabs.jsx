@@ -29,8 +29,19 @@ export default function BasicTabs({ events }) {
 
   }
 
+  const handleInstanceDetailChange = (value, instanceId, property) => {
+    setUpdatedInstances(prev => ({
+      ...prev,
+      [instanceId]: {
+        ...(prev[instanceId] ?? {}),
+        [property]: value,
+      }
+    }));     
+  }
+
   React.useEffect(() => {
-    console.log(browserFiles)}, [browserFiles])
+    console.log(updatedInstances)
+  }, [updatedInstances])
 
   return (
     <Box sx={{ display: "flex", height: "100%" }}>
@@ -55,6 +66,8 @@ export default function BasicTabs({ events }) {
                 selectedInstanceData={events[focusedTabIndex].instances[focusedSubTabIndex]}
                 focusedTabIndex={focusedSubTabIndex}
                 browserFiles={browserFiles}
+                handleChange={handleInstanceDetailChange}
+                updatedInstances={updatedInstances}
               />
             )}
           </>
