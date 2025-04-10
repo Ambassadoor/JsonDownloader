@@ -1,7 +1,7 @@
 import React, { useEffect, useState, } from "react";
 import axios from "axios";
 
-const FileBrowser = React.memo(({ events, selectedTab, onFileSelect }) => {
+const FileBrowser = React.memo(({ events, focusedTab, onBrowserSelect }) => {
   const [oauthToken, setOauthToken] = useState("");
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const FileBrowser = React.memo(({ events, selectedTab, onFileSelect }) => {
         .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
         .setOAuthToken(oauthToken)
         .setDeveloperKey("AIzaSyCZ_NpeJ9n8UtCwBfu009QoZLbcbyXSKAY") // Replace with your Developer Key
-        .setCallback((data) => pickerCallback(data, events[selectedTab]?.event?.id))
+        .setCallback((data) => pickerCallback(data, events[focusedTab]?.event?.id))
         .build();
       picker.setVisible(true);
     }
@@ -43,7 +43,7 @@ const FileBrowser = React.memo(({ events, selectedTab, onFileSelect }) => {
   const pickerCallback = (data, eventId) => {
     if (data.action === window.google.picker.Action.PICKED) {
       const files = data.docs;
-      onFileSelect(eventId, files); // Pass the selected files and event ID to the parent
+      onBrowserSelect(eventId, files); // Pass the selected files and event ID to the parent
     }
   };
 

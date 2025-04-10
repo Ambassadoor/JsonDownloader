@@ -19,8 +19,7 @@ const CalendarConfirmation = () => {
   return (
     <div>
       <BasicTabs 
-        tabs={eventSample}
-        setEventSample={setEventSample}
+        events={eventSample}
         />
       <Button variant="contained" onClick={handleReset}>
         Reset Calendar

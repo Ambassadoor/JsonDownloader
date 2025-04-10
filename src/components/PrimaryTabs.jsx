@@ -11,7 +11,7 @@ function a11yProps(index) {
   };
 }
 
-const PrimaryTabs = React.memo(({ tabs, selectedTab, handleTabClick, handleFileSelect, selectedFiles }) => (
+const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrowserSelect, browserFiles }) => (
   <Box
     sx={{
       width: "20%",
@@ -23,27 +23,27 @@ const PrimaryTabs = React.memo(({ tabs, selectedTab, handleTabClick, handleFileS
     <h2>Courses</h2>
     <Tabs
       variant="scrollable"
-      value={selectedTab}
+      value={focusedTab}
       onChange={handleTabClick}
       aria-label="main tabs"
       orientation="vertical"
     >
-      {tabs.map((tab, index) => (
-        <Tab label={tab.event.summary} key={index} {...a11yProps(index)} />
+      {events.map((event, index) => (
+        <Tab label={event.event.summary} key={index} {...a11yProps(index)} />
       ))}
     </Tabs>
     <Box sx={{ flexGrow: 1, p: 2 }}>
       <FileBrowser
-        events={tabs}
-        selectedTab={selectedTab}
-        onFileSelect={handleFileSelect}
+        events={events}
+        focusedTab={focusedTab}
+        onBrowserSelect={handleBrowserSelect}
       />
     </Box>
-    {selectedFiles[tabs[selectedTab]?.event?.id]?.length > 0 && (
+    {browserFiles[focusedTab]?.length > 0 && (
         <Box sx={{ p: 2 }}>
           <h3>Selected Files:</h3>
           <ul>
-            {selectedFiles[tabs[selectedTab]?.event?.id].map(
+            {browserFiles[focusedTab].map(
               (file, index) => (
                 <li key={index}>{file.name}</li>
               ),

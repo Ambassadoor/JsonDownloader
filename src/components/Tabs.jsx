@@ -3,148 +3,58 @@ import Box from "@mui/material/Box";
 import PrimaryTabs from "./PrimaryTabs";
 import SubTabs from "./SubTabs";
 import InstanceDetails from "./InstanceDetails";
-import FileBrowser from "./FileBrowser";
 
-export default function BasicTabs({ tabs, setEventSample }) {
-  const [state, setState] = React.useState({
-    selectedTab: 0,
-    selectedSubTab: 0,
-    instanceFiles: {},
-    selectedFiles: {},
-    editedInstances: {},
-  });
+export default function BasicTabs({ events }) {
 
-  const updateState = (key, updater) => {
-    try {
-      setState((prevState) => ({
-        ...prevState,
-        [key]: updater(prevState[key]),
-      }));
-    } catch (error) {
-      console.error(`Error updating state for key "${key}":`, error);
-    }
-  };
+  const [focusedTabIndex, setFocusedTabIndex] = React.useState(0);
+  const [focusedSubTabIndex, setFocusedSubTabIndex] = React.useState(0);  
+  const [browserFiles, setBrowserFiles ] = React.useState({});
+  const [updatedInstances, setUpdatedInstances] = React.useState({});
 
-  const updateNestedState = (prevState, eventId, instanceId, key, value) => ({
-    ...prevState,
-    [eventId]: {
-      ...(prevState[eventId] || {}),
-      [instanceId]: {
-        ...(prevState[eventId]?.[instanceId] || {}),
-        [key]: value,
-      },
-    },
-  });
+  const handleTabClick = (event, value) => {
+    console.log(value)
+    setFocusedTabIndex(value);
+  }
 
-  const selectedTabData = React.useMemo(() => {
-    try {
-      return tabs[state.selectedTab] || {};
-    } catch (error) {
-      console.error("Error deriving selectedTabData:", error);
-      return {};
-    }
-  }, [tabs, state.selectedTab]);
+  const handleSubTabClick = (event, value) => {
+    setFocusedSubTabIndex(value);
+  }
 
-  const selectedInstanceData = React.useMemo(() => {
-    try {
-      return selectedTabData.instances?.[state.selectedSubTab] || {};
-    } catch (error) {
-      console.error("Error deriving selectedInstanceData:", error);
-      return {};
-    }
-  }, [selectedTabData, state.selectedSubTab]);
+  const handleBrowserSelect = (eventId, files) => {
+    const combined = [...(browserFiles[eventId] ?? []), ...files]
+    const validPairs = combined.filter(file => file.id !== undefined && file.name !== undefined).map(file => [file.id, file])
 
-  const handleTabClick = React.useCallback((event, newValue) => {
-    try {
-      updateState("selectedTab", () => newValue);
-      updateState("selectedSubTab", () => 0);
-    } catch (error) {
-      console.error("Error handling tab click:", error);
-    }
-  }, []);
+    const dedupedFiles = Array.from(new Map(validPairs).values())
+    setBrowserFiles({ ...browserFiles, [eventId]: dedupedFiles });
 
-  const handleSubTabClick = React.useCallback((event, newValue) => {
-    try {
-      updateState("selectedSubTab", () => newValue);
-    } catch (error) {
-      console.error("Error handling subtab click:", error);
-    }
-  }, []);
+  }
 
-  const handleInstanceChange = React.useCallback(
-    (key, value) => {
-      try {
-        const eventId = selectedTabData.event?.id;
-        const instanceId = selectedInstanceData?.id;
-
-        if (!eventId || !instanceId) {
-          throw new Error("Missing eventId or instanceId for instance change");
-        }
-
-        updateState("editedInstances", (prevEdits) =>
-          updateNestedState(prevEdits, eventId, instanceId, key, value),
-        );
-      } catch (error) {
-        console.error("Error handling instance change:", error);
-      }
-    },
-    [selectedTabData, selectedInstanceData],
-  );
-
-  const handleFileSelect = React.useCallback((eventId, files) => {
-    try {
-      if (!eventId || !files) {
-        throw new Error("Missing eventId or files for file selection");
-      }
-
-      updateState("selectedFiles", (prevFiles) => ({
-        ...prevFiles,
-        [eventId]: [...(prevFiles[eventId] || []), ...files],
-      }));
-    } catch (error) {
-      console.error("Error handling file selection:", error);
-    }
-  }, []);
-
-  const handleFileChange = React.useCallback((updatedInstanceFiles) => {
-    try {
-      if (!updatedInstanceFiles) {
-        throw new Error("Missing updatedInstanceFiles for file change");
-      }
-
-      updateState("instanceFiles", () => updatedInstanceFiles);
-    } catch (error) {
-      console.error("Error handling file change:", error);
-    }
-  }, []);
+  React.useEffect(() => {
+    console.log(browserFiles)}, [browserFiles])
 
   return (
     <Box sx={{ display: "flex", height: "100%" }}>
       <PrimaryTabs
-        tabs={tabs}
-        selectedTab={state.selectedTab}
+        events={events}
+        focusedTab={focusedTabIndex}
         handleTabClick={handleTabClick}
-        handleFileSelect={handleFileSelect}
-        selectedFiles={state.selectedFiles
-          }
+        handleBrowserSelect={handleBrowserSelect}
+        browserFiles={browserFiles}
       />
       <Box sx={{ flexGrow: 1, p: 2 }}>
         <h2>Dates</h2>
-        {selectedTabData.instances?.length > 0 ? (
+        {events[focusedSubTabIndex].instances?.length > 0 ? (
           <>
             <SubTabs
-              instances={selectedTabData.instances}
-              selectedSubTab={state.selectedSubTab}
+              instances={events[focusedSubTabIndex].instances}
+              focusedSubTabIndex={focusedSubTabIndex}
               handleSubTabClick={handleSubTabClick}
             />
-            {state.selectedSubTab !== null && (
+            {focusedSubTabIndex !== null && (
               <InstanceDetails
-                selectedInstanceData={selectedInstanceData}
-                selectedTabData={selectedTabData}
-                state={state}
-                handleInstanceChange={handleInstanceChange}
-                handleFileChange={handleFileChange}
-                handleFileSelect={handleFileSelect}
+                selectedInstanceData={events[focusedTabIndex].instances[focusedSubTabIndex]}
+                focusedTabIndex={focusedSubTabIndex}
+                browserFiles={browserFiles}
               />
             )}
           </>

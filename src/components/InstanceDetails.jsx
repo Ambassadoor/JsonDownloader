@@ -10,10 +10,8 @@ dayjs.extend(tz);
 const InstanceDetails = React.memo(
   ({
     selectedInstanceData,
-    selectedTabData,
-    state,
-    handleInstanceChange,
-    handleFileChange,
+    focusedTabIndex,
+    browserFiles,
   }) => (
     <Box sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2 }}>
       <h3>Instance Details</h3>
@@ -21,14 +19,8 @@ const InstanceDetails = React.memo(
         label="Description"
         name="description"
         value={
-          state.editedInstances[selectedTabData.event?.id]?.[
-            selectedInstanceData?.id
-          ]?.description ??
           selectedInstanceData?.description ??
           ""
-        }
-        onChange={(event) =>
-          handleInstanceChange(event.target.name, event.target.value)
         }
         multiline
         sx={{ width: { xs: "100%", sm: "400px" } }}
@@ -37,14 +29,8 @@ const InstanceDetails = React.memo(
         label="Location"
         name="location"
         value={
-          state.editedInstances[selectedTabData.event?.id]?.[
-            selectedInstanceData?.id
-          ]?.location ??
           selectedInstanceData?.location ??
           ""
-        }
-        onChange={(event) =>
-          handleInstanceChange(event.target.name, event.target.value)
         }
         sx={{ width: { xs: "100%", sm: "400px" } }}
       />
@@ -66,13 +52,7 @@ const InstanceDetails = React.memo(
           handleInstanceChange("end", newValue?.toISOString())
         }
       />
-      <FileSelector
-        selectedFiles={state.selectedFiles[selectedTabData.event?.id] || []}
-        onFileChange={handleFileChange}
-        eventId={selectedTabData.event?.id}
-        instanceId={selectedInstanceData?.id}
-        instanceFiles={state.instanceFiles}
-      />
+
     </Box>
   )
 );

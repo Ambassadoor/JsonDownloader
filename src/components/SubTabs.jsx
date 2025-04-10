@@ -10,12 +10,12 @@ function a11yProps(index) {
   };
 }
 
-const SubTabs = React.memo(({ instances, selectedSubTab, handleSubTabClick }) => (
+const SubTabs = React.memo(({ instances, focusedSubTabIndex, handleSubTabClick }) => (
   <Tabs
     variant="scrollable"
     scrollButtons="auto"
     allowScrollButtonsMobile
-    value={selectedSubTab}
+    value={focusedSubTabIndex}
     onChange={handleSubTabClick}
     aria-label="subtabs"
     sx={{
