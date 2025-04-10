@@ -39,11 +39,11 @@ const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrow
         onBrowserSelect={handleBrowserSelect}
       />
     </Box>
-    {browserFiles[focusedTab]?.length > 0 && (
+    {browserFiles[events[focusedTab].event.id]?.length > 0 && (
         <Box sx={{ p: 2 }}>
           <h3>Selected Files:</h3>
           <ul>
-            {browserFiles[focusedTab].map(
+            {browserFiles[events[focusedTab].event.id].map(
               (file, index) => (
                 <li key={index}>{file.name}</li>
               ),
