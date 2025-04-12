@@ -5,14 +5,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from 'dayjs';
 
 export default function BasicTimePicker({ label, name, value, timezone, handleChange, id }) {
-    const [timeValue, setTimeValue] = React.useState(value ? dayjs(value) : dayjs()); // Default to current time if value is not provided
-
-    const handleTimeChange = (newTime) => {
-      console.log(newTime)
-      setTimeValue(newTime);
-      handleChange(newTime, id, name); // Call the parent function with the new time value
-    }
-
+   
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <TimePicker 

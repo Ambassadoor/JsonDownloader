@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
-import eventSamples from "../../downloads/eventSample.json"; // Import the sample JSON file
+import eventSamples from "../../testingFiles/eventSamples.json"; // Import the sample JSON file
 import BasicTabs from "./Tabs";
 
 const CalendarConfirmation = () => {

@@ -12,8 +12,8 @@ export default function BasicTabs({ events }) {
   const [updatedInstances, setUpdatedInstances] = React.useState({});
 
   const handleTabClick = (event, value) => {
-    console.log(value)
     setFocusedTabIndex(value);
+    setFocusedSubTabIndex(0);
   }
 
   const handleSubTabClick = (event, value) => {
@@ -54,10 +54,10 @@ export default function BasicTabs({ events }) {
       />
       <Box sx={{ flexGrow: 1, p: 2 }}>
         <h2>Dates</h2>
-        {events[focusedSubTabIndex].instances?.length > 0 ? (
+        {events[focusedTabIndex].instances?.length > 0 ? (
           <>
             <SubTabs
-              instances={events[focusedSubTabIndex].instances}
+              instances={events[focusedTabIndex].instances}
               focusedSubTabIndex={focusedSubTabIndex}
               handleSubTabClick={handleSubTabClick}
             />
