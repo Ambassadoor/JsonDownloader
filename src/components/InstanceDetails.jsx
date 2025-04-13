@@ -11,9 +11,10 @@ const InstanceDetails = React.memo(
   ({
     selectedInstanceData,
     focusedTabIndex,
-    browserFiles,
     handleChange,
     updatedInstances,
+    focusedId,
+    focusedFiles
   }) => (
     <Box sx={{ mt: 2, display: "flex", flexDirection: "column", gap: 2 }}>
       <h3>Instance Details</h3>
@@ -56,7 +57,12 @@ const InstanceDetails = React.memo(
         handleChange={handleChange}
         id={selectedInstanceData?.id}
       />
-
+      <FileSelector
+        focusedFiles={focusedFiles}
+        onFileChange={handleChange}
+        focusedId={focusedId}
+        updatedInstances={updatedInstances}
+      />
     </Box>
   )
 );

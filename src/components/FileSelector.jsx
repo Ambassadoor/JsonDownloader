@@ -2,11 +2,10 @@ import * as React from "react";
 import { Box, Select, MenuItem, Checkbox, ListItemText } from "@mui/material";
 
 export default function FileSelector({
-  selectedFiles,
+  focusedFiles,
   onFileChange,
-  eventId,
-  instanceId,
-  instanceFiles,
+  focusedId,
+  updatedInstances
 }) {
   const handleChange = (event) => {
     const {
@@ -14,35 +13,26 @@ export default function FileSelector({
     } = event;
 
     // Update the instanceFiles state for the specific eventId and instanceId
-    const updatedFiles = typeof value === "string" ? value.split(",") : value;
-
-    const updatedInstanceFiles = {
-      ...instanceFiles,
-      [eventId]: {
-        ...(instanceFiles[eventId] || {}),
-        [instanceId]: updatedFiles, // Update files for the specific instance
-      },
-    };
-
+    const updatedFiles = typeof value === "string" ? value.split(",") : value
     // Propagate the changes to the parent component
-    onFileChange(updatedInstanceFiles);
+    onFileChange(updatedFiles, focusedId, "attachments");
   };
 
   return (
     <Box>
       <Select
         multiple
-        value={instanceFiles[eventId]?.[instanceId] || []} // Use files for the specific event and instance
+        value={updatedInstances[focusedId]?.attachments|| []} // Use files for the specific event and instance
         onChange={handleChange}
         renderValue={(selected) =>
           selected.map((file) => file.name).join(", ") // Display selected file names
         }
       >
-        {selectedFiles.map((file) => (
+        {focusedFiles.map((file) => (
           <MenuItem key={file.name} value={file}>
             <Checkbox
               checked={
-                instanceFiles[eventId]?.[instanceId]?.some(
+                updatedInstances[focusedId]?.attachments?.some(
                   (selectedFile) => selectedFile.name === file.name
                 ) || false
               }

@@ -11,6 +11,13 @@ export default function BasicTabs({ events }) {
   const [browserFiles, setBrowserFiles ] = React.useState({});
   const [updatedInstances, setUpdatedInstances] = React.useState({});
 
+  const focusedId = events[focusedTabIndex].instances[focusedSubTabIndex]?.id
+  const focusedFiles = browserFiles[events[focusedTabIndex].event.id] ?? []
+
+  React.useEffect(() => {
+    console.log(focusedId, focusedFiles)
+  }, [focusedId, focusedFiles])
+
   const handleTabClick = (event, value) => {
     setFocusedTabIndex(value);
     setFocusedSubTabIndex(0);
@@ -65,9 +72,10 @@ export default function BasicTabs({ events }) {
               <InstanceDetails
                 selectedInstanceData={events[focusedTabIndex].instances[focusedSubTabIndex]}
                 focusedTabIndex={focusedSubTabIndex}
-                browserFiles={browserFiles}
                 handleChange={handleInstanceDetailChange}
                 updatedInstances={updatedInstances}
+                focusedId={focusedId}
+                focusedFiles={focusedFiles}
               />
             )}
           </>
