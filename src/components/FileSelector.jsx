@@ -8,14 +8,27 @@ export default function FileSelector({
   updatedInstances
 }) {
   const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
 
-    // Update the instanceFiles state for the specific eventId and instanceId
-    const updatedFiles = typeof value === "string" ? value.split(",") : value
-    // Propagate the changes to the parent component
-    onFileChange(updatedFiles, focusedId, "attachments");
+    // Compares the existing number of attachments to the new number of attachments
+    const currentAttachmentLength = updatedInstances[focusedId]?.attachments?.length || 0
+    const newAttachmentLength = event.target.value.length
+
+    const checked = newAttachmentLength > currentAttachmentLength
+
+
+    // If the number of attachments has increased, find the new files and call onFileChange with them
+    if (checked) {
+      const addedFiles = event.target.value.filter(
+        (file) => !updatedInstances[focusedId]?.attachments?.includes(file)
+      ) || []
+      onFileChange(addedFiles, focusedId, "attachments", checked);
+      // If the number of attachments has decreased, find the removed files and call onFileChange with them
+    } else { 
+      const removedFiles = updatedInstances[focusedId]?.attachments?.filter(
+        (file) => !event.target.value.includes(file)
+      ) || [] 
+      onFileChange(removedFiles, focusedId, "attachments", checked);
+    }
   };
 
   return (

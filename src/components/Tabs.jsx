@@ -14,9 +14,6 @@ export default function BasicTabs({ events }) {
   const focusedId = events[focusedTabIndex].instances[focusedSubTabIndex]?.id
   const focusedFiles = browserFiles[events[focusedTabIndex].event.id] ?? []
 
-  React.useEffect(() => {
-    console.log(focusedId, focusedFiles)
-  }, [focusedId, focusedFiles])
 
   const handleTabClick = (event, value) => {
     setFocusedTabIndex(value);
@@ -36,19 +33,41 @@ export default function BasicTabs({ events }) {
 
   }
 
-  const handleInstanceDetailChange = (value, instanceId, property) => {
+  const handleInstanceDetailChange = (value, instanceId, property, checked) => {
+    if (property !== "attachments") {
     setUpdatedInstances(prev => ({
       ...prev,
       [instanceId]: {
         ...(prev[instanceId] ?? {}),
         [property]: value,
       }
-    }));     
+    }));   }
+    else if (checked) {
+      for (let attachment of value) {
+        if (!updatedInstances[instanceId]?.attachments?.some(file => file.id === attachment.id)) {
+      setUpdatedInstances(prev => ({
+        ...prev,
+        [instanceId]: {
+          ...(prev[instanceId] ?? {}),
+          attachments: [...(prev[instanceId]?.attachments || []), attachment],
+        }
+      }))};}
+    } else {
+      for (let attachment of value) {
+      setUpdatedInstances(prev => ({
+        ...prev,
+        [instanceId]: {
+          ...(prev[instanceId] ?? {}),
+          attachments: prev[instanceId]?.attachments.filter(file => file.id !== attachment.id) || [],
+        }
+      }));}
+    }
   }
 
   React.useEffect(() => {
-    console.log(updatedInstances)
-  }, [updatedInstances])
+    console.log("Updated Instances:", updatedInstances);
+  }, [updatedInstances]);
+
 
   return (
     <Box sx={{ display: "flex", height: "100%" }}>
@@ -58,6 +77,8 @@ export default function BasicTabs({ events }) {
         handleTabClick={handleTabClick}
         handleBrowserSelect={handleBrowserSelect}
         browserFiles={browserFiles}
+        handleChange={handleInstanceDetailChange}
+        focusedFiles={focusedFiles}
       />
       <Box sx={{ flexGrow: 1, p: 2 }}>
         <h2>Dates</h2>

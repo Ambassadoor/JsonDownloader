@@ -3,6 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import FileBrowser from "./FileBrowser";
+import { Checkbox, Stack } from "@mui/material";
 
 function a11yProps(index) {
   return {
@@ -11,7 +12,9 @@ function a11yProps(index) {
   };
 }
 
-const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrowserSelect, browserFiles }) => (
+const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrowserSelect, handleChange, focusedFiles }) => 
+  
+  (
   <Box
     sx={{
       width: "20%",
@@ -39,18 +42,35 @@ const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrow
         onBrowserSelect={handleBrowserSelect}
       />
     </Box>
-    {browserFiles[events[focusedTab].event.id]?.length > 0 && (
-        <Box sx={{ p: 2 }}>
-          <h3>Selected Files:</h3>
-          <ul>
-            {browserFiles[events[focusedTab].event.id].map(
-              (file, index) => (
-                <li key={index}>{file.name}</li>
-              ),
-            )}
-          </ul>
-        </Box>
-      )}
+    {focusedFiles?.length > 0 && (
+  <Box sx={{ p: 2, border: "1px solid #ccc", borderRadius: "8px" }}>
+    <Stack spacing={2}>
+      {/* Header Row */}
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <h3>Selected Files</h3>
+        <h3>Attach to all?</h3>
+      </Stack>
+
+      {/* File Rows */}
+      {focusedFiles.map((file, index) => (
+        <Stack
+          key={index}
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ borderBottom: "1px solid #eee", pb: 1, mb: 1 }}
+        >
+          <p>{file.name}</p>
+          <Checkbox
+            value={file}
+            onChange={(e) => {for (let instance of events[focusedTab].instances) {
+              handleChange([file], instance.id, "attachments", e.target.checked);
+            }}} />
+        </Stack>
+      ))}
+    </Stack>
+  </Box>
+)}
   </Box>
 ));
 
