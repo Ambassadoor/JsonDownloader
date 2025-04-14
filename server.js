@@ -8,11 +8,13 @@ const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const webpackConfig = require("./webpack.config.js");
-const { google } = require("googleapis");
+const { google, Auth } = require("googleapis");
 const oAuth2Client = require("./src/oauth2client"); // Import the OAuth2 client
 const getAuthUrl = require("./src/auth"); // Import the function to get the auth URL
 const { getSemesters } = require("./js/SemesterSelector.js");
 const { runPuppeteer } = require("./js/downloader.js")
+const buildCalendarBatchPatch = require("./src/hooks/useBatchFormatter.js")
+const axios = require("axios");
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -241,6 +243,25 @@ app.get("/api/semesters", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch term menu"})
+  }
+});
+
+app.post("/api/update", async (req, res) => {
+  try {
+    const { body, boundary } = req.body;
+
+    const url = "https://www.googleapis.com/batch/calendar/v3";
+    const headers = {
+      "Content-Type": `multipart/mixed; boundary="${boundary}"`,
+      Authorization: `Bearer ${oAuth2Client.credentials.access_token}`,
+    };
+    const response = await axios.post(url, body, { headers });
+    res.status(200).json({ message: "Calendar updated successfully", data: response.data });
+    
+  }
+catch (error) {
+  console.error("Error updating calendar:", error.response?.data || error.message);
+  res.status(500).json({ error: "Failed to update calendar" });
   }
 });
 

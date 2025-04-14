@@ -4,7 +4,7 @@ import PrimaryTabs from "./PrimaryTabs";
 import SubTabs from "./SubTabs";
 import InstanceDetails from "./InstanceDetails";
 
-export default function BasicTabs({ events }) {
+export default function BasicTabs({ events, handleChangeLog }) {
 
   const [focusedTabIndex, setFocusedTabIndex] = React.useState(0);
   const [focusedSubTabIndex, setFocusedSubTabIndex] = React.useState(0);  
@@ -32,6 +32,10 @@ export default function BasicTabs({ events }) {
     setBrowserFiles({ ...browserFiles, [eventId]: dedupedFiles });
 
   }
+
+  React.useEffect(() => {
+    handleChangeLog(updatedInstances);
+  }, [updatedInstances]);
 
   const handleInstanceDetailChange = (value, instanceId, property, checked) => {
     if (property !== "attachments") {
@@ -63,10 +67,6 @@ export default function BasicTabs({ events }) {
       }));}
     }
   }
-
-  React.useEffect(() => {
-    console.log("Updated Instances:", updatedInstances);
-  }, [updatedInstances]);
 
 
   return (
