@@ -3,6 +3,8 @@
 const oAuth2Client = require("./oauth2client");
 
 const SCOPES = [
+  "https://www.googleapis.com/auth/userinfo.email",
+  "https://www.googleapis.com/auth/userinfo.profile",
   "https://www.googleapis.com/auth/calendar",
   "https://www.googleapis.com/auth/drive",
   "https://www.googleapis.com/auth/drive.file",
@@ -13,6 +15,7 @@ const SCOPES = [
 const getAuthUrl = () => {
   return oAuth2Client.generateAuthUrl({
     access_type: "offline",
+    prompt: "consent",
     scope: SCOPES,
   });
 };

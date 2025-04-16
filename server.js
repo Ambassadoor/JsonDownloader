@@ -14,6 +14,8 @@ const { getSemesters } = require("./js/SemesterSelector.js");
 const { runPuppeteer } = require("./js/downloader.js")
 const axios = require("axios");
 const { scrapeTable } = require("./js/scrapeTable.js");
+const { saveTokens, getTokens } = require("./src/tokenManager.js");
+const { validateAndRefreshToken } = require("./src/validateToken.js");
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -69,16 +71,10 @@ app.get("/api/check-download", async (req, res) => {
 // Endpoint to check for token and redirect to OAuth2 flow if missing
 app.get("/api/check-token", async (req, res) => {
   try {
-    // Check if the token file exists
-    if (!fs.existsSync(TOKEN_PATH)) {
-      // If the token file is missing, generate the auth URL
-      const authUrl = getAuthUrl();
-      return res.status(200).json({ authUrl });
-    }
+    const userId = req.headers["x-user-id"]; // Replace with a unique identifier for the user
+    const tokens = await getTokens(userId);
 
-    // If the token file exists, validate the token
-    const token = JSON.parse(fs.readFileSync(TOKEN_PATH, "utf-8"));
-    oAuth2Client.setCredentials(token);
+    oAuth2Client.setCredentials(tokens);
 
     // Check if the token is still valid
     await oAuth2Client.getAccessToken(); // Throws an error if invalid
@@ -88,8 +84,6 @@ app.get("/api/check-token", async (req, res) => {
     res.status(200).json({ authUrl: getAuthUrl() }); // Redirect to OAuth2 flow if invalid
   }
 });
-
-
 // server.js
 
 app.get("/oauth2callback", async (req, res) => {
@@ -100,13 +94,27 @@ app.get("/oauth2callback", async (req, res) => {
       const { tokens } = await oAuth2Client.getToken(code);
       oAuth2Client.setCredentials(tokens);
 
-      fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens));
+      // Fetch user info from Google
+      const oauth2 = google.oauth2({ version: "v2", auth: oAuth2Client });
+      const userInfo = await oauth2.userinfo.get();
+      const userId = userInfo.data.email;
 
-      // Redirect to your frontend or another page after successful authentication
-      res.redirect("http://localhost:3000"); // Adjust this redirect URL as needed
+      // Save tokens to the database
+      try {
+        await saveTokens(userId, tokens);
+        res.cookie("userId", userId, { httpOnly: false });
+        res.redirect("http://localhost:3000");
+      } catch (error) {
+        if (error.message.includes("Missing refresh_token")) {
+          console.warn("Redirecting user to reauthorize the app.");
+          res.redirect("/auth"); // Redirect to reauthorize
+        } else {
+          throw error;
+        }
+      }
     } catch (error) {
-      console.error("Error retrieving access token", error);
-      res.status(500).send("Authentication failed");
+      console.error("Error retrieving access token or user info:", error);
+      res.status(500).send("Authentication failed. Please try again.");
     }
   } else {
     res.status(400).send("No authorization code provided");
@@ -119,25 +127,17 @@ app.get("/auth", (req, res) => {
   res.redirect(authUrl);
 });
 
-app.post("/api/create-events", async (req, res) => {
+app.post("/api/create-events", validateAndRefreshToken, async (req, res) => {
   try {
-    loadCredentials(); // Load OAuth credentials
     const eventObjects = req.body.events;
 
     const cleanedEvents = eventObjects.map((event) => {
-      // Clean recurrence rules by removing empty fields
-      const cleanedRecurrence = event.recurrence
-        .filter((rule) => rule !== ""); // Filter out empty rules
-
-      return {
-        ...event,
-        recurrence: cleanedRecurrence, // Update event with cleaned recurrence rules
-      };
+      const cleanedRecurrence = event.recurrence.filter((rule) => rule !== "");
+      return { ...event, recurrence: cleanedRecurrence };
     });
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-    // Create each event and retrieve instances
     const eventResponses = await Promise.all(
       cleanedEvents.map(async (event) => {
         const createdEvent = await calendar.events.insert({
@@ -145,38 +145,27 @@ app.post("/api/create-events", async (req, res) => {
           resource: event,
         });
 
-        // Retrieve instances of the created event
         const instances = await calendar.events.instances({
           calendarId: "primary",
-          eventId: createdEvent.data.id, // Use the event ID from the created event
+          eventId: createdEvent.data.id,
         });
 
-        return {
-          event: createdEvent.data,
-          instances: instances.data.items, // Capture the instances
-        };
-      }),
+        return { event: createdEvent.data, instances: instances.data.items };
+      })
     );
 
-    // Send back all created events and their instances
-    res.status(200).json({
-      events: eventResponses, // Send back the entire array of events and instances
-    });
+    res.status(200).json({ events: eventResponses });
   } catch (error) {
     console.error("Error creating events:", error);
     res.status(500).json({ error: "Failed to create events" });
   }
 });
 
-app.post("/api/delete-events", async (req, res) => {
+app.post("/api/delete-events", validateAndRefreshToken, async (req, res) => {
   try {
-    loadCredentials(); // Load OAuth credentials
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-    // Clear the primary calendar
-    await calendar.calendars.clear({
-      calendarId: "primary",
-    });
+    await calendar.calendars.clear({ calendarId: "primary" });
 
     res.status(200).json({ message: "Calendar cleared successfully" });
   } catch (error) {

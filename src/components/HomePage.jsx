@@ -1,10 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
 import { Box } from "@mui/material";
 import CourseTransferList from "./CourseTransferList";
 import SemesterSelectorUI from "./SemesterSelectorUI";
 import { AppStateContext } from "../AppStateContext";
 import "../styles/styles.css";
+import Cookies from "js-cookie";
 
 const HomePage = () => {
   const { setOriginalData } = useContext(AppStateContext);
@@ -12,7 +13,10 @@ const HomePage = () => {
   useEffect(() => {
     const checkToken = async () => {
       try {
-        const response = await axios.get("/api/check-token");
+        const userId = Cookies.get("userId");
+        const response = await axios.get("/api/check-token", {
+          headers: { "x-user-id": userId },
+        });
         if (response.data.authUrl) {
           window.location.href = response.data.authUrl;
         }
