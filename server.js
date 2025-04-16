@@ -2,19 +2,18 @@
 const express = require("express");
 const fs = require("fs");
 const path = require("path");
-const { exec } = require("child_process");
 const cors = require("cors");
 const webpack = require("webpack");
 const webpackDevMiddleware = require("webpack-dev-middleware");
 const webpackHotMiddleware = require("webpack-hot-middleware");
 const webpackConfig = require("./webpack.config.js");
-const { google, Auth } = require("googleapis");
+const { google } = require("googleapis");
 const oAuth2Client = require("./src/oauth2client"); // Import the OAuth2 client
 const getAuthUrl = require("./src/auth"); // Import the function to get the auth URL
 const { getSemesters } = require("./js/SemesterSelector.js");
 const { runPuppeteer } = require("./js/downloader.js")
-const buildCalendarBatchPatch = require("./src/hooks/useBatchFormatter.js")
 const axios = require("axios");
+const { scrapeTable } = require("./js/scrapeTable.js");
 
 const app = express();
 const compiler = webpack(webpackConfig);
@@ -38,21 +37,32 @@ app.use(express.static("public"));
 app.use("/downloads", express.static(path.join(__dirname, "downloads")));
 
 app.get("/api/check-download", async (req, res) => {
+  const selectedUrl = req.query.url;
+
+  if (!selectedUrl) {
+    return res.status(400).json({ error: "Missing selected semester URL" });
+  }
 
   try {
-    // Get the selected URL from the query parameters
-    const selectedUrl = req.query.url;
-    if (!selectedUrl) {
-      return res.status(400).json({ error: "Missing selected semester URL" });
-    }
+    // Attempt to scrape the table first
+    console.log("Attempting to scrape table for URL:", selectedUrl);
+    const data = await scrapeTable(selectedUrl);
+    return res.status(200).json({ status: "success", method: "scrapeTable", data: data });
+  } catch (scrapeError) {
+    console.error("Error in scrapeTable:", scrapeError);
+    console.log("Falling back to Puppeteer for URL:", selectedUrl);
 
-    // Run the downloader function directly
-    await runPuppeteer(selectedUrl);
-    
-    res.status(200).json({ status: "updated" });
-  } catch (error) {
-    console.error("Error in /api/check-download:", error);
-    res.status(500).json({ error: "Server error" });
+    try {
+      // Fallback to Puppeteer if scrapeTable fails
+      await runPuppeteer(selectedUrl);
+      return res.status(200).json({ status: "success", method: "runPuppeteer" });
+    } catch (puppeteerError) {
+      console.error("Error in runPuppeteer:", puppeteerError);
+      return res.status(500).json({
+        error: "Failed to retrieve data using both methods",
+        details: puppeteerError.message,
+      });
+    }
   }
 });
 
@@ -172,56 +182,6 @@ app.post("/api/delete-events", async (req, res) => {
   } catch (error) {
     console.error("Error clearing calendar:", error);
     res.status(500).json({ error: "Failed to clear calendar" });
-  }
-});
-
-app.get("/api/drive-files", async (req, res) => {
-  try {
-    loadCredentials(); // Load OAuth credentials
-    const drive = google.drive({ version: "v3", auth: oAuth2Client });
-
-    const response = await drive.files.list({
-      pageSize: 20, // Adjust the page size as needed
-      fields: "nextPageToken, files(id, name, mimeType, webViewLink, iconLink)",
-    });
-
-    res.status(200).json({ files: response.data.files });
-  } catch (error) {
-    console.error("Error fetching Google Drive files:", error);
-    res.status(500).json({ error: "Failed to fetch files" });
-  }
-});
-
-app.post("/api/attach-files", async (req, res) => {
-  try {
-    loadCredentials(); // Load OAuth credentials
-    const { instanceId, files } = req.body;
-    console.log(files);
-
-    const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
-
-    // Transform the selected files into the required attachment format
-    const attachments = files.map((file) => ({
-      fileUrl: file.url, // Use the 'url' property for the Google Drive file link
-      title: file.name, // Use the 'name' property for the file title
-      mimeType: file.mimeType, // Use the 'mimeType' property for the file MIME type
-    }));
-    console.log(attachments);
-
-    // Patch the event instance to include the attachments
-    await calendar.events.patch({
-      calendarId: "primary",
-      eventId: instanceId, // Use the event instance ID
-      supportsAttachments: true,
-      resource: {
-        attachments,
-      },
-    });
-
-    res.status(200).json({ message: "Files attached successfully" });
-  } catch (error) {
-    console.error("Error attaching files:", error);
-    res.status(500).json({ error: "Failed to attach files" });
   }
 });
 

@@ -1,12 +1,13 @@
 // scrapeTable.js
 const puppeteer = require('puppeteer');
 
-async function scrapeTable() {
+// Retrieves table from user selected page
+async function scrapeTable(targetUrl) {
   const browser = await puppeteer.launch({ headless: true });
   const page = await browser.newPage();
 
   // Go to the course schedule page
-  await page.goto('https://courseschedule.lipscomb.edu/ScheduleP2025SUMMER.html', {
+  await page.goto(targetUrl, {
     waitUntil: 'networkidle2',
   });
 
@@ -38,9 +39,4 @@ async function scrapeTable() {
   return formatted;
 }
 
-// Run the function or export for use in an API
-scrapeTable().then(data => {
-  console.log(JSON.stringify(data, null, 2));
-}).catch(err => {
-  console.error('Error:', err);
-});
+module.exports = { scrapeTable };
