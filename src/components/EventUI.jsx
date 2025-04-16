@@ -21,6 +21,7 @@ import { getTimezones } from "../../server/utils/dateUtils";
 import useEventFormatter from "../hooks/useEventFormatter";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Cookies from "js-cookie";
 
 const dayButtonLabels = ["SUN", "MON", "TUES", "WED", "THURS", "FRI", "SAT"];
 const timeZones = getTimezones();
@@ -77,9 +78,11 @@ const EventUI = () => {
 
     try {
       // Send the formatted events directly in the POST request
-      const response = await axios.post("/api/create-events", {
-        events: formattedEvents,
-      });
+      const response = await axios.post(
+        "/api/create-events", 
+        {events: formattedEvents},
+        {headers: { "x-user-id": Cookies.get("userId") }},
+      );
       console.log("Events created successfully:", response.data.events);
       setEventData(response.data.events);
     } catch (error) {

@@ -16,16 +16,10 @@ const axios = require("axios");
 const { scrapeTable } = require("./js/scrapeTable.js");
 const { saveTokens, getTokens } = require("./src/tokenManager.js");
 const { validateAndRefreshToken } = require("./src/validateToken.js");
+require("dotenv").config();
 
 const app = express();
 const compiler = webpack(webpackConfig);
-const TOKEN_PATH = path.join(__dirname, "server", "config", "tokens.json");
-
-const loadCredentials = () => {
-  const tokenData = fs.readFileSync(TOKEN_PATH, "utf8");
-  const tokens = JSON.parse(tokenData);
-  oAuth2Client.setCredentials(tokens);
-};
 
 app.use(express.json());
 app.use(cors());
@@ -91,7 +85,7 @@ app.get("/oauth2callback", async (req, res) => {
 
   if (code) {
     try {
-      const { tokens } = await oAuth2Client.getToken(code);
+      const { tokens } = oAuth2Client.getToken(code);
       oAuth2Client.setCredentials(tokens);
 
       // Fetch user info from Google
@@ -174,17 +168,6 @@ app.post("/api/delete-events", validateAndRefreshToken, async (req, res) => {
   }
 });
 
-app.get("/api/get-token", (req, res) => {
-  try {
-    const tokenData = fs.readFileSync(TOKEN_PATH, "utf8");
-    const tokens = JSON.parse(tokenData);
-    res.status(200).json({ access_token: tokens.access_token });
-  } catch (error) {
-    console.error("Error reading token:", error);
-    res.status(500).json({ error: "Failed to retrieve token" });
-  }
-});
-
 app.get("/api/semesters", async (req, res) => {
   try {
     const termMenu = await getSemesters();
@@ -195,7 +178,7 @@ app.get("/api/semesters", async (req, res) => {
   }
 });
 
-app.post("/api/update", async (req, res) => {
+app.post("/api/update", validateAndRefreshToken, async (req, res) => {
   try {
     const { body, boundary } = req.body;
 

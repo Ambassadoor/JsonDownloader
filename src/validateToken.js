@@ -1,4 +1,6 @@
 const { getTokens, refreshTokens } = require("./tokenManager");
+const oAuth2Client = require("./oauth2client");
+const getAuthUrl = require("./auth"); // Import the function to get the auth URL
 
 const validateAndRefreshToken = async (req, res, next) => {
     try {

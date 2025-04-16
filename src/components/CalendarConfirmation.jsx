@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import BasicTabs from "./Tabs";
 import { useLocation } from "react-router-dom";
 import buildCalendarBatchPatch from "../hooks/useBatchFormatter";
+import Cookies from "js-cookie";
 
 const CalendarConfirmation = () => {
 
@@ -17,8 +18,13 @@ const CalendarConfirmation = () => {
 
 
   const handleReset = async () => {
+    const userId = Cookies.get("userId");
     try {
-      const response = await axios.post("/api/delete-events");
+      const response = await axios.post(
+        "/api/delete-events",
+         {},
+        { headers: { "x-user-id": userId } },
+      );
       console.log(response.data.message);
     } catch (error) {
       console.error("Error resetting calendar:", error);
@@ -27,8 +33,13 @@ const CalendarConfirmation = () => {
 
   const handleSubmit = async () => {
     const { body, boundary } = buildCalendarBatchPatch(changes);
+    const userId = Cookies.get("userId");
     try {
-      const response = await axios.post("/api/update", { body, boundary });
+      const response = await axios.post(
+        "/api/update",
+         { body, boundary},
+         { headers: { "x-user-id": userId } }
+        );
       console.log(response.data.message);
     } catch (error) {
       console.error("Error submitting changes:", error);

@@ -6,3 +6,4 @@ js/exchange.js
 js/generateAuth.js
 deprecated/
 downloads/courses.json
+.env

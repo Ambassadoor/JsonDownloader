@@ -1,31 +1,21 @@
-import React, { useEffect, useState, } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import Cookies from "js-cookie";
+
 
 const FileBrowser = React.memo(({ events, focusedTab, onBrowserSelect }) => {
-  const [oauthToken, setOauthToken] = useState("");
+  const oauthToken = Cookies.get("oauthToken");
 
   useEffect(() => {
     // Load the Picker API after the component mounts
     window.gapi.load("picker", { callback: onPickerApiLoad });
-
-    // Fetch the OAuth token from the server
-    const fetchToken = async () => {
-      try {
-        const response = await axios.get("/api/get-token");
-        setOauthToken(response.data.access_token);
-      } catch (error) {
-        console.error("Error fetching token:", error);
-      }
-    };
-
-    fetchToken();
-  }, []);
+  }, [oauthToken]);
 
   const onPickerApiLoad = () => {
     if (oauthToken) {
       createPicker();
     }
   };
+  const developerKey = process.env.REACT_APP_GOOGLE_DEVELOPER_KEY; 
 
   const createPicker = () => {
     if (oauthToken) {
@@ -33,7 +23,7 @@ const FileBrowser = React.memo(({ events, focusedTab, onBrowserSelect }) => {
         .addView(window.google.picker.ViewId.DOCS)
         .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
         .setOAuthToken(oauthToken)
-        .setDeveloperKey("AIzaSyCZ_NpeJ9n8UtCwBfu009QoZLbcbyXSKAY") // Replace with your Developer Key
+        .setDeveloperKey(developerKey) // Replace with your Developer Key
         .setCallback((data) => pickerCallback(data, events[focusedTab]?.event?.id))
         .build();
       picker.setVisible(true);
