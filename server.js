@@ -65,8 +65,19 @@ app.get("/api/check-download", async (req, res) => {
 // Endpoint to check for token and redirect to OAuth2 flow if missing
 app.get("/api/check-token", validateAndRefreshToken, async (req, res) => {
   try {
-    const userId = req.headers["x-user-id"]; // Replace with a unique identifier for the user
+    const userId = req.headers["x-user-id"];
+    if (!userId || typeof userId !== "string") {
+      console.warn("Invalid or missing user ID cookie");
+      res.clearCookie("userId");
+      return res.status(200).json({ authUrl: getAuthUrl() }); // Redirect to OAuth2 flow
+    }
+
     const tokens = await getTokens(userId);
+    if (!tokens) {
+      console.warn(`No tokens found for user ID: ${userId}`);
+      res.clearCookie("userId");
+      return res.status(200).json({ authUrl: getAuthUrl() }); // Redirect to OAuth2 flow
+    }
 
     oAuth2Client.setCredentials(tokens);
 
@@ -74,8 +85,13 @@ app.get("/api/check-token", validateAndRefreshToken, async (req, res) => {
     await oAuth2Client.getAccessToken(); // Throws an error if invalid
     res.status(200).json({ valid: true });
   } catch (error) {
-    console.error("Error checking token:", error);
-    res.status(200).json({ authUrl: getAuthUrl() }); // Redirect to OAuth2 flow if invalid
+    if (error.message === "Database connection failed") {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Internal server error. Please try again later." });
+    } else {
+      console.error("Error checking token:", error);
+      res.status(200).json({ authUrl: getAuthUrl() }); // Redirect to OAuth2 flow if invalid
+    }
   }
 });
 // server.js
@@ -86,27 +102,25 @@ app.get("/oauth2callback", async (req, res) => {
   if (code) {
     try {
       const { tokens } = await oAuth2Client.getToken(code);
-      console.log("Received tokens:", tokens); // Debugging log
+      console.log("Received tokens:", tokens);
       oAuth2Client.setCredentials(tokens);
+
+      if (!tokens.refresh_token) {
+        console.warn("Missing refresh_token. Redirecting to reauthorize.");
+        return res.redirect("/auth");
+      }
 
       // Fetch user info from Google
       const oauth2 = google.oauth2({ version: "v2", auth: oAuth2Client });
       const userInfo = await oauth2.userinfo.get();
-      const userId = userInfo.data.email;
+      const userId = userInfo.data.id;
+      const provider = "google";
+      const email = userInfo.data.email;
 
       // Save tokens to the database
-      try {
-        await saveTokens(userId, tokens);
-        res.cookie("userId", userId, { httpOnly: false });
-        res.redirect("http://localhost:3000");
-      } catch (error) {
-        if (error.message.includes("Missing refresh_token")) {
-          console.warn("Redirecting user to reauthorize the app.");
-          res.redirect("/auth"); // Redirect to reauthorize
-        } else {
-          throw error;
-        }
-      }
+      await saveTokens(userId, provider, email, tokens);
+      res.cookie("userId", userId, { httpOnly: false });
+      res.redirect("http://localhost:3000");
     } catch (error) {
       console.error("Error retrieving access token or user info:", error);
       res.status(500).send("Authentication failed. Please try again.");
