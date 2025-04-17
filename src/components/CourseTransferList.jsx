@@ -68,6 +68,7 @@ const CourseTransferList = () => {
           <Grid item xs={6} alignContent={"center"}>
             <ConfirmCoursesButton
               handleConfirmCoursesClick={handleConfirmCoursesClick}
+              disabled={subscribedData.length === 0}
             />
           </Grid>
         </Grid>

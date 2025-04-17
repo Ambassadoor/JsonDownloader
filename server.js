@@ -102,7 +102,6 @@ app.get("/oauth2callback", async (req, res) => {
   if (code) {
     try {
       const { tokens } = await oAuth2Client.getToken(code);
-      console.log("Received tokens:", tokens);
       oAuth2Client.setCredentials(tokens);
 
       if (!tokens.refresh_token) {
