@@ -63,7 +63,7 @@ app.get("/api/check-download", async (req, res) => {
 });
 
 // Endpoint to check for token and redirect to OAuth2 flow if missing
-app.get("/api/check-token", async (req, res) => {
+app.get("/api/check-token", validateAndRefreshToken, async (req, res) => {
   try {
     const userId = req.headers["x-user-id"]; // Replace with a unique identifier for the user
     const tokens = await getTokens(userId);
@@ -85,7 +85,8 @@ app.get("/oauth2callback", async (req, res) => {
 
   if (code) {
     try {
-      const { tokens } = oAuth2Client.getToken(code);
+      const { tokens } = await oAuth2Client.getToken(code);
+      console.log("Received tokens:", tokens); // Debugging log
       oAuth2Client.setCredentials(tokens);
 
       // Fetch user info from Google
