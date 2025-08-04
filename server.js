@@ -118,7 +118,7 @@ app.get("/oauth2callback", async (req, res) => {
 
       // Save tokens to the database
       await saveTokens(userId, provider, email, tokens);
-      res.cookie("userId", userId, { httpOnly: false });
+      res.cookie("userId", userId, { httpOnly: false, maxAge: 7 * 24 * 60 * 60 * 1000 }); // 7 days
       res.redirect("http://localhost:3000");
     } catch (error) {
       console.error("Error retrieving access token or user info:", error);
@@ -208,6 +208,27 @@ app.post("/api/update", validateAndRefreshToken, async (req, res) => {
 catch (error) {
   console.error("Error updating calendar:", error.response?.data || error.message);
   res.status(500).json({ error: "Failed to update calendar" });
+  }
+});
+
+
+
+app.get("/api/access-token", validateAndRefreshToken, async (req, res) => {
+  try {
+    const userId = req.headers["x-user-id"];
+    const tokens = await getTokens(userId);
+    
+    if (!tokens) {
+      return res.status(401).json({ error: "No tokens found" });
+    }
+    
+    oAuth2Client.setCredentials(tokens);
+    const { token } = await oAuth2Client.getAccessToken();
+    
+    res.status(200).json({ accessToken: token });
+  } catch (error) {
+    console.error("Error getting access token:", error);
+    res.status(500).json({ error: "Failed to get access token" });
   }
 });
 

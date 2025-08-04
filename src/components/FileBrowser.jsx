@@ -1,9 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import axios from "axios"
 
 
 const FileBrowser = React.memo(({ events, focusedTab, onBrowserSelect }) => {
-  const oauthToken = Cookies.get("oauthToken");
+  const [oauthToken, setOauthToken] = useState(null);
+
+  useEffect(() => {
+    const getAccessToken = async () => {
+      try {
+        const userId = Cookies.get("userId");
+        if (!userId) return;
+
+        const response = await axios.get("/api/access-token", {
+          headers: { "x-user-id": userId },
+        });
+        setOauthToken(response.data.getAccessToken);
+      } catch (error) {
+        console.error("Error getting access token:", error);
+      }
+    };
+
+    getAccessToken();
+  }, []);
 
   useEffect(() => {
     // Load the Picker API after the component mounts
