@@ -1,5 +1,5 @@
 import { rrulestr } from "rrule";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import { Badge, Box } from "@mui/material";
@@ -57,6 +57,12 @@ export default function RecurrenceCalendar({
   const [selectedDate, setSelectedDate] = useState(
     dayjs(formData.startDate.$d),
   );
+
+  useEffect(() => {
+    if (formData.startDate) {
+      setSelectedDate(dayjs(formData.startDate.$d));
+    }
+  }, [currentCourseIndex, formData.startDate])
 
   const fetchRecurringDates = () => {
     setIsLoading(true);

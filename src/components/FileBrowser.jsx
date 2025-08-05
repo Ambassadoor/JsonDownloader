@@ -10,12 +10,14 @@ const FileBrowser = React.memo(({ events, focusedTab, onBrowserSelect }) => {
     const getAccessToken = async () => {
       try {
         const userId = Cookies.get("userId");
+        console.log(userId)
         if (!userId) return;
 
         const response = await axios.get("/api/access-token", {
           headers: { "x-user-id": userId },
         });
-        setOauthToken(response.data.getAccessToken);
+        console.log(response.data)
+        setOauthToken(response.data.accessToken);
       } catch (error) {
         console.error("Error getting access token:", error);
       }
