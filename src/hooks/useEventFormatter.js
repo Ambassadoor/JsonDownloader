@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
+import {RRule, RRuleSet} from "rrule"
 
 dayjs.extend(utc);
 
@@ -21,16 +22,33 @@ const useEventFormatter = (formData) => {
     .utc()
     .format("YYYYMMDDTHHmmss[Z]");
 
+const getNextValidDate = (startDate, byDay) => {
+  const  rule = new RRule({
+    freq: RRule.WEEKLY,
+    dtstart: startDate,
+    byweekday: byDay.map(day => day.slice(0,2)),
+    count: 1
+  })
+
+  return rule.after(startDate, true);
+}
+
+let dtstart = formData.startDate.$d
+
+if (formData.frequency === "WEEKLY") {
+  dtstart = getNextValidDate(dtstart, formData.meetingDays)
+}
+
   const formattedData = {
     summary: formData.summary,
     location: formData.location,
     description: formData.description,
     start: {
-      dateTime: dateTimeFormatter(formData.startDate, formData.startTime),
+      dateTime: dateTimeFormatter(dtstart, formData.startTime),
       timeZone: formData.timeZone,
     },
     end: {
-      dateTime: dateTimeFormatter(formData.startDate, formData.endTime),
+      dateTime: dateTimeFormatter(dtstart, formData.endTime),
       timeZone: formData.timeZone,
     },
     recurrence: [

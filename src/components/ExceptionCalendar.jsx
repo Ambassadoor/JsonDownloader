@@ -1,15 +1,13 @@
 import { rrulestr } from "rrule";
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-import { Badge, Box, Button } from "@mui/material";
+import { Badge, Box } from "@mui/material";
 import {
   DateCalendar,
   DayCalendarSkeleton,
   PickersDay,
 } from "@mui/x-date-pickers";
-import { format } from "date-fns";
 // Add copy of recurring dates for reset functionality
 // Add a undo/redo function by tracking dates as they're submitted
 dayjs.extend(utc);
@@ -63,20 +61,50 @@ export default function RecurrenceCalendar({
   const fetchRecurringDates = () => {
     setIsLoading(true);
     setTimeout(() => {
-      let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss[Z]")};DTSTART=${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss[Z]")}`;
-      //let rruleString = `DTSTART:${dayjs(formData.startDate.$d).format("YYYYMMDDTHHmmss")};FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss")};`;
-      // Simulate calculating recurring dates using rrule (this would be your actual logic)
+      let startDate = dayjs(formData.startDate.$d);
+      
+      // If we have BYDAY specified, adjust start date to first valid occurrence
+      if (formData.frequency === "WEEKLY" && formData.meetingDays?.length > 0) {
+        const dayAbbrToNumber = {
+          'SU': 0, 'MO': 1, 'TU': 2, 'WE': 3,
+          'TH': 4, 'FR': 5, 'SA': 6
+        };
+        
+
+        const meetingDayNumbers = formData.meetingDays.map(day => dayAbbrToNumber[day.slice(0,2).toUpperCase()]);
+        const startDayOfWeek = startDate.day();
+        
+        // Check if start date is already a valid meeting day
+        if (!meetingDayNumbers.includes(startDayOfWeek)) {
+          // Find the next valid meeting day
+          let nextValidDay = null;
+          for (let i = 1; i <= 7; i++) {
+            const checkDay = (startDayOfWeek + i) % 7;
+            if (meetingDayNumbers.includes(checkDay)) {
+              nextValidDay = checkDay;
+              break;
+            }
+          }
+          
+          if (nextValidDay !== null) {
+            const daysToAdd = nextValidDay > startDayOfWeek 
+              ? nextValidDay - startDayOfWeek 
+              : (7 - startDayOfWeek) + nextValidDay;
+            startDate = startDate.add(daysToAdd, 'day');
+          }
+        }
+      }
+
+      let rruleString = `FREQ=${formData.frequency};UNTIL=${dayjs(formData.endDate.$d).format("YYYYMMDDTHHmmss[Z]")};DTSTART=${startDate.format("YYYYMMDDTHHmmss[Z]")}`;
+
       if (formData.frequency === "WEEKLY") {
         rruleString += `;BYDAY=${formData.meetingDays
           .map((day) => day.slice(0, 2))
           .join(",")}`;
       }
-
+      console.log(formData.meetingDays)
       const rule = rrulestr(rruleString);
-
       const occurrences = rule.all();
-
-      // Convert dates to dayjs objects
       const dates = occurrences.map((date) => dayjs(date).format("YYYYMMDD"));
       setRruleDates(dates);
       setIsLoading(false);
