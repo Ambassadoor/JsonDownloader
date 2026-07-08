@@ -18,10 +18,169 @@ const { saveTokens, getTokens } = require("./src/tokenManager.js");
 const { validateAndRefreshToken } = require("./src/validateToken.js");
 require("dotenv").config();
 
+// Runs `iterator` over `items` with at most `limit` calls in flight at once
+async function mapWithConcurrency(items, limit, iterator) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex++;
+      results[currentIndex] = await iterator(items[currentIndex], currentIndex);
+    }
+  }
+
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
+}
+
+// A 200 from Google's batch endpoint only means the outer request was accepted -
+// each PATCH inside it has its own embedded HTTP status that must be checked
+// individually to know whether that specific event instance actually updated.
+function parseBatchResponse(response) {
+  const contentType = response.headers["content-type"] || "";
+  const boundaryMatch = contentType.match(/boundary=(?:"([^"]+)"|([^;]+))/);
+  const boundary = boundaryMatch ? boundaryMatch[1] || boundaryMatch[2] : null;
+
+  if (!boundary || typeof response.data !== "string") {
+    return { succeeded: [], failed: [] };
+  }
+
+  const parts = response.data
+    .split(`--${boundary}`)
+    .map((part) => part.trim())
+    .filter((part) => part && part !== "--");
+
+  const succeeded = [];
+  const failed = [];
+
+  for (const part of parts) {
+    const idMatch = part.match(/Content-ID:\s*<?response-([^>\r\n]+)>?/i);
+    const statusMatch = part.match(/HTTP\/1\.1 (\d+)/);
+    const id = idMatch ? idMatch[1] : null;
+    const status = statusMatch ? parseInt(statusMatch[1], 10) : null;
+
+    if (status >= 200 && status < 300) {
+      succeeded.push({ id, status });
+    } else {
+      const jsonMatch = part.match(/\{[\s\S]*\}/);
+      let error = null;
+      if (jsonMatch) {
+        try {
+          error = JSON.parse(jsonMatch[0]);
+        } catch (e) {
+          error = jsonMatch[0];
+        }
+      }
+      failed.push({ id, status, error });
+    }
+  }
+
+  return { succeeded, failed };
+}
+
+const RETRYABLE_REASONS = new Set([
+  "rateLimitExceeded",
+  "userRateLimitExceeded",
+  "quotaExceeded",
+  "backendError",
+]);
+
+function isRetryable(failure) {
+  if (failure.status === 429 || failure.status >= 500) return true;
+  const reason = failure.error?.error?.errors?.[0]?.reason;
+  return RETRYABLE_REASONS.has(reason);
+}
+
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Pulls each sub-request's raw "PATCH ... \r\nContent-Type: ...\r\n\r\n{json}" text out of a
+// batch body, keyed by its Content-ID, so a retry batch can be rebuilt from just the failed ones.
+function extractBatchParts(body, boundary) {
+  const parts = body
+    .split(`--${boundary}`)
+    .map((part) => part.trim())
+    .filter((part) => part && part !== "--");
+
+  const requestsById = new Map();
+  for (const part of parts) {
+    const idMatch = part.match(/Content-ID:\s*<([^>]+)>/i);
+    const separatorMatch = part.match(/\r?\n\r?\n([\s\S]*)/);
+    if (idMatch && separatorMatch) {
+      requestsById.set(idMatch[1], separatorMatch[1]);
+    }
+  }
+  return requestsById;
+}
+
+function buildRetryBatchBody(requestsById, ids, boundary) {
+  let body = "";
+  for (const id of ids) {
+    const requestText = requestsById.get(id);
+    if (!requestText) continue;
+    body += `--${boundary}\r\n`;
+    body += `Content-Type: application/http\r\n`;
+    body += `Content-ID: <${id}>\r\n\r\n`;
+    body += `${requestText}\r\n\r\n`;
+  }
+  body += `--${boundary}--`;
+  return body;
+}
+
+// Sends a Calendar batch request, retrying only the sub-requests that fail with a
+// retryable (rate-limit/backend) error, using exponential backoff between attempts.
+async function sendCalendarBatchWithRetry(body, boundary, accessToken, maxRetries = 7) {
+  const url = "https://www.googleapis.com/batch/calendar/v3";
+  let currentBody = body;
+  let currentBoundary = boundary;
+  const allSucceeded = [];
+  const allFailed = [];
+
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    const headers = {
+      "Content-Type": `multipart/mixed; boundary="${currentBoundary}"`,
+      Authorization: `Bearer ${accessToken}`,
+    };
+    const response = await axios.post(url, currentBody, { headers });
+    const { succeeded, failed } = parseBatchResponse(response);
+    allSucceeded.push(...succeeded);
+
+    const retryable = failed.filter(isRetryable);
+    const permanent = failed.filter((f) => !isRetryable(f));
+    allFailed.push(...permanent);
+
+    if (retryable.length === 0) break;
+
+    if (attempt === maxRetries) {
+      allFailed.push(...retryable);
+      break;
+    }
+
+    console.log(
+      `Batch update: retrying ${retryable.length} rate-limited event(s), attempt ${attempt + 1}/${maxRetries}`
+    );
+
+    const requestsById = extractBatchParts(currentBody, currentBoundary);
+    currentBoundary = "batch_" + Math.random().toString(36).substring(2, 15);
+    currentBody = buildRetryBatchBody(
+      requestsById,
+      retryable.map((f) => f.id),
+      currentBoundary
+    );
+
+    // Google's usageLimits rate-limit windows commonly run ~100s; cap growth at 32s
+    // per attempt so 7 attempts can accumulate enough total wait to ride one out.
+    const delayMs = Math.min(1000 * 2 ** attempt, 32000) + Math.random() * 250;
+    await sleep(delayMs);
+  }
+
+  return { succeeded: allSucceeded, failed: allFailed };
+}
+
 const app = express();
 const compiler = webpack(webpackConfig);
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb'}));
 app.use(cors());
 app.use(
   webpackDevMiddleware(compiler, {
@@ -146,21 +305,21 @@ app.post("/api/create-events", validateAndRefreshToken, async (req, res) => {
 
     const calendar = google.calendar({ version: "v3", auth: oAuth2Client });
 
-    const eventResponses = await Promise.all(
-      cleanedEvents.map(async (event) => {
-        const createdEvent = await calendar.events.insert({
-          calendarId: "primary",
-          resource: event,
-        });
+    // Cap concurrent Calendar API calls so a large course load doesn't fire dozens
+    // of simultaneous requests and trip Google's per-user rate limit.
+    const eventResponses = await mapWithConcurrency(cleanedEvents, 5, async (event) => {
+      const createdEvent = await calendar.events.insert({
+        calendarId: "primary",
+        resource: event,
+      });
 
-        const instances = await calendar.events.instances({
-          calendarId: "primary",
-          eventId: createdEvent.data.id,
-        });
+      const instances = await calendar.events.instances({
+        calendarId: "primary",
+        eventId: createdEvent.data.id,
+      });
 
-        return { event: createdEvent.data, instances: instances.data.items };
-      })
-    );
+      return { event: createdEvent.data, instances: instances.data.items };
+    });
 
     res.status(200).json({ events: eventResponses });
   } catch (error) {
@@ -196,14 +355,21 @@ app.post("/api/update", validateAndRefreshToken, async (req, res) => {
   try {
     const { body, boundary } = req.body;
 
-    const url = "https://www.googleapis.com/batch/calendar/v3";
-    const headers = {
-      "Content-Type": `multipart/mixed; boundary="${boundary}"`,
-      Authorization: `Bearer ${oAuth2Client.credentials.access_token}`,
-    };
-    const response = await axios.post(url, body, { headers });
-    res.status(200).json({ message: "Calendar updated successfully", data: response.data });
-    
+    const { succeeded, failed } = await sendCalendarBatchWithRetry(
+      body,
+      boundary,
+      oAuth2Client.credentials.access_token
+    );
+
+    if (failed.length > 0) {
+      console.error("Batch update: some event instances failed to update:", failed);
+    }
+
+    res.status(200).json({
+      message: `Calendar update: ${succeeded.length} succeeded, ${failed.length} failed`,
+      succeeded,
+      failed,
+    });
   }
 catch (error) {
   console.error("Error updating calendar:", error.response?.data || error.message);

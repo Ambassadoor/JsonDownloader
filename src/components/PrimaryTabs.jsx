@@ -12,7 +12,7 @@ function a11yProps(index) {
   };
 }
 
-const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrowserSelect, handleChange, focusedFiles }) => 
+const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrowserSelect, handleChange, handleAttachToAllChange, focusedFiles }) =>
   
   (
   <Box
@@ -63,9 +63,13 @@ const PrimaryTabs = React.memo(({ events, focusedTab, handleTabClick, handleBrow
           <p>{file.name}</p>
           <Checkbox
             value={file}
-            onChange={(e) => {for (let instance of events[focusedTab].instances) {
-              handleChange([file], instance.id, "attachments", e.target.checked);
-            }}} />
+            onChange={(e) =>
+              handleAttachToAllChange(
+                file,
+                events[focusedTab].instances.map((instance) => instance.id),
+                e.target.checked
+              )
+            } />
         </Stack>
       ))}
     </Stack>

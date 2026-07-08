@@ -32,15 +32,31 @@ const CalendarConfirmation = () => {
   };
 
   const handleSubmit = async () => {
-    const { body, boundary } = buildCalendarBatchPatch(changes);
+    const batches = buildCalendarBatchPatch(changes);
     const userId = Cookies.get("userId");
+    const allFailed = [];
     try {
-      const response = await axios.post(
-        "/api/update",
-         { body, boundary},
-         { headers: { "x-user-id": userId } }
+      // Google's batch endpoint caps out at 50 sub-requests, so large change sets are
+      // split into multiple batches and sent one at a time, with a short pause between
+      // batches so we don't pile more load onto an already-strained rate-limit window.
+      for (let i = 0; i < batches.length; i++) {
+        if (i > 0) {
+          await new Promise((resolve) => setTimeout(resolve, 1500));
+        }
+
+        const { body, boundary } = batches[i];
+        const response = await axios.post(
+          "/api/update",
+          { body, boundary },
+          { headers: { "x-user-id": userId } }
         );
-      console.log(response.data.message);
+        console.log(response.data.message);
+        allFailed.push(...(response.data.failed || []));
+      }
+
+      if (allFailed.length > 0) {
+        console.error(`${allFailed.length} event instance(s) failed to update:`, allFailed);
+      }
     } catch (error) {
       console.error("Error submitting changes:", error);
     }

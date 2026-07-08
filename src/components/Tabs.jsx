@@ -39,33 +39,58 @@ export default function BasicTabs({ events, handleChangeLog }) {
 
   const handleInstanceDetailChange = (value, instanceId, property, checked) => {
     if (property !== "attachments") {
-    setUpdatedInstances(prev => ({
-      ...prev,
-      [instanceId]: {
-        ...(prev[instanceId] ?? {}),
-        [property]: value,
-      }
-    }));   }
-    else if (checked) {
-      for (let attachment of value) {
-        if (!updatedInstances[instanceId]?.attachments?.some(file => file.id === attachment.id)) {
       setUpdatedInstances(prev => ({
         ...prev,
         [instanceId]: {
           ...(prev[instanceId] ?? {}),
-          attachments: [...(prev[instanceId]?.attachments || []), attachment],
+          [property]: value,
         }
-      }))};}
-    } else {
-      for (let attachment of value) {
-      setUpdatedInstances(prev => ({
-        ...prev,
-        [instanceId]: {
-          ...(prev[instanceId] ?? {}),
-          attachments: prev[instanceId]?.attachments.filter(file => file.id !== attachment.id) || [],
-        }
-      }));}
+      }));
+      return;
     }
+
+    setUpdatedInstances(prev => {
+      const existingAttachments = prev[instanceId]?.attachments ?? [];
+      const newAttachments = checked
+        ? [
+            ...existingAttachments,
+            ...value.filter(
+              (attachment) => !existingAttachments.some((file) => file.id === attachment.id)
+            ),
+          ]
+        : existingAttachments.filter(
+            (file) => !value.some((attachment) => attachment.id === file.id)
+          );
+
+      return {
+        ...prev,
+        [instanceId]: {
+          ...(prev[instanceId] ?? {}),
+          attachments: newAttachments,
+        },
+      };
+    });
+  }
+
+  // Attach (or detach) a single file across every instance of the focused course in one state update
+  const handleAttachToAllChange = (file, instanceIds, checked) => {
+    setUpdatedInstances(prev => {
+      const next = { ...prev };
+      for (const instanceId of instanceIds) {
+        const existingAttachments = next[instanceId]?.attachments ?? [];
+        const newAttachments = checked
+          ? existingAttachments.some((f) => f.id === file.id)
+            ? existingAttachments
+            : [...existingAttachments, file]
+          : existingAttachments.filter((f) => f.id !== file.id);
+
+        next[instanceId] = {
+          ...(next[instanceId] ?? {}),
+          attachments: newAttachments,
+        };
+      }
+      return next;
+    });
   }
 
 
@@ -78,6 +103,7 @@ export default function BasicTabs({ events, handleChangeLog }) {
         handleBrowserSelect={handleBrowserSelect}
         browserFiles={browserFiles}
         handleChange={handleInstanceDetailChange}
+        handleAttachToAllChange={handleAttachToAllChange}
         focusedFiles={focusedFiles}
       />
       <Box sx={{ flexGrow: 1, p: 2 }}>
