@@ -7,3 +7,5 @@ js/generateAuth.js
 deprecated/
 downloads/courses.json
 .env
+public/bundle.js
+public/bundle.js.LICENSE.txt
